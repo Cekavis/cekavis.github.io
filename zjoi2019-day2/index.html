@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cekavis.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}}},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="不知道会怎么样呢 update: 凉了 update: 进队了…欧是真的欧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZJOI2019 Day2 游记">
+<meta property="og:url" content="https://cekavis.github.io/zjoi2019-day2/index.html">
+<meta property="og:site_name" content="Cekavis&#39;s notes">
+<meta property="og:description" content="不知道会怎么样呢 update: 凉了 update: 进队了…欧是真的欧">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-04-22T12:53:57.000Z">
+<meta property="article:modified_time" content="2020-07-23T02:30:26.895Z">
+<meta property="article:author" content="Cekavis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cekavis.github.io/zjoi2019-day2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>ZJOI2019 Day2 游记 | Cekavis's notes</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cekavis's notes</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-3-%EF%BC%884-22%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Day -3 （4.22）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-2-%EF%BC%884-23%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Day -2 （4.23）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-1-%EF%BC%884-24%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Day -1 （4.24）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-0-%EF%BC%884-25%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Day 0 （4.25）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-1%EF%BC%884-26%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">Day 1（4.26）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Cekavis</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cekavis.github.io/zjoi2019-day2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Cekavis">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cekavis's notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ZJOI2019 Day2 游记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-04-22 20:53:57" itemprop="dateCreated datePublished" datetime="2019-04-22T20:53:57+08:00">2019-04-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-07-23 10:30:26" itemprop="dateModified" datetime="2020-07-23T10:30:26+08:00">2020-07-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%B8%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">游记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><del>不知道会怎么样呢</del></p>
+<p><del><strong>update:</strong> 凉了</del></p>
+<p><strong>update:</strong> 进队了…欧是真的欧</p>
+<a id="more"></a>
+
+<h1 id="Day-3-（4-22）"><a href="#Day-3-（4-22）" class="headerlink" title="Day -3 （4.22）"></a>Day -3 （4.22）</h1><p>雀魂好难啊</p>
+<h1 id="Day-2-（4-23）"><a href="#Day-2-（4-23）" class="headerlink" title="Day -2 （4.23）"></a>Day -2 （4.23）</h1><p>早上到机房颓颓颓，被打到自闭</p>
+<p>中午坐车去余姚中学，去年也是在这里呢</p>
+<p>住的余姚宾馆，好大喔</p>
+<p>到了之后继续颓颓颓，后来把手机上隔膜都删了，比赛前还是不打了 = =</p>
+<p>走到江对面去吃了顿金拱门，店很大倒没几个人</p>
+<p>还写了道题</p>
+<p><del>晚上洗了澡穿着浴袍串门真是爽</del></p>
+<p>十一点多才睡</p>
+<h1 id="Day-1-（4-24）"><a href="#Day-1-（4-24）" class="headerlink" title="Day -1 （4.24）"></a>Day -1 （4.24）</h1><p>酒店的早餐还行</p>
+<p>早上走去余姚中学，过江的时候还以为没人行道，然后发现桥下面有台阶可以走上去，但是走上去了还是非机动车道 = =</p>
+<p>到的时候已经没什么休闲养生座位了，最后坐了板凳</p>
+<p>上午是 zzy 讲课，<del>感觉也还好？后来提前跑出去看妇联4了</del></p>
+<p><del>在万达吃了金拱门</del></p>
+<p><del>其实也没太大感觉，看看还是挺好看的，还看到最后 1s 什么彩蛋都没看到，出去被收眼镜的嘲讽了</del></p>
+<p>回来下午是 zzq 讲课，好像也还是可以听的</p>
+<p>听完跑去和鸽了一下午的人吃 KFC 了，吃完去试机</p>
+<p>桌子好高，凳子好矮，贺指导想必会适应一点吧</p>
+<p>机子速度也不是很快，$3$ 次长度 $2^{21}$ 的 NTT 跑了 1.8s，记得基本上同样代码在一试的机子上跑了 1s</p>
+<p>回来之后看到 yf 的讲稿好丑啊，然后改 LaTeX Beamer 改了一个晚上 = =</p>
+<p>十点多才睡</p>
+<h1 id="Day-0-（4-25）"><a href="#Day-0-（4-25）" class="headerlink" title="Day 0 （4.25）"></a>Day 0 （4.25）</h1><p>上午就是 yf 和 myc 讲课</p>
+<p>题目也还行吧，但是掉线了</p>
+<p>中午溜出去吃了 KFC = =</p>
+<p>下午讲课鸽了 = =</p>
+<p>鸽了也没干什么，写了一道题，然后就一直在划水了 = =</p>
+<p>好焦虑</p>
+<p><del>六点多去泡澡</del></p>
+<p>问了好多人应该怎么办 = =</p>
+<p>后来随便看了一下写的博客，八点就睡觉了</p>
+<p>果然睡不着呢，还突然想起来还不会 Linux 下面的一些编译选项和对拍什么的 = =</p>
+<p>赶紧背</p>
+<p>九点多她放学了来安慰我……最后睡着了。</p>
+<h1 id="Day-1（4-26）"><a href="#Day-1（4-26）" class="headerlink" title="Day 1（4.26）"></a>Day 1（4.26）</h1><p>六点半起的，好像之前就醒了，也睡不着了</p>
+<p>比较早到学校了，至少不像一试那样 = =</p>
+<p>谢谢某位小哥哥送的星巴克 ⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</p>
+<p>进考场还是有点慌的，zzy 就坐旁边 = =</p>
+<p>开场先看了一下三道题好像都有 $40$ 暴力，<del>感觉稳了</del></p>
+<p>由于一些原因决定开 B，先写了 $\mathcal O(n^2)$ 的暴力，然后再去写了 A 的 $\mathcal O(2^{3n})$ 的高斯消元</p>
+<p>大概 1h 不到就开始刚 B 了，走上不归路</p>
+<p>感觉这种点对的问题可以分治搞搞，点分想不太清楚，就写边分了</p>
+<p>钦定一条边之后考虑跨越这条边的路径和点对，左侧一个点在右侧对应的是一个包含根的联通块，左侧的一个点对应的联通块可以从儿子里合并上来，并且新加入若干以该点为端点的路径</p>
+<p>在右边维护的就是一个虚树状物</p>
+<p>直接拿线段树启发式合并，$\mathcal O(n\log^3n)$，$n=10^5$，时限 3s，稳了</p>
+<p>写了 1h，然后调调调，过了小样例之后就挂了个对拍，大概在 2.5h 的时候发现边分是假的 (╯‵□′)╯︵┻━┻</p>
+<p>出去上厕所冷静一下，想大不了再堆三题暴力 = =</p>
+<p>碰到了 lyc，他好像以为我稳了</p>
+<p>回去冷静分析了一下挂掉的情况，是一条路径的 LCA 和下面的某个点的贡献没有计算到，因为边分重构的部分有问题（之前模拟赛题也这样 GG 过，这次写前虽然想过但是也没想到 = =）</p>
+<p>于是想到暴力把一条路径拆成三条，LCA 和两个端点再连一条，这样好像就对了</p>
+<p>最后调出来了，觉得自己 win 了，<del>这种东西应该比 D1T2 难一点吧（当然最终是 lose 了）</del></p>
+<p>$5000$ 的随机数据拍了好久没挂，$10^5$ 的只要 3.1s，由于觉得本机挺慢就很自信</p>
+<p>后来发现一条链段错误了，好像是爆栈喔，觉得很凉 = =</p>
+<p>开了栈跑了 90s+，冷静分析了一下之后发现没加之前想到的一个东西导致复杂度和路径长度总和有关，但是随机数据随便过 = =</p>
+<p>加了之后链只要 1s，随机只要 1.9s</p>
+<p>然后爆栈的问题一顿瞎搞之后发现是 <code>-ftrapv -fsanitize=address</code> 的锅</p>
+<p><del>再次觉得 win 了</del></p>
+<p>大概已经 3.5h 之后了</p>
+<p>先把 C 的 $\mathcal O(n^2)$ 暴力写了，后来再写了 A 的 $p_i=1$ 的 10pts</p>
+<p><del>陷入无所事事状态，反复幻想自己 win 了</del></p>
+<p><del>吃了点东西</del></p>
+<p>最后考完了</p>
+<p><del>zzy 主动问我怎么样 ⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</del></p>
+<p>出来好像大家都过了 B 啊，这怎么树链剖分啊 = =</p>
+<p><del>觉得也还好</del></p>
+<p>后来，听说是一个 $\log$ 的，而且 $\log^3$ 过不了 = =</p>
+<p>好凉啊</p>
+<p>希望别的题别 fst 了啊..</p>
+<p>等退役了</p>
+<p><strong>update 4.29</strong></p>
+<p>没 fst = =</p>
+<p>$\log^3$ 草过去了，然后就..B队队长了?..</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/icpc-world-finals-2017/" rel="prev" title="ICPC World Finals 2017 题解">
+                  <i class="fa fa-chevron-left"></i> ICPC World Finals 2017 题解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/noi2019/" rel="next" title="NOI2019 游记">
+                  NOI2019 游记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cekavis</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

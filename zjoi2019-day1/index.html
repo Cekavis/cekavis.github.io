@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cekavis.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}}},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="这么快就到了啊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZJOI2019 Day1 游记">
+<meta property="og:url" content="https://cekavis.github.io/zjoi2019-day1/index.html">
+<meta property="og:site_name" content="Cekavis&#39;s notes">
+<meta property="og:description" content="这么快就到了啊">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-03-24T11:20:27.000Z">
+<meta property="article:modified_time" content="2020-07-23T02:29:35.445Z">
+<meta property="article:author" content="Cekavis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cekavis.github.io/zjoi2019-day1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>ZJOI2019 Day1 游记 | Cekavis's notes</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Cekavis's notes</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-3"><span class="nav-number">1.</span> <span class="nav-text">Day -3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-2"><span class="nav-number">2.</span> <span class="nav-text">Day -2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-1"><span class="nav-number">3.</span> <span class="nav-text">Day -1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-0"><span class="nav-number">4.</span> <span class="nav-text">Day 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-1-1"><span class="nav-number">5.</span> <span class="nav-text">Day 1</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Cekavis</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://cekavis.github.io/zjoi2019-day1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Cekavis">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cekavis's notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ZJOI2019 Day1 游记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-03-24 19:20:27" itemprop="dateCreated datePublished" datetime="2019-03-24T19:20:27+08:00">2019-03-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-07-23 10:29:35" itemprop="dateModified" datetime="2020-07-23T10:29:35+08:00">2020-07-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%B8%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">游记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>这么快就到了啊</p>
+<a id="more"></a>
+
+<h1 id="Day-3"><a href="#Day-3" class="headerlink" title="Day -3"></a>Day -3</h1><p>听说昨天被奶了</p>
+<p>= =</p>
+<p>这怎么轮得到我的</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day -2"></a>Day -2</h1><p><del>跟贺指导打荒野行动，两次落地成盒之后就吃到鸡了，讲真的贺指导不太行。</del></p>
+<p>睡得还算早。</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day -1"></a>Day -1</h1><p>听课体验 至少比以前好吧 虽然还是有掉线。</p>
+<p>雀魂是真的好玩= =</p>
+<p>填海机房的键盘好垃圾，B 按下去都有问题，跑起来倒挺快。</p>
+<p>晚上下自走棋被打爆了，怀疑智商，要退役了。</p>
+<p>睡得稍微有点迟，也没一直颓。</p>
+<h1 id="Day-0"><a href="#Day-0" class="headerlink" title="Day 0"></a>Day 0</h1><p>上午数据结构选讲，有些还挺小清新的= =</p>
+<p>中午和 fls 一起吃饭 rp++</p>
+<p>下午讲课海星，好好准备省选了，不想退役啊。</p>
+<p>晚上也挺早睡了，有点紧张，有喜欢的人陪着真好。</p>
+<h1 id="Day-1-1"><a href="#Day-1-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>考试了</p>
+<p><del>退役了，不更了</del></p>
+<p><strong>update 4.8</strong></p>
+<p>还是简单记一下吧..</p>
+<p>早上 5 点十几醒了，上了厕所然后 cwy 也醒了 = =</p>
+<p>继续睡</p>
+<p>坐车到填海校门口已经 7:56 了，走到考场已经是 8:00，但是好像刚开门。</p>
+<p>8:10 发密码，密码还错了一次。</p>
+<p>开题发现有麻将，有纯正九莲宝灯，还有吉利，心态崩了。</p>
+<p>会 20 pts 直接搞搞就好了，先扔了。</p>
+<p>看 B，也会 20 pts，随便看了眼 C 回来继续乱想，想不出什么多项式的复杂度。</p>
+<p>然后开 C，会 10 pts，<del>去年也就 60 pts，今年这样 20+20+10 也差不多了吧。</del></p>
+<p>看到极强的性质 $l=r=n$ 就再也没去想 50 后面的部分分了= =</p>
+<p>发现可以记个二元组搞搞，就先写了个应该是 $\mathcal O(n^5)$ 的暴力，可以轻易优化得到 30 pts = =</p>
+<p>还想继续优化但是没什么用，很多也压不到 $\mathcal O(n^2)$。</p>
+<p>然后发现只要根节点权值改变就行了，本质不同的二元组只有三种，这样就线性了。但是一开始以为是两种，写完调完已经 2h 了。</p>
+<p><del>去年才 60 pts，今年 2h 就拿到 50 已经很棒了吧，精神大振</del></p>
+<p>回来开 B</p>
+<p>想到计算一个位置对答案的贡献，然后 xjb 凑状态。</p>
+<p>后来分析了一下有标记的条件，有三种情况，转移也比较清楚，直接拿矩阵维护复杂度 $\mathcal O(n\log n)$，<del>数据范围才 1e5 稳得一逼啊。</del></p>
+<p>看了一下大概还有 2.5h，感觉最后 1h 补暴力也够了，就开始写</p>
+<p>好像也挺好写的，就是要跑 6s = =</p>
+<p>听说评测机很慢啊，然后就绝望了。</p>
+<p>就一直卡常卡常卡常，<del>卡到最后也没把答案矩阵改成向量</del></p>
+<p>卡到 2.9s 了放弃了，想扔了搞搞 A，突然又看到一点可以卡的地方 = =</p>
+<p>离结束 1h 的时候卡到了 2.4s 就不管了。</p>
+<p><del>有点飘</del> A 就直接写 20 了，好像还有点难写的 = =</p>
+<p>延迟了 10min，不过最后 20min 都无所事事。</p>
+<p>怕放错位置，把代码复制了好多个地方。</p>
+<p>出来之后有些人说没写 B 的 $\mathcal O(n\log n)$，好像有的还是 $\mathcal O(n\log ^2n)$，不过跑得差不多快 = =</p>
+<p>感觉卡常已经很明确了，只有一个询问的 30 pts 感觉卡定了，另外 30 出题人放一半修改一半询问的话说不定还有戏 = =</p>
+<p>很慌，一题都没拍，A 甚至没有样例可以测。</p>
+<p>C 要是 f 了怎么办啊，再算上 B 卡掉 60，那..</p>
+<p>但是感觉，感觉也没理由写挂啊，但是真的，真的一点都不清晰，那 5h 又干了什么呢。</p>
+<p>后来两个同学接连发现 A 的 20 pts fst 了，可能我要等成绩出来才能发现吧。</p>
+<hr>
+<p><del>4.1 出成绩了一直没来更= =</del></p>
+<p><del>评测机好像不是很慢，2.4s 的卡过去了，别的也没 fst</del></p>
+<p><del>有些人还是被卡了啊 = =</del></p>
+<p><del>他们都好强啊</del></p>
+<p><del>Day 2 见了</del></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/uoj-345/" rel="prev" title="「UOJ 345」「清华集训2017」榕树之心">
+                  <i class="fa fa-chevron-left"></i> 「UOJ 345」「清华集训2017」榕树之心
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/atcoder-exawizards2019/" rel="next" title="「AtCoder ExaWizards 2019」简要题解">
+                  「AtCoder ExaWizards 2019」简要题解 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cekavis</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>
