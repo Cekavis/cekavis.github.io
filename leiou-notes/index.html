@@ -23,12 +23,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"cekavis.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Load Disqus","order":-1}},"activeClass":"disqus"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="问题求以下形式表达式的值。 $$ \sum_{i&#x3D;0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} $$">
+<meta name="description" content="问题 求以下形式表达式的值。 \[ \sum_{i&#x3D;0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="类欧几里得算法学习笔记">
 <meta property="og:url" content="https://cekavis.github.io/leiou-notes/index.html">
 <meta property="og:site_name" content="Cekavis&#39;s notes">
-<meta property="og:description" content="问题求以下形式表达式的值。 $$ \sum_{i&#x3D;0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} $$">
+<meta property="og:description" content="问题 求以下形式表达式的值。 \[ \sum_{i&#x3D;0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \]">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-12-18T09:28:44.000Z">
 <meta property="article:modified_time" content="2020-07-30T16:12:48.057Z">
@@ -91,7 +91,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -202,7 +206,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -215,7 +219,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -321,101 +325,170 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>求以下形式表达式的值。</p>
-<p>$$ \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} $$</p>
+        <h1 id="问题">问题</h1>
+<p>求以下形式表达式的值。</p>
+<p><span class="math display">\[ \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \]</span></p>
 <a id="more"></a>
-
-<h1 id="简单情况"><a href="#简单情况" class="headerlink" title="简单情况"></a>简单情况</h1><p>求</p>
-<p>$$ f(a,b,c,n)=\sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor $$</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这其实相当于求一条直线下的整点数。</p>
-<p>考虑到直线斜率非常大的时候，可以快速转化为斜率 $&lt;1$ 的情况，并且规模可以缩小到原先的至多 $\frac{1}{2}$。</p>
+<h1 id="简单情况">简单情况</h1>
+<p>求</p>
+<p><span class="math display">\[ f(a,b,c,n)=\sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor \]</span></p>
+<h2 id="概述">概述</h2>
+<p>这其实相当于求一条直线下的整点数。</p>
+<p>考虑到直线斜率非常大的时候，可以快速转化为斜率 <span class="math inline">\(&lt;1\)</span> 的情况，并且规模可以缩小到原先的至多 <span class="math inline">\(\frac{1}{2}\)</span>。</p>
 <p>而直线斜率小的时候可以用对称不改变规模转化为大的情况。</p>
-<p>这样总次数就是 $\mathcal O(\log c)$ 了。</p>
-<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><h3 id="一"><a href="#一" class="headerlink" title="一"></a>一</h3><p>$a=0$ 时，直接算。</p>
-<h3 id="二"><a href="#二" class="headerlink" title="二"></a>二</h3><p>若 $a\ge c$ 或 $b\ge c$：</p>
+<p>这样总次数就是 <span class="math inline">\(\mathcal O(\log c)\)</span> 了。</p>
+<h2 id="做法">做法</h2>
+<h3 id="一">一</h3>
+<p><span class="math inline">\(a=0\)</span> 时，直接算。</p>
+<h3 id="二">二</h3>
+<p>若 <span class="math inline">\(a\ge c\)</span> 或 <span class="math inline">\(b\ge c\)</span>：</p>
 <p>首先有</p>
-<p>$$<br>\begin{aligned}<br>f(a,b,c,n) = &amp; \sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor \<br>= &amp; \sum_{i=0}^n \left( \left\lfloor \frac{a}{c} \right\rfloor i + \left\lfloor \frac{b}{c} \right\rfloor +\left\lfloor \frac{(a\bmod c)i+(b\bmod c)}{c} \right\rfloor\right) \<br>= &amp; \frac{n(n+1)}{2} \left\lfloor \frac{a}{c} \right\rfloor + (n+1) \left\lfloor \frac{b}{c} \right\rfloor + f(a\bmod c, b\bmod c, c, n)<br>\end{aligned}<br>$$</p>
-<p>前面的两项可以直接计算，接下来只考虑 $a&lt;c,b&lt;c$ 的情况。</p>
-<h3 id="三"><a href="#三" class="headerlink" title="三"></a>三</h3><p>若 $a,b&lt;c$：</p>
-<p>枚举一个 $j$</p>
-<p>$$<br>\sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor<br>= \sum_{i=0}^n \sum_{j=0}^{\left\lfloor \frac{a\times i+b}{c} \right\rfloor-1} 1<br>$$</p>
-<p>令 $m=\left\lfloor \frac{a\times n+b}{c} \right\rfloor$，</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(a,b,c,n) = &amp; \sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor \\
+= &amp; \sum_{i=0}^n \left( \left\lfloor \frac{a}{c} \right\rfloor i + \left\lfloor \frac{b}{c} \right\rfloor +\left\lfloor \frac{(a\bmod c)i+(b\bmod c)}{c} \right\rfloor\right) \\
+= &amp; \frac{n(n+1)}{2} \left\lfloor \frac{a}{c} \right\rfloor + (n+1) \left\lfloor \frac{b}{c} \right\rfloor + f(a\bmod c, b\bmod c, c, n)
+\end{aligned}
+\]</span></p>
+<p>前面的两项可以直接计算，接下来只考虑 <span class="math inline">\(a&lt;c,b&lt;c\)</span> 的情况。</p>
+<h3 id="三">三</h3>
+<p>若 <span class="math inline">\(a,b&lt;c\)</span>：</p>
+<p>枚举一个 <span class="math inline">\(j\)</span></p>
+<p><span class="math display">\[
+\sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor
+= \sum_{i=0}^n \sum_{j=0}^{\left\lfloor \frac{a\times i+b}{c} \right\rfloor-1} 1
+\]</span></p>
+<p>令 <span class="math inline">\(m=\left\lfloor \frac{a\times n+b}{c} \right\rfloor\)</span>，</p>
 <p>于是</p>
-<p>$$<br>\begin{aligned}<br>  \sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor<br>= &amp; \sum_{i=0}^n \sum_{j=0}^{\left\lfloor \frac{a\times i+b}{c} \right\rfloor-1} 1 \<br>= &amp; \sum_{i=0}^n \sum_{j=0}^{m-1} [j+1\le \left\lfloor \frac{a\times i+b}{c} \right\rfloor] \<br>= &amp; \sum_{i=0}^n \sum_{j=0}^{m-1} [i\ge\left\lceil \frac{cj+c-b}{a} \right\rceil] \<br>= &amp; \sum_{i=0}^n \sum_{j=0}^{m-1} [i\ge\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor+1] \<br>= &amp; \sum_{j=0}^{m-1} \sum_{i=0}^n [i\ge\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor+1] \<br>= &amp; \sum_{j=0}^{m-1} n-\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor \<br>= &amp; mn-f(c,c-b-1,a,m-1)<br>\end{aligned}<br>$$</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \sum_{i=0}^n \left\lfloor \frac{a\times i+b}{c} \right\rfloor
+= &amp; \sum_{i=0}^n \sum_{j=0}^{\left\lfloor \frac{a\times i+b}{c} \right\rfloor-1} 1 \\
+= &amp; \sum_{i=0}^n \sum_{j=0}^{m-1} [j+1\le \left\lfloor \frac{a\times i+b}{c} \right\rfloor] \\
+= &amp; \sum_{i=0}^n \sum_{j=0}^{m-1} [i\ge\left\lceil \frac{cj+c-b}{a} \right\rceil] \\
+= &amp; \sum_{i=0}^n \sum_{j=0}^{m-1} [i\ge\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor+1] \\
+= &amp; \sum_{j=0}^{m-1} \sum_{i=0}^n [i\ge\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor+1] \\
+= &amp; \sum_{j=0}^{m-1} n-\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor \\
+= &amp; mn-f(c,c-b-1,a,m-1)
+\end{aligned}
+\]</span></p>
 <p>其中第二行到第三行的变换自己推一推就好了，注意直接做会得到上取整。</p>
-<p><strong>主要套路是交换两个 $\sum$。</strong></p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>观察第 $a,c$ 两个变量，$(a,c)\to(a\bmod c,c)\to(c, a\bmod c)$</p>
+<p><strong>主要套路是交换两个 <span class="math inline">\(\sum\)</span>。</strong></p>
+<h2 id="复杂度">复杂度</h2>
+<p>观察第 <span class="math inline">\(a,c\)</span> 两个变量，<span class="math inline">\((a,c)\to(a\bmod c,c)\to(c, a\bmod c)\)</span></p>
 <p>于是复杂度和欧几里得算法相同。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>可以自然溢出，最终答案在范围内即可。</p>
+<h2 id="代码">代码</h2>
+<p>可以自然溢出，最终答案在范围内即可。</p>
 <p><del>听说自然溢出要 <code>unsigned</code>，代码仅供参考。</del></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	ll ans=(ll)n*(n+<span class="number">1</span>)/<span class="number">2</span>*(a/c)+(ll)(n+<span class="number">1</span>)*(b/c);</span><br><span class="line">	a%=c, b%=c;</span><br><span class="line">	<span class="keyword">if</span>(!a) <span class="keyword">return</span> ans;</span><br><span class="line">	<span class="keyword">int</span> m=((ll)n*a+b)/c;</span><br><span class="line">	<span class="keyword">return</span> ans+(ll)m*n-f(c, c-b<span class="number">-1</span>, a, m<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="一般情况"><a href="#一般情况" class="headerlink" title="一般情况"></a>一般情况</h1><p><a target="_blank" rel="noopener" href="https://loj.ac/problem/138">LOJ #138. 类欧几里得算法</a></p>
-<p>$$ \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} $$</p>
-<h2 id="做法-1"><a href="#做法-1" class="headerlink" title="做法"></a>做法</h2><p><del>咕咕咕</del></p>
-<p>这里钦定 $0^0=1$</p>
-<h3 id="特判"><a href="#特判" class="headerlink" title="特判"></a>特判</h3><p>首先，若 $a=0$ 或 $k_2=0$，问题转化为 $\lambda\sum\limits_{i=0}^n i^{k_1}$ 的形式，其中 $\lambda$ 是一个易求的常数。这可以直接插值。</p>
-<p>另外需要注意 $n&lt;0$ 的情况。</p>
+<h1 id="一般情况">一般情况</h1>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/problem/138">LOJ #138. 类欧几里得算法</a></p>
+<p><span class="math display">\[ \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \]</span></p>
+<h2 id="做法-1">做法</h2>
+<p><del>咕咕咕</del></p>
+<p>这里钦定 <span class="math inline">\(0^0=1\)</span></p>
+<h3 id="特判">特判</h3>
+<p>首先，若 <span class="math inline">\(a=0\)</span> 或 <span class="math inline">\(k_2=0\)</span>，问题转化为 <span class="math inline">\(\lambda\sum\limits_{i=0}^n i^{k_1}\)</span> 的形式，其中 <span class="math inline">\(\lambda\)</span> 是一个易求的常数。这可以直接插值。</p>
+<p>另外需要注意 <span class="math inline">\(n&lt;0\)</span> 的情况。</p>
 <p><del>但是鲁棒性较好的代码不需要某些特判。</del></p>
-<h3 id="一-1"><a href="#一-1" class="headerlink" title="一"></a>一</h3><p>若 $a\ge c$ 或 $b\ge c$：</p>
+<h3 id="一-1">一</h3>
+<p>若 <span class="math inline">\(a\ge c\)</span> 或 <span class="math inline">\(b\ge c\)</span>：</p>
 <p>令</p>
-<p>$$<br>\begin{aligned}<br>f(a,b,c,n,k_1,k_2) &amp;= \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \<br>&amp;= \sum_{i=0}^n i^{k_1}\left( \left\lfloor \frac{a}{c} \right\rfloor i + \left\lfloor \frac{b}{c} \right\rfloor +\left\lfloor \frac{(a\bmod c)i+(b\bmod c)}{c} \right\rfloor \right) ^{k_2}<br>\end{aligned}<br>$$</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(a,b,c,n,k_1,k_2) &amp;= \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \\
+&amp;= \sum_{i=0}^n i^{k_1}\left( \left\lfloor \frac{a}{c} \right\rfloor i + \left\lfloor \frac{b}{c} \right\rfloor +\left\lfloor \frac{(a\bmod c)i+(b\bmod c)}{c} \right\rfloor \right) ^{k_2}
+\end{aligned}
+\]</span></p>
 <p>前面的两项可以插值。</p>
-<p>三项式暴力展开，形式是若干个 $\lambda \times f(a\bmod c, b\bmod c, c, n, k_1’, k_2’)$，且其中 $k_1’+k_2’\le k_1+k_2$。</p>
-<h3 id="二-1"><a href="#二-1" class="headerlink" title="二"></a>二</h3><p>若 $a,b&lt;c$：</p>
-<p>我们可以把 $x^{k_2}$ 转化为 $\sum\limits_{j=0}^{x-1}\left((j+1)^{k_2}-j^{k_2}\right)$。</p>
-<p>同样令 $m=\left\lfloor \frac{a\times n+b}{c} \right\rfloor$，</p>
-<p>$$<br>\begin{aligned}<br>f(a,b,c,n,k_1,k_2)<br>&amp;= \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \<br>&amp;= \sum_{i=0}^n i^{k_1} \sum_{j=0}^{\left\lfloor \frac{a\times i+b}{c} \right\rfloor-1} \left((j+1)^{k_2}-j^{k_2}\right) \<br>&amp;= \sum_{i=0}^n i^{k_1}\sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) [j\le \left\lfloor \frac{a\times i+b}{c} \right\rfloor-1] \<br>&amp;= \sum_{i=0}^n i^{k_1}\sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) [i&gt;\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor] \<br>&amp;= \sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) \sum_{i=0}^n i^{k_1}[i&gt;\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor] \<br>&amp;= \sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) \left(\sum_{i=0}^n i^{k_1} -\sum_{i=0}^{\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor}i^{k_1}\right)\<br>&amp;= \left(\sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right)\right) \times \left( \sum_{i=0}^n i^{k_1} \right) - \sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) \sum_{i=0}^{\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor}i^{k_1}<br>\end{aligned}<br>$$</p>
-<p>前面部分可以插值，后面的 $\left((j+1)^{k_2}-j^{k_2}\right)$ 是一个关于 $j$ 的 $k_2-1$ 次多项式 $A(x)$，$\sum\limits_{i=0}^{\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor}i^{k_1}$ 是一个关于 $\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor$ 的 $\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor$ 的 $k_1+1$ 次多项式 $B(x)$。</p>
-<p>转化为 $\sum\limits_{j=0}^{m-1} A(j) \times B\left(\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor\right)$。</p>
-<p>枚举两个多项式的项 $x^{k_1’}$ 和 $x^{k_2’}$，有贡献是</p>
-<p>$$[x^{k_1’}]A(x) \times [x^{k_2’}] B(x) \times f(c, c-b-1, a, m-1, k_1’, k_2’)$$</p>
-<p>并且也有 $k_1’+k_2’\le k_1+k_2$。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>可以发现每层的 $n,a,b,c$ 都是相同的，记忆化 $k_1,k_2$ 两维。</p>
-<p>注意到 $(a,c)\to (a\bmod c,c) \to(c,a\bmod c)$，层数是 $\mathcal O(\log c)$ 的。</p>
-<p>每次计算是 $\mathcal O\left((k_1+k_2)^2\right)$，所以总复杂度就是 $\mathcal O\left((k_1+k_2)^4\log c\right)$。</p>
+<p>三项式暴力展开，形式是若干个 <span class="math inline">\(\lambda \times f(a\bmod c, b\bmod c, c, n, k_1&#39;, k_2&#39;)\)</span>，且其中 <span class="math inline">\(k_1&#39;+k_2&#39;\le k_1+k_2\)</span>。</p>
+<h3 id="二-1">二</h3>
+<p>若 <span class="math inline">\(a,b&lt;c\)</span>：</p>
+<p>我们可以把 <span class="math inline">\(x^{k_2}\)</span> 转化为 <span class="math inline">\(\sum\limits_{j=0}^{x-1}\left((j+1)^{k_2}-j^{k_2}\right)\)</span>。</p>
+<p>同样令 <span class="math inline">\(m=\left\lfloor \frac{a\times n+b}{c} \right\rfloor\)</span>，</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(a,b,c,n,k_1,k_2)
+&amp;= \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \\
+&amp;= \sum_{i=0}^n i^{k_1} \sum_{j=0}^{\left\lfloor \frac{a\times i+b}{c} \right\rfloor-1} \left((j+1)^{k_2}-j^{k_2}\right) \\
+&amp;= \sum_{i=0}^n i^{k_1}\sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) [j\le \left\lfloor \frac{a\times i+b}{c} \right\rfloor-1] \\
+&amp;= \sum_{i=0}^n i^{k_1}\sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) [i&gt;\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor] \\
+&amp;= \sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) \sum_{i=0}^n i^{k_1}[i&gt;\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor] \\
+&amp;= \sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) \left(\sum_{i=0}^n i^{k_1} -\sum_{i=0}^{\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor}i^{k_1}\right)\\
+&amp;= \left(\sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right)\right) \times \left( \sum_{i=0}^n i^{k_1} \right) - \sum_{j=0}^{m-1} \left((j+1)^{k_2}-j^{k_2}\right) \sum_{i=0}^{\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor}i^{k_1}
+\end{aligned}
+\]</span></p>
+<p>前面部分可以插值，后面的 <span class="math inline">\(\left((j+1)^{k_2}-j^{k_2}\right)\)</span> 是一个关于 <span class="math inline">\(j\)</span> 的 <span class="math inline">\(k_2-1\)</span> 次多项式 <span class="math inline">\(A(x)\)</span>，<span class="math inline">\(\sum\limits_{i=0}^{\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor}i^{k_1}\)</span> 是一个关于 <span class="math inline">\(\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor\)</span> 的 <span class="math inline">\(\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor\)</span> 的 <span class="math inline">\(k_1+1\)</span> 次多项式 <span class="math inline">\(B(x)\)</span>。</p>
+<p>转化为 <span class="math inline">\(\sum\limits_{j=0}^{m-1} A(j) \times B\left(\left\lfloor \frac{cj+c-b-1}{a} \right\rfloor\right)\)</span>。</p>
+<p>枚举两个多项式的项 <span class="math inline">\(x^{k_1&#39;}\)</span> 和 <span class="math inline">\(x^{k_2&#39;}\)</span>，有贡献是</p>
+<p><span class="math display">\[[x^{k_1&#39;}]A(x) \times [x^{k_2&#39;}] B(x) \times f(c, c-b-1, a, m-1, k_1&#39;, k_2&#39;)\]</span></p>
+<p>并且也有 <span class="math inline">\(k_1&#39;+k_2&#39;\le k_1+k_2\)</span>。</p>
+<h2 id="复杂度-1">复杂度</h2>
+<p>可以发现每层的 <span class="math inline">\(n,a,b,c\)</span> 都是相同的，记忆化 <span class="math inline">\(k_1,k_2\)</span> 两维。</p>
+<p>注意到 <span class="math inline">\((a,c)\to (a\bmod c,c) \to(c,a\bmod c)\)</span>，层数是 <span class="math inline">\(\mathcal O(\log c)\)</span> 的。</p>
+<p>每次计算是 <span class="math inline">\(\mathcal O\left((k_1+k_2)^2\right)\)</span>，所以总复杂度就是 <span class="math inline">\(\mathcal O\left((k_1+k_2)^4\log c\right)\)</span>。</p>
 <p><del>跑得很快就是了。</del></p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>注意代码中 $A_{k_2}(x) = \sum\limits_{i=0}^x \left((i+1)^{k_2}-i^{k_2}\right)$，和上面定义的 $A(x)$ 不同。</p>
-<p>$B_{k_1}(x) = \sum\limits_{i=0}^x i^{k_1}$。</p>
+<h2 id="代码-1">代码</h2>
+<p>注意代码中 <span class="math inline">\(A_{k_2}(x) = \sum\limits_{i=0}^x \left((i+1)^{k_2}-i^{k_2}\right)\)</span>，和上面定义的 <span class="math inline">\(A(x)\)</span> 不同。</p>
+<p><span class="math inline">\(B_{k_1}(x) = \sum\limits_{i=0}^x i^{k_1}\)</span>。</p>
 <ul>
-<li>  <strong>update on 2019-1-7 19:24:20:</strong></li>
+<li><strong>update on 2019-1-7 19:24:20:</strong></li>
 </ul>
 <p>之前的代码记忆化层数开了60，在<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5170">Luogu 上的模板题</a>里被 Sooke 卡到了66层qaq..</p>
 <p>还被卡常了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">#define ll long long</span><br><span class="line"></span><br><span class="line">const int N &#x3D; 12, P &#x3D; 1000000007;</span><br><span class="line">int n, a, b, c, k1, k2, T, Y[N], C[N][N], F[75][N][N];</span><br><span class="line">struct Poly&#123;</span><br><span class="line">	int a[N];</span><br><span class="line">	inline Poly()&#123; memset(a, 0, sizeof a);&#125;</span><br><span class="line">	inline Poly operator +(const Poly &amp;rhs)const&#123;</span><br><span class="line">		Poly ans;</span><br><span class="line">		for(int i&#x3D;0; i&lt;N; ++i) ans.a[i]&#x3D;(a[i]+rhs.a[i])%P;</span><br><span class="line">		return ans;</span><br><span class="line">	&#125;</span><br><span class="line">	inline Poly operator *(const Poly &amp;rhs)const&#123;</span><br><span class="line">		Poly ans;</span><br><span class="line">		for(int i&#x3D;0; i&lt;N; ++i) for(int j&#x3D;0; i+j&lt;N; ++j)</span><br><span class="line">			ans.a[i+j]&#x3D;(ans.a[i+j]+(ll)a[i]*rhs.a[j])%P;</span><br><span class="line">		return ans;</span><br><span class="line">	&#125;</span><br><span class="line">	inline int calc(int n, int k)&#123;</span><br><span class="line">		int ans&#x3D;a[k+1];</span><br><span class="line">		for(int i&#x3D;k; ~i; --i) ans&#x3D;((ll)ans*n+a[i])%P;</span><br><span class="line">		return ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; A[N], B[N];</span><br><span class="line">inline int Pow(ll x, int y&#x3D;P-2)&#123;</span><br><span class="line">	int ans&#x3D;1;</span><br><span class="line">	for(x+&#x3D;P; y; y&gt;&gt;&#x3D;1, x&#x3D;x*x%P) if(y&amp;1) ans&#x3D;ans*x%P;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line">void solve(Poly &amp;A, int n)&#123;</span><br><span class="line">	for(int i&#x3D;0; i&lt;&#x3D;n; ++i)&#123;</span><br><span class="line">		Poly t;</span><br><span class="line">		t.a[0]&#x3D;Y[i];</span><br><span class="line">		for(int j&#x3D;0; j&lt;&#x3D;n; ++j) if(j!&#x3D;i) t.a[0]&#x3D;(ll)t.a[0]*Pow(i-j)%P;</span><br><span class="line">		for(int j&#x3D;0; j&lt;&#x3D;n; ++j) if(j!&#x3D;i)&#123;</span><br><span class="line">			Poly d;</span><br><span class="line">			d.a[0]&#x3D;P-j, d.a[1]&#x3D;1;</span><br><span class="line">			t&#x3D;t*d;</span><br><span class="line">		&#125;</span><br><span class="line">		A&#x3D;A+t;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int f(int n, int a, int b, int c, int k1, int k2, int dep&#x3D;0)&#123;</span><br><span class="line">	if(~F[dep][k1][k2]) return F[dep][k1][k2];</span><br><span class="line">	int ans&#x3D;0;</span><br><span class="line">	if(!a) ans&#x3D;(ll)B[k1].calc(n, k1)*Pow(b&#x2F;c, k2)%P;</span><br><span class="line">	else if(!k2) ans&#x3D;B[k1].calc(n, k1);</span><br><span class="line">	else if(a&gt;&#x3D;c || b&gt;&#x3D;c)&#123;</span><br><span class="line">		int x&#x3D;a&#x2F;c, y&#x3D;b&#x2F;c;</span><br><span class="line">		a%&#x3D;c, b%&#x3D;c;</span><br><span class="line">		for(int i&#x3D;0, I&#x3D;1; i&lt;&#x3D;k2; ++i, I&#x3D;(ll)I*x%P)</span><br><span class="line">			for(int j&#x3D;0, J&#x3D;I; i+j&lt;&#x3D;k2; ++j, J&#x3D;(ll)J*y%P)</span><br><span class="line">				ans&#x3D;(ans+(ll)f(n, a, b, c, k1+i, k2-i-j, dep+1)*C[k2][i]%P*C[k2-i][j]%P*J)%P;</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">		int m&#x3D;((ll)a*n+b)&#x2F;c;</span><br><span class="line">		ans&#x3D;(ll)A[k2].calc(m-1, k2)*B[k1].calc(n, k1)%P;</span><br><span class="line">		for(int j&#x3D;0; j&lt;k2; ++j) for(int i&#x3D;0; i&lt;&#x3D;k1+1; ++i)</span><br><span class="line">			ans&#x3D;(ans-(ll)f(m-1, c, c-b-1, a, j, i, dep+1)*C[k2][j]%P*B[k1].a[i])%P;</span><br><span class="line">	&#125;</span><br><span class="line">	return F[dep][k1][k2]&#x3D;(ans+P)%P;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">	C[0][0]&#x3D;1;</span><br><span class="line">	for(int i&#x3D;1; i&lt;&#x3D;10; ++i) for(int j&#x3D;0; j&lt;&#x3D;i; ++j) C[i][j]&#x3D;(C[i-1][j]+(j?C[i-1][j-1]:0))%P;</span><br><span class="line">	for(int i&#x3D;0; i&lt;&#x3D;10; ++i)&#123;</span><br><span class="line">		Y[0]&#x3D;1-!i;</span><br><span class="line">		for(int j&#x3D;1; j&lt;&#x3D;i+1; ++j) Y[j]&#x3D;((ll)P+Y[j-1]+Pow(j+1, i)-Pow(j, i))%P;</span><br><span class="line">		solve(A[i], i+1);</span><br><span class="line">		Y[0]&#x3D;!i;</span><br><span class="line">		for(int j&#x3D;1; j&lt;&#x3D;i+1; ++j) Y[j]&#x3D;(Y[j-1]+Pow(j, i))%P;</span><br><span class="line">		solve(B[i], i+1);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	scanf(&quot;%d&quot;, &amp;T);</span><br><span class="line">	while(T--)&#123;</span><br><span class="line">		scanf(&quot;%d%d%d%d%d%d&quot;, &amp;n, &amp;a, &amp;b, &amp;c, &amp;k1, &amp;k2);</span><br><span class="line">		memset(F, -1, sizeof F);</span><br><span class="line">		printf(&quot;%d\n&quot;, f(n, a, b, c, k1, k2));</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="一种特殊情况"><a href="#一种特殊情况" class="headerlink" title="一种特殊情况"></a>一种特殊情况</h1><p><a target="_blank" rel="noopener" href="http://uoj.ac/problem/42">UOJ #42. 【清华集训2014】Sum</a></p>
+<h1 id="一种特殊情况">一种特殊情况</h1>
+<p><a target="_blank" rel="noopener" href="http://uoj.ac/problem/42">UOJ #42. 【清华集训2014】Sum</a></p>
 <p>求</p>
-<p>$$<br>\sum_{d = 1}^{n}{(-1)^{\left\lfloor \sqrt{d\times r\times d} \right\rfloor}}<br>$$</p>
-<h2 id="做法-2"><a href="#做法-2" class="headerlink" title="做法"></a>做法</h2><p>显然只要求 $\sum_{d=1}^n (\left\lfloor d \sqrt r \right\rfloor \bmod 2) = \sum_{d=1}^n \left\lfloor d \sqrt r \right\rfloor -2 \sum_{d=1}^n \left\lfloor \frac{d \sqrt r}{2} \right\rfloor$。</p>
+<p><span class="math display">\[
+\sum_{d = 1}^{n}{(-1)^{\left\lfloor \sqrt{d\times r\times d} \right\rfloor}}
+\]</span></p>
+<h2 id="做法-2">做法</h2>
+<p>显然只要求 <span class="math inline">\(\sum_{d=1}^n (\left\lfloor d \sqrt r \right\rfloor \bmod 2) = \sum_{d=1}^n \left\lfloor d \sqrt r \right\rfloor -2 \sum_{d=1}^n \left\lfloor \frac{d \sqrt r}{2} \right\rfloor\)</span>。</p>
 <p>设</p>
-<p>$$<br>f(a,b,c,n) = \sum_{i=1}^n \left\lfloor i \times \frac{a\sqrt r + b}{c}\right\rfloor<br>$$</p>
-<h3 id="一-2"><a href="#一-2" class="headerlink" title="一"></a>一</h3><p>若 $\frac{a\sqrt r +b}{c}\ge 1$，有</p>
-<p>$$<br>\begin{aligned}<br>f(a,b,c,n) &amp; = \sum_{i=1}^n \left\lfloor i \times \frac{a\sqrt r + b}{c}\right\rfloor \<br>&amp; = \sum_{i=1}^n \left\lfloor i  \left\lfloor \frac{a\sqrt r + b}{c}\right\rfloor + i\left(\frac{a\sqrt r + b}{c} - \left\lfloor \frac{a\sqrt r + b}{c} \right\rfloor\right) \right\rfloor<br>\end{aligned}<br>$$</p>
-<p>第一部分可以提出直接计算，于是我们只考虑 $\frac{a\sqrt r + b}{c}&lt;1$ 的情况。</p>
-<h3 id="二-2"><a href="#二-2" class="headerlink" title="二"></a>二</h3><p>若 $\frac{a\sqrt r + b}{c}&lt;1$：</p>
-<p>令 $m=\left\lfloor n\times \frac{a\sqrt r + b}{c} \right\rfloor$，</p>
-<p>$$<br>\begin{aligned}<br>f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\sqrt r + b}{c} \right\rfloor] \<br>&amp; = \sum_{j=1}^m \sum_{i=1}^n [i\ge \left\lceil j\times \frac{ac\sqrt r-bc}{a^2r-b^2} \right\rceil] \<br>&amp; = \sum_{j=1}^m n-\left\lceil j\times \frac{ac\sqrt r-bc}{a^2r-b^2} \right\rceil+1<br>\end{aligned}<br>$$</p>
+<p><span class="math display">\[
+f(a,b,c,n) = \sum_{i=1}^n \left\lfloor i \times \frac{a\sqrt r + b}{c}\right\rfloor
+\]</span></p>
+<h3 id="一-2">一</h3>
+<p>若 <span class="math inline">\(\frac{a\sqrt r +b}{c}\ge 1\)</span>，有</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(a,b,c,n) &amp; = \sum_{i=1}^n \left\lfloor i \times \frac{a\sqrt r + b}{c}\right\rfloor \\
+&amp; = \sum_{i=1}^n \left\lfloor i  \left\lfloor \frac{a\sqrt r + b}{c}\right\rfloor + i\left(\frac{a\sqrt r + b}{c} - \left\lfloor \frac{a\sqrt r + b}{c} \right\rfloor\right) \right\rfloor
+\end{aligned}
+\]</span></p>
+<p>第一部分可以提出直接计算，于是我们只考虑 <span class="math inline">\(\frac{a\sqrt r + b}{c}&lt;1\)</span> 的情况。</p>
+<h3 id="二-2">二</h3>
+<p>若 <span class="math inline">\(\frac{a\sqrt r + b}{c}&lt;1\)</span>：</p>
+<p>令 <span class="math inline">\(m=\left\lfloor n\times \frac{a\sqrt r + b}{c} \right\rfloor\)</span>，</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\sqrt r + b}{c} \right\rfloor] \\
+&amp; = \sum_{j=1}^m \sum_{i=1}^n [i\ge \left\lceil j\times \frac{ac\sqrt r-bc}{a^2r-b^2} \right\rceil] \\
+&amp; = \sum_{j=1}^m n-\left\lceil j\times \frac{ac\sqrt r-bc}{a^2r-b^2} \right\rceil+1
+\end{aligned}
+\]</span></p>
 <p>第二行可以通过移项和分母有理化得到。</p>
-<p>注意这里上取整解决不了，可以发现上取整和下取整 $+1$ 只有在整数时不同，这里要是整数必然有 $r$ 是完全平方数</p>
+<p>注意这里上取整解决不了，可以发现上取整和下取整 <span class="math inline">\(+1\)</span> 只有在整数时不同，这里要是整数必然有 <span class="math inline">\(r\)</span> 是完全平方数</p>
 <ul>
-<li><p>  可以发现当 $\frac{a^2r-b^2}{\gcd(ac\sqrt r-bc, a^2r-b^2)} \mid j$ 时会出现整数，特判即可。</p>
-</li>
-<li><p>  另一种解决方法是当 $\sqrt r$ 是整数的时候可以很轻易地计算原式，在一开始判掉。</p>
-</li>
+<li><p>可以发现当 <span class="math inline">\(\frac{a^2r-b^2}{\gcd(ac\sqrt r-bc, a^2r-b^2)} \mid j\)</span> 时会出现整数，特判即可。</p></li>
+<li><p>另一种解决方法是当 <span class="math inline">\(\sqrt r\)</span> 是整数的时候可以很轻易地计算原式，在一开始判掉。</p></li>
 </ul>
-<h2 id="复杂度-2"><a href="#复杂度-2" class="headerlink" title="复杂度"></a>复杂度</h2><p>这里 $f(a,b,c,n)\to f(ac,-bc,a^2r-b^2,m)$，令 $x=\frac{a<br>\sqrt r+b}{c}&lt;1$，这可以看做 $(n,x)\to (n’, \frac{1}{x})$</p>
-<p>其中 $n’=\lfloor n\times x \rfloor$ ，<del>显然每次严格减小，但是没什么用。</del></p>
-<p>令 $\alpha=\frac{\sqrt{5}-1}{2}$</p>
+<h2 id="复杂度-2">复杂度</h2>
+<p>这里 <span class="math inline">\(f(a,b,c,n)\to f(ac,-bc,a^2r-b^2,m)\)</span>，令 <span class="math inline">\(x=\frac{a \sqrt r+b}{c}&lt;1\)</span>，这可以看做 <span class="math inline">\((n,x)\to (n&#39;, \frac{1}{x})\)</span></p>
+<p>其中 <span class="math inline">\(n&#39;=\lfloor n\times x \rfloor\)</span> ，<del>显然每次严格减小，但是没什么用。</del></p>
+<p>令 <span class="math inline">\(\alpha=\frac{\sqrt{5}-1}{2}\)</span></p>
 <ul>
-<li><p>  当 $0&lt;x\le \alpha$，有 $n’=\lfloor n\times x \rfloor \le \alpha n$</p>
-</li>
-<li><p>  当 $\alpha&lt;x&lt;1$，有$1&lt;\frac{1}{x}&lt;\frac{1}{\alpha}=\alpha+1$，于是 $n’’=\lfloor n’\times (\frac{1}{x}-1)\rfloor&lt;\alpha n’&lt;\alpha n$</p>
-</li>
+<li><p>当 <span class="math inline">\(0&lt;x\le \alpha\)</span>，有 <span class="math inline">\(n&#39;=\lfloor n\times x \rfloor \le \alpha n\)</span></p></li>
+<li><p>当 <span class="math inline">\(\alpha&lt;x&lt;1\)</span>，有<span class="math inline">\(1&lt;\frac{1}{x}&lt;\frac{1}{\alpha}=\alpha+1\)</span>，于是 <span class="math inline">\(n&#39;&#39;=\lfloor n&#39;\times (\frac{1}{x}-1)\rfloor&lt;\alpha n&#39;&lt;\alpha n\)</span></p></li>
 </ul>
-<p>于是递归至多两层后 $n$ 会变成至多 $\alpha$ 倍，层数至多是 $2\log_{\frac{1}{\alpha}} n+\mathcal O(1)$。</p>
-<p>总复杂度 $\mathcal O(\log^2 n)$。</p>
+<p>于是递归至多两层后 <span class="math inline">\(n\)</span> 会变成至多 <span class="math inline">\(\alpha\)</span> 倍，层数至多是 <span class="math inline">\(2\log_{\frac{1}{\alpha}} n+\mathcal O(1)\)</span>。</p>
+<p>总复杂度 <span class="math inline">\(\mathcal O(\log^2 n)\)</span>。</p>
 <p>但是这里数字会变得很大，每次约分一下就好了，<del>我也不知道为什么能过，实测<code>int</code>可过。</del></p>
-<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p><del>不太懂自然溢出，反正能过</del></p>
+<h2 id="代码-2">代码</h2>
+<p><del>不太懂自然溢出，反正能过</del></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, r, n;</span><br><span class="line"><span class="keyword">double</span> sr;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123; <span class="keyword">return</span> b?gcd(b, a%b):a;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> g=gcd(gcd(a, b), c);</span><br><span class="line">	a/=g, b/=g, c/=g;</span><br><span class="line">	<span class="keyword">int</span> t=(a*sr+b)/c;</span><br><span class="line">	b-=t*c;</span><br><span class="line">	<span class="keyword">int</span> m=n*(a*sr+b)/c, ssr=sr, ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(ssr*ssr==r &amp;&amp; a*a*r-b*b) ans=m/((a*a*r-b*b)/gcd(a*c*ssr-b*c, a*a*r-b*b));</span><br><span class="line">	<span class="keyword">return</span> n*(n+<span class="number">1</span>)/<span class="number">2</span>*t+m*n-f(a*c, -b*c, a*a*r-b*b, m)+ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;r), sr=<span class="built_in">sqrt</span>(r);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, n<span class="number">-2</span>*(f(<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, n)<span class="number">-2</span>*f(<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, n)));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     </div>
 
     

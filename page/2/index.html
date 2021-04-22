@@ -85,7 +85,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -195,7 +199,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -208,7 +212,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -521,7 +525,7 @@
     <div class="post-body" itemprop="articleBody">
           <p><del>不知道会怎么样呢</del></p>
 <p><del><strong>update:</strong> 凉了</del></p>
-<p><strong>update:</strong> 进队了…欧是真的欧</p>
+<p><strong>update:</strong> 进队了...欧是真的欧</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/zjoi2019-day2/#more" rel="contents">
@@ -928,7 +932,8 @@
     
     <div class="post-body" itemprop="articleBody">
           <p><a target="_blank" rel="noopener" href="http://uoj.ac/problem/345">UOJ #345. 【清华集训2017】榕树之心</a></p>
-<h1 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h1><blockquote>
+<h1 id="题目背景">题目背景</h1>
+<blockquote>
 <p>深秋。冷风吹散了最后一丝夏日的暑气，也吹落了榕树脚下灌木丛的叶子。相识数年的 Evan 和 Lyra 再次回到了小时候见面的茂盛榕树之下。小溪依旧，石桥依旧，榕树虽是历经荣枯更迭，依旧亭亭如盖，只是 Evan 和 Lyra 再也不是七八年前不经世事的少年了。</p>
 <p>……</p>
 </blockquote>
@@ -1169,7 +1174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://cekavis.github.io/chu-liu-edmonds-algorithm-notes/">
+    <link itemprop="mainEntityOfPage" href="https://cekavis.github.io/characteristic-polynomial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1182,7 +1187,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/chu-liu-edmonds-algorithm-notes/" class="post-title-link" itemprop="url">最小树形图 朱刘算法学习笔记</a>
+          <a href="/characteristic-polynomial/" class="post-title-link" itemprop="url">特征多项式和常系数线性齐次递推学习笔记</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1193,14 +1198,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2019-01-03 16:14:24" itemprop="dateCreated datePublished" datetime="2019-01-03T16:14:24+08:00">2019-01-03</time>
+      <time title="Created: 2019-01-17 08:36:14" itemprop="dateCreated datePublished" datetime="2019-01-17T08:36:14+08:00">2019-01-17</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-07-31 00:24:44" itemprop="dateModified" datetime="2020-07-31T00:24:44+08:00">2020-07-31</time>
+        <time title="Modified: 2021-04-22 20:36:06" itemprop="dateModified" datetime="2021-04-22T20:36:06+08:00">2021-04-22</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1221,8 +1226,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/chu-liu-edmonds-algorithm-notes/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="chu-liu-edmonds-algorithm-notes/" itemprop="commentCount"></span>
+    <a title="disqus" href="/characteristic-polynomial/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="characteristic-polynomial/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1236,13 +1241,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><del>好久没写博客了，不过之前文章的锅修了好多。</del></p>
-<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>给出一张 $n$ 个点 $m$ 条带权边的有向图，钦定一个根 $r$，求以 $r$ 为根的最小有向生成树（<strong>M</strong>inimum <strong>D</strong>irected <strong>S</strong>panning <strong>T</strong>ree，MDST，也即最小树形图）。</p>
-<p>有向生成树（DST）即要求边是<strong>从父亲连向儿子</strong>。</p>
-<p>下面给出的算法可以在 $\mathcal O(n\times m)$ 的复杂度内求解，另外存在更优的算法。</p>
+          <h1 id="特征多项式">特征多项式</h1>
+<p>设 <span class="math inline">\(A\)</span> 为给定的 <span class="math inline">\(n\times n\)</span> 矩阵，<span class="math inline">\(I_n\)</span> 为 <span class="math inline">\(n\times n\)</span> 单位矩阵，<span class="math inline">\(A\)</span> 的特征多项式定义为</p>
+<p><span class="math display">\[
+p(\lambda )=\det(\lambda I_{n}-A)
+\]</span></p>
+<p>其中 <span class="math inline">\(\det\)</span> 表示行列式</p>
+<h1 id="cayleyhamilton-theorem">Cayley–Hamilton theorem</h1>
+<p>根据 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem">凯莱–哈密顿定理</a>，<span class="math inline">\(A\)</span> 满足方程</p>
+<p><span class="math display">\[
+p(A)=O
+\]</span></p>
+<p>其中 <span class="math inline">\(O\)</span> 是零矩阵</p>
+<p>因此我们可以利用这个 <span class="math inline">\(n\)</span> 次的多项式 <span class="math inline">\(p(A)\)</span> 来降低 <span class="math inline">\(A\)</span> 的高次幂</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/chu-liu-edmonds-algorithm-notes/#more" rel="contents">
+              <a class="btn" href="/characteristic-polynomial/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

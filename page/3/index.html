@@ -85,7 +85,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -195,7 +199,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -208,7 +212,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -237,6 +241,111 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://cekavis.github.io/chu-liu-edmonds-algorithm-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Cekavis">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cekavis's notes">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/chu-liu-edmonds-algorithm-notes/" class="post-title-link" itemprop="url">最小树形图 朱刘算法学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-03 16:14:24" itemprop="dateCreated datePublished" datetime="2019-01-03T16:14:24+08:00">2019-01-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-07-31 00:24:44" itemprop="dateModified" datetime="2020-07-31T00:24:44+08:00">2020-07-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithms/" itemprop="url" rel="index"><span itemprop="name">Algorithms</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/chu-liu-edmonds-algorithm-notes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="chu-liu-edmonds-algorithm-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><del>好久没写博客了，不过之前文章的锅修了好多。</del></p>
+<h1 id="描述">描述</h1>
+<p>给出一张 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\(m\)</span> 条带权边的有向图，钦定一个根 <span class="math inline">\(r\)</span>，求以 <span class="math inline">\(r\)</span> 为根的最小有向生成树（<strong>M</strong>inimum <strong>D</strong>irected <strong>S</strong>panning <strong>T</strong>ree，MDST，也即最小树形图）。</p>
+<p>有向生成树（DST）即要求边是<strong>从父亲连向儿子</strong>。</p>
+<p>下面给出的算法可以在 <span class="math inline">\(\mathcal O(n\times m)\)</span> 的复杂度内求解，另外存在更优的算法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/chu-liu-edmonds-algorithm-notes/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -313,8 +422,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>求以下形式表达式的值。</p>
-<p>$$ \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} $$</p>
+          <h1 id="问题">问题</h1>
+<p>求以下形式表达式的值。</p>
+<p><span class="math display">\[ \sum_{i=0}^n i^{k_1}\left\lfloor \frac{a\times i+b}{c} \right\rfloor ^{k_2} \]</span></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/leiou-notes/#more" rel="contents">
@@ -415,9 +525,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>有 $n$ 个物品，每个物品有两个属性 $a_i$ 和 $b_i$，需要选出 $k$ 个，设选出的编号集合是 $S$。</p>
+          <h1 id="问题">问题</h1>
+<p>有 <span class="math inline">\(n\)</span> 个物品，每个物品有两个属性 <span class="math inline">\(a_i\)</span> 和 <span class="math inline">\(b_i\)</span>，需要选出 <span class="math inline">\(k\)</span> 个，设选出的编号集合是 <span class="math inline">\(S\)</span>。</p>
 <p>最大化</p>
-<p>$$\frac{\sum_{i\in S} a_i}{\sum_{i\in S} b_i}$$</p>
+<p><span class="math display">\[\frac{\sum_{i\in S} a_i}{\sum_{i\in S} b_i}\]</span></p>
 <p>保留一定精度。</p>
           <!--noindex-->
             <div class="post-button">
