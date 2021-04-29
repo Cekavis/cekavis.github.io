@@ -81,6 +81,24 @@
       </tags>
   </entry>
   <entry>
+    <title>2021 集训队作业 题解</title>
+    <url>/2021-team-problems-solution/</url>
+    <content><![CDATA[<p>题目链接：</p>
+<p>Problem E, <a href="https://codeforces.com/gym/102482">2018 ACM-ICPC World Finals</a></p>
+<p>Problem J, <a href="https://codeforces.com/gym/101471">2017 ACM-ICPC World Finals</a></p>
+<p>Problem H, <a href="https://codeforces.com/gym/100851">2015-2016 ACM-ICPC Northeastern European Regional Contest (NEERC 15)</a></p>
+<p>欢迎任何建议</p>
+<a id="more"></a>
+<hr />
+<!-- <object data="/source/2020-team-problems-solution/solution.pdf" type="application/pdf" width="100%" height="100%"> -->
+<p><a href="/source/2021-team-problems-solution/solution.pdf">PDF 链接</a></p>
+<div class="pdf-container" data-target="/source/2021-team-problems-solution/solution.pdf" data-height="500px"></div>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+  </entry>
+  <entry>
     <title>「AtCoder ExaWizards 2019」简要题解</title>
     <url>/atcoder-exawizards2019/</url>
     <content><![CDATA[<p><a href="https://atcoder.jp/contests/exawizards2019">AtCoder ExaWizards 2019</a></p>
@@ -180,24 +198,6 @@
       </categories>
   </entry>
   <entry>
-    <title>2021 集训队作业 题解</title>
-    <url>/2021-team-problems-solution/</url>
-    <content><![CDATA[<p>题目链接：</p>
-<p>Problem E, <a href="https://codeforces.com/gym/102482">2018 ACM-ICPC World Finals</a></p>
-<p>Problem J, <a href="https://codeforces.com/gym/101471">2017 ACM-ICPC World Finals</a></p>
-<p>Problem H, <a href="https://codeforces.com/gym/100851">2015-2016 ACM-ICPC Northeastern European Regional Contest (NEERC 15)</a></p>
-<p>欢迎任何建议</p>
-<a id="more"></a>
-<hr />
-<!-- <object data="/source/2020-team-problems-solution/solution.pdf" type="application/pdf" width="100%" height="100%"> -->
-<p><a href="/source/2021-team-problems-solution/solution.pdf">PDF 链接</a></p>
-<div class="pdf-container" data-target="/source/2021-team-problems-solution/solution.pdf" data-height="500px"></div>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-  </entry>
-  <entry>
     <title>伯努利数学习笔记</title>
     <url>/bernoulli-number-notes/</url>
     <content><![CDATA[<p><a href="https://en.wikipedia.org/wiki/Bernoulli_number">Bernoulli number</a></p>
@@ -263,82 +263,6 @@ S_{m}(n)&amp;=\sum _{k=1}^{n}k^{m}=1^{m}+2^{m}+\cdots +{n}^{m} \\
         <tag>伯努利数</tag>
         <tag>多项式</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>最小树形图 朱刘算法学习笔记</title>
-    <url>/chu-liu-edmonds-algorithm-notes/</url>
-    <content><![CDATA[<p><del>好久没写博客了，不过之前文章的锅修了好多。</del></p>
-<h1 id="描述">描述</h1>
-<p>给出一张 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\(m\)</span> 条带权边的有向图，钦定一个根 <span class="math inline">\(r\)</span>，求以 <span class="math inline">\(r\)</span> 为根的最小有向生成树（<strong>M</strong>inimum <strong>D</strong>irected <strong>S</strong>panning <strong>T</strong>ree，MDST，也即最小树形图）。</p>
-<p>有向生成树（DST）即要求边是<strong>从父亲连向儿子</strong>。</p>
-<p>下面给出的算法可以在 <span class="math inline">\(\mathcal O(n\times m)\)</span> 的复杂度内求解，另外存在更优的算法。</p>
-<a id="more"></a>
-<h1 id="算法">算法</h1>
-<p>学习自 <a href="https://riteme.github.io/blog/2018-6-18/mdst.html"><strong>这里</strong></a>。</p>
-<h2 id="流程">流程</h2>
-<p>自环可以特判，重边没有影响。</p>
-<h3 id="section">1</h3>
-<p>除了根节点，对每个点 <span class="math inline">\(i\)</span> 找到一条边权最小的<strong>入边</strong>，如果有多条相同，可以任意选择。</p>
-<p>记 <span class="math inline">\(a_i\)</span> 表示这条入边的起点，<span class="math inline">\(b_i\)</span> 表示这条边的边权。</p>
-<h3 id="section-1">2</h3>
-<ol type="1">
-<li>如果所选的边形成一棵树，结束。</li>
-</ol>
-<p>否则会形成若干环套树外加包含根节点的一棵树。</p>
-<ol start="2" type="1">
-<li><p>如果此时有根节点以外的孤立的点，则无法形成合法的有向生成树，结束。</p></li>
-<li><p>把每个环缩成一个点，不在环上的点保留，设点 <span class="math inline">\(u\)</span> 所属的环在新图中的编号为 <span class="math inline">\(id_u\)</span> 对于一条两端不在同一个环内的边 <span class="math inline">\((u,v,w)\)</span>，变成 <span class="math inline">\((id_u,id_v,w-b_{id_v})\)</span>。</p></li>
-</ol>
-<p>形成的新图重复该步骤。</p>
-<h3 id="section-2">3</h3>
-<p>最小权值和就是每轮第一步选出的最小入边的权值总和。</p>
-<p>如果题目需要，可以复原出选择的边。</p>
-<h2 id="理解及证明">理解及证明</h2>
-<p>除了根节点外的 <span class="math inline">\(n-1\)</span> 个点在 MDST 中恰好有一条入边，因此如果在第一步中选出的边<strong>合法</strong>，则必然是最小的，可以得到 MDST。</p>
-<p>否则考虑一个环，环上至少有一个点的入边需要调整，可以证明存在一个 MDST 取到了这个环上的除一条边以外的全部边。</p>
-<p>对于任意一个 MDST，如果有一个环多于一条边未取到，那么考虑环上的一条未被取到的边 <span class="math inline">\((u_0,v,w_0)\)</span>，假设对于 <span class="math inline">\(v\)</span> 在方案中选取的边是 <span class="math inline">\((u,v,w)\)</span>，由于环是最小的，那么有 <span class="math inline">\(w_0\le w\)</span>。</p>
-<p>我们可以尝试把 <span class="math inline">\((u,v,w)\)</span> 改成环边 <span class="math inline">\((u_0,v,w_0)\)</span>。</p>
-<ul>
-<li>新图如果仍然是合法的 DST，那么权值和不会变大，因此必然也是一个 MDST。</li>
-<li>出现不合法当且仅当在原来的 MDST 中 <span class="math inline">\(u_0\)</span> 在 <span class="math inline">\(v\)</span> 的子树中，即该边在原有向生成树中是返祖边。而如果一个环需要换边，其必有一条不是返祖边的非树边，因此上述操作可以不断执行直到满足“MDST 取到了这个环上的除一条边以外的全部边”。</li>
-</ul>
-<h2 id="复杂度">复杂度</h2>
-<p>排除了自环影响，除了最后一轮，每次重构的图都会至少减少一个点，单次复杂度 <span class="math inline">\(\mathcal O(m)\)</span>，因此总复杂度 <span class="math inline">\(\mathcal O(n\times m)\)</span>。</p>
-<h2 id="代码">代码</h2>
-<p>参考下面的例题一。</p>
-<h1 id="例题">例题</h1>
-<p><del>好像都是板子</del></p>
-<h2 id="例题一-loj-140.-最小树形图">例题一 LOJ #140. 最小树形图</h2>
-<p><a href="https://loj.ac/problem/140">LOJ #140. 最小树形图</a></p>
-<p>模板</p>
-<h3 id="代码-1">代码</h3>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">105</span>, M = <span class="number">10005</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, r, p, ans, mm, id[N], a[N], b[N], x[M], y[M], z[M];</span><br><span class="line"><span class="keyword">bool</span> instk[N], vis[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(u==r) <span class="keyword">return</span>;</span><br><span class="line">	instk[u]=vis[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(!vis[a[u]]) dfs(a[u]);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(instk[a[u]])&#123;</span><br><span class="line">		id[u]=++p;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=a[u]; j!=u; j=a[j]) id[j]=p;</span><br><span class="line">	&#125;</span><br><span class="line">	instk[u]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(!id[u]) id[u]=++p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;m, &amp;r);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, x+i, y+i, z+i);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) b[i]=<span class="number">1e9</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(z[i]&lt;b[y[i]]) b[y[i]]=z[i], a[y[i]]=x[i];</span><br><span class="line">		<span class="built_in">memset</span>(id+<span class="number">1</span>, <span class="number">0</span>, n&lt;&lt;<span class="number">2</span>), <span class="built_in">memset</span>(vis+<span class="number">1</span>, <span class="number">0</span>, n), id[r]=p=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) <span class="keyword">if</span>(i!=r)&#123;</span><br><span class="line">			<span class="keyword">if</span>(b[i]==<span class="number">1e9</span>) <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>), <span class="number">0</span>; <span class="keyword">else</span> ans+=b[i];</span><br><span class="line">			<span class="keyword">if</span>(!vis[i]) dfs(i);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p==n) <span class="keyword">break</span>;</span><br><span class="line">		mm=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(id[x[i]]!=id[y[i]])</span><br><span class="line">			z[++mm]=z[i]-b[y[i]], x[mm]=id[x[i]], y[mm]=id[y[i]];</span><br><span class="line">		m=mm, n=p, r=id[r];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ans), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="例题二-loj-6510.-雅礼集训-2018-day8a">例题二 LOJ #6510. 「雅礼集训 2018 Day8」A</h2>
-<p><a href="https://loj.ac/problem/6510">LOJ #6510. 「雅礼集训 2018 Day8」A</a></p>
-<h3 id="做法">做法</h3>
-<p>这题没有钦定一个根，我们可以新建一个根，连极大的边到每个点，保证了如果原图有解极大边只会取一次。</p>
-<p>新图必然是有解的，原图无解即极大边选取了多次，判一下就好了。</p>
-<p>时间复杂度还是 <span class="math inline">\(\mathcal O(n\times m)\)</span>。</p>
-<h3 id="代码-2">代码</h3>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">505</span>, M = <span class="number">126000</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, p, mm, id[N], a[N], x[M], y[M];</span><br><span class="line">ll ans, b[N], z[M];</span><br><span class="line"><span class="keyword">bool</span> vis[N], instk[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!u) <span class="keyword">return</span>;</span><br><span class="line">	instk[u]=vis[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(!vis[a[u]]) dfs(a[u]);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(instk[a[u]])&#123;</span><br><span class="line">		id[u]=++p;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=a[u]; i!=u; i=a[i]) id[i]=p;</span><br><span class="line">	&#125;</span><br><span class="line">	instk[u]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(!id[u]) id[u]=++p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%lld&quot;</span>, x+i, y+i, z+i);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) y[++m]=i, z[m]=<span class="number">1ll</span>&lt;&lt;<span class="number">40</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) b[i]=<span class="number">1ll</span>&lt;&lt;<span class="number">50</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(z[i]&lt;b[y[i]]) b[y[i]]=z[i], a[y[i]]=x[i];</span><br><span class="line">		<span class="built_in">memset</span>(vis+<span class="number">1</span>, <span class="number">0</span>, n), <span class="built_in">memset</span>(id+<span class="number">1</span>, <span class="number">0</span>, n&lt;&lt;<span class="number">2</span>), mm=p=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)&#123;</span><br><span class="line">			ans+=b[i];</span><br><span class="line">			<span class="keyword">if</span>(!vis[i]) dfs(i);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(n==p) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(id[x[i]]!=id[y[i]])</span><br><span class="line">			z[++mm]=z[i]-b[y[i]], x[mm]=id[x[i]], y[mm]=id[y[i]];</span><br><span class="line">		m=mm, n=p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans&gt;(<span class="number">2ll</span>&lt;&lt;<span class="number">40</span>)?<span class="number">-1</span>:ans-(<span class="number">1ll</span>&lt;&lt;<span class="number">40</span>)), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Algorithms</category>
-      </categories>
-      <tags>
-        <tag>最小树形图</tag>
-        <tag>朱刘算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>北大集训 2019 游记</title>
-    <url>/ctt2019/</url>
-    <content><![CDATA[<p>咕咕咕</p>
-<p>（当时为什么不想写呢？可能是前两天太自闭了。）</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
   </entry>
   <entry>
     <title>特征多项式和常系数线性齐次递推学习笔记</title>
@@ -467,6 +391,153 @@ f(n) &amp; =\left[A^n \vec{f}\right]_ k \\
       </tags>
   </entry>
   <entry>
+    <title>最小树形图 朱刘算法学习笔记</title>
+    <url>/chu-liu-edmonds-algorithm-notes/</url>
+    <content><![CDATA[<p><del>好久没写博客了，不过之前文章的锅修了好多。</del></p>
+<h1 id="描述">描述</h1>
+<p>给出一张 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\(m\)</span> 条带权边的有向图，钦定一个根 <span class="math inline">\(r\)</span>，求以 <span class="math inline">\(r\)</span> 为根的最小有向生成树（<strong>M</strong>inimum <strong>D</strong>irected <strong>S</strong>panning <strong>T</strong>ree，MDST，也即最小树形图）。</p>
+<p>有向生成树（DST）即要求边是<strong>从父亲连向儿子</strong>。</p>
+<p>下面给出的算法可以在 <span class="math inline">\(\mathcal O(n\times m)\)</span> 的复杂度内求解，另外存在更优的算法。</p>
+<a id="more"></a>
+<h1 id="算法">算法</h1>
+<p>学习自 <a href="https://riteme.github.io/blog/2018-6-18/mdst.html"><strong>这里</strong></a>。</p>
+<h2 id="流程">流程</h2>
+<p>自环可以特判，重边没有影响。</p>
+<h3 id="section">1</h3>
+<p>除了根节点，对每个点 <span class="math inline">\(i\)</span> 找到一条边权最小的<strong>入边</strong>，如果有多条相同，可以任意选择。</p>
+<p>记 <span class="math inline">\(a_i\)</span> 表示这条入边的起点，<span class="math inline">\(b_i\)</span> 表示这条边的边权。</p>
+<h3 id="section-1">2</h3>
+<ol type="1">
+<li>如果所选的边形成一棵树，结束。</li>
+</ol>
+<p>否则会形成若干环套树外加包含根节点的一棵树。</p>
+<ol start="2" type="1">
+<li><p>如果此时有根节点以外的孤立的点，则无法形成合法的有向生成树，结束。</p></li>
+<li><p>把每个环缩成一个点，不在环上的点保留，设点 <span class="math inline">\(u\)</span> 所属的环在新图中的编号为 <span class="math inline">\(id_u\)</span> 对于一条两端不在同一个环内的边 <span class="math inline">\((u,v,w)\)</span>，变成 <span class="math inline">\((id_u,id_v,w-b_{id_v})\)</span>。</p></li>
+</ol>
+<p>形成的新图重复该步骤。</p>
+<h3 id="section-2">3</h3>
+<p>最小权值和就是每轮第一步选出的最小入边的权值总和。</p>
+<p>如果题目需要，可以复原出选择的边。</p>
+<h2 id="理解及证明">理解及证明</h2>
+<p>除了根节点外的 <span class="math inline">\(n-1\)</span> 个点在 MDST 中恰好有一条入边，因此如果在第一步中选出的边<strong>合法</strong>，则必然是最小的，可以得到 MDST。</p>
+<p>否则考虑一个环，环上至少有一个点的入边需要调整，可以证明存在一个 MDST 取到了这个环上的除一条边以外的全部边。</p>
+<p>对于任意一个 MDST，如果有一个环多于一条边未取到，那么考虑环上的一条未被取到的边 <span class="math inline">\((u_0,v,w_0)\)</span>，假设对于 <span class="math inline">\(v\)</span> 在方案中选取的边是 <span class="math inline">\((u,v,w)\)</span>，由于环是最小的，那么有 <span class="math inline">\(w_0\le w\)</span>。</p>
+<p>我们可以尝试把 <span class="math inline">\((u,v,w)\)</span> 改成环边 <span class="math inline">\((u_0,v,w_0)\)</span>。</p>
+<ul>
+<li>新图如果仍然是合法的 DST，那么权值和不会变大，因此必然也是一个 MDST。</li>
+<li>出现不合法当且仅当在原来的 MDST 中 <span class="math inline">\(u_0\)</span> 在 <span class="math inline">\(v\)</span> 的子树中，即该边在原有向生成树中是返祖边。而如果一个环需要换边，其必有一条不是返祖边的非树边，因此上述操作可以不断执行直到满足“MDST 取到了这个环上的除一条边以外的全部边”。</li>
+</ul>
+<h2 id="复杂度">复杂度</h2>
+<p>排除了自环影响，除了最后一轮，每次重构的图都会至少减少一个点，单次复杂度 <span class="math inline">\(\mathcal O(m)\)</span>，因此总复杂度 <span class="math inline">\(\mathcal O(n\times m)\)</span>。</p>
+<h2 id="代码">代码</h2>
+<p>参考下面的例题一。</p>
+<h1 id="例题">例题</h1>
+<p><del>好像都是板子</del></p>
+<h2 id="例题一-loj-140.-最小树形图">例题一 LOJ #140. 最小树形图</h2>
+<p><a href="https://loj.ac/problem/140">LOJ #140. 最小树形图</a></p>
+<p>模板</p>
+<h3 id="代码-1">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">105</span>, M = <span class="number">10005</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, r, p, ans, mm, id[N], a[N], b[N], x[M], y[M], z[M];</span><br><span class="line"><span class="keyword">bool</span> instk[N], vis[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(u==r) <span class="keyword">return</span>;</span><br><span class="line">	instk[u]=vis[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(!vis[a[u]]) dfs(a[u]);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(instk[a[u]])&#123;</span><br><span class="line">		id[u]=++p;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=a[u]; j!=u; j=a[j]) id[j]=p;</span><br><span class="line">	&#125;</span><br><span class="line">	instk[u]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(!id[u]) id[u]=++p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;m, &amp;r);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, x+i, y+i, z+i);</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) b[i]=<span class="number">1e9</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(z[i]&lt;b[y[i]]) b[y[i]]=z[i], a[y[i]]=x[i];</span><br><span class="line">		<span class="built_in">memset</span>(id+<span class="number">1</span>, <span class="number">0</span>, n&lt;&lt;<span class="number">2</span>), <span class="built_in">memset</span>(vis+<span class="number">1</span>, <span class="number">0</span>, n), id[r]=p=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) <span class="keyword">if</span>(i!=r)&#123;</span><br><span class="line">			<span class="keyword">if</span>(b[i]==<span class="number">1e9</span>) <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>), <span class="number">0</span>; <span class="keyword">else</span> ans+=b[i];</span><br><span class="line">			<span class="keyword">if</span>(!vis[i]) dfs(i);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p==n) <span class="keyword">break</span>;</span><br><span class="line">		mm=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(id[x[i]]!=id[y[i]])</span><br><span class="line">			z[++mm]=z[i]-b[y[i]], x[mm]=id[x[i]], y[mm]=id[y[i]];</span><br><span class="line">		m=mm, n=p, r=id[r];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ans), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例题二-loj-6510.-雅礼集训-2018-day8a">例题二 LOJ #6510. 「雅礼集训 2018 Day8」A</h2>
+<p><a href="https://loj.ac/problem/6510">LOJ #6510. 「雅礼集训 2018 Day8」A</a></p>
+<h3 id="做法">做法</h3>
+<p>这题没有钦定一个根，我们可以新建一个根，连极大的边到每个点，保证了如果原图有解极大边只会取一次。</p>
+<p>新图必然是有解的，原图无解即极大边选取了多次，判一下就好了。</p>
+<p>时间复杂度还是 <span class="math inline">\(\mathcal O(n\times m)\)</span>。</p>
+<h3 id="代码-2">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">505</span>, M = <span class="number">126000</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, p, mm, id[N], a[N], x[M], y[M];</span><br><span class="line">ll ans, b[N], z[M];</span><br><span class="line"><span class="keyword">bool</span> vis[N], instk[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!u) <span class="keyword">return</span>;</span><br><span class="line">	instk[u]=vis[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(!vis[a[u]]) dfs(a[u]);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(instk[a[u]])&#123;</span><br><span class="line">		id[u]=++p;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=a[u]; i!=u; i=a[i]) id[i]=p;</span><br><span class="line">	&#125;</span><br><span class="line">	instk[u]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(!id[u]) id[u]=++p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%lld&quot;</span>, x+i, y+i, z+i);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) y[++m]=i, z[m]=<span class="number">1ll</span>&lt;&lt;<span class="number">40</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) b[i]=<span class="number">1ll</span>&lt;&lt;<span class="number">50</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(z[i]&lt;b[y[i]]) b[y[i]]=z[i], a[y[i]]=x[i];</span><br><span class="line">		<span class="built_in">memset</span>(vis+<span class="number">1</span>, <span class="number">0</span>, n), <span class="built_in">memset</span>(id+<span class="number">1</span>, <span class="number">0</span>, n&lt;&lt;<span class="number">2</span>), mm=p=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)&#123;</span><br><span class="line">			ans+=b[i];</span><br><span class="line">			<span class="keyword">if</span>(!vis[i]) dfs(i);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(n==p) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) <span class="keyword">if</span>(id[x[i]]!=id[y[i]])</span><br><span class="line">			z[++mm]=z[i]-b[y[i]], x[mm]=id[x[i]], y[mm]=id[y[i]];</span><br><span class="line">		m=mm, n=p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans&gt;(<span class="number">2ll</span>&lt;&lt;<span class="number">40</span>)?<span class="number">-1</span>:ans-(<span class="number">1ll</span>&lt;&lt;<span class="number">40</span>)), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Algorithms</category>
+      </categories>
+      <tags>
+        <tag>最小树形图</tag>
+        <tag>朱刘算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSP-S2019 退役记</title>
+    <url>/csp-s-2019/</url>
+    <content><![CDATA[<p>退役了</p>
+<a id="more"></a>
+<h1 id="day-0">Day 0</h1>
+<p>去秋游了，走了三万多步，人没了（退役 flag x 1）。</p>
+<p>回来就颓颓颓颓（退役 flag x 2）</p>
+<h1 id="day-1">Day 1</h1>
+<p>11 点睡觉的，1 点多被爆肝的室友吵醒，醒了大半个小时才睡着（退役 flag x 3），6 点多就得起床了。</p>
+<p>考场是学车的负一层教室（地下停车场），只提供睿智的移动厕所，没有冲水（退役 flag x 4）。</p>
+<p>座位对面就有一个显示屏，随时可以看到时间，觉得很爽（退役 flag x 5）。</p>
+<p>开考了，傻逼，直接把第一题走了。</p>
+<p>第二题调了很久傻逼错误（退役 flag x 6），比如什么左括号的点没算贡献、没做前缀和……</p>
+<p>我想 AK（退役 flag x 7）。</p>
+<p>第三题一开始去想一个拆子问题的算法了（退役 flag x 8），大概是 <span class="math inline">\(1\)</span> 一定会走到另外的编号最小点，于是对于这条链挂出的若干子树搞一搞，一开始还以为是对的，成功自闭。</p>
+<p>后来想到正解方向，只是模糊觉得限制都是一条边要在另一条边之前做，于是全局暴力维护一个顺序关系（优化以后再说）（退役 flag x 9），后来发现无法解决的是一条边必须紧接着一条边选的情况，成功自闭。</p>
+<p>还有一个小时就冲上去写暴力了，十分不冷静，写了一个假的链，然后不会做菊花，最后就是把阶乘和链和假的算法结合了一下。后来很开心地发现链挂了，然后意识到我的假算法对于链的情况应该是对的？获得了 10pts 的好成绩。</p>
+<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 10）。</p>
+<h1 id="day-2">Day 2</h1>
+<p>换了个寝室住，但是也没睡好（退役 flag x 11）。</p>
+<p>我想 AK（退役 flag x 12）。</p>
+<p>开考前在正常的厕所外面排了一会儿队，然后意识到好像不想上厕所。</p>
+<p>开考，看到一个 <span class="math inline">\(998244353\)</span>，傻逼，直接把 dp 走了。</p>
+<p>看到第二题慌的一批，有点点斜率优化的感觉（？）（退役 flag x 13）。先猜了一个段数相同情况下每一段尽量往右延伸的结论，然后再猜了一个段数越多越优的结论，乱写一通从前往后贪心，发现写不来，于是不会做（退役 flag x 14）。</p>
+<p>想扔了看第三题（退役 flag x 15），但是模糊意识到反过来做最后一段尽量短，然后写了一个二分，过不去大样例（退役 flag x 16）。冷静了一下，写了个暴力，发现右端点确定时段长不能二分。</p>
+<p>再冷静了一下，发现左端点确定时段长可以二分（注定了想不到单调队列优化（退役 flag x 17）），写了个 88pts 跑路了。</p>
+<p>第三题一开始想对于每条边求出具体两边中心的，搞了一会儿还是不会做。突然想到对每个点算贡献，随便推了一下发现好像是可以维护的，就把线段树合并走了（退役 flag x 18），到根的链单独拿个树状数组维护。大概 1h 后过了大样例，还有 20min，觉得自己好强（退役 flag x 19）。极限数据本机跑了 3.5s 不想卡，改了个用 <code>getchar()</code> 的读入优化没有任何变化，怕写挂就改回去了（退役 flag x 20）。</p>
+<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 21）。</p>
+<p>学会了德扑，赌了两局都破产了（退役 flag x 22），还重学了 UNO。</p>
+<p>100+100+10+100+88+(100-?)，大家再见。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>北大集训 2019 游记</title>
+    <url>/ctt2019/</url>
+    <content><![CDATA[<p>咕咕咕</p>
+<p>（当时为什么不想写呢？可能是前两天太自闭了。）</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>北大集训 2020 游记</title>
+    <url>/ctt2020/</url>
+    <content><![CDATA[<p>OI生活结束时，已不知道该如何提笔了。</p>
+<a id="more"></a>
+<h1 id="section">12.7</h1>
+<p>早上的高铁，信号比印象中好了很多，可能是因为换了手机吧，但路上肯定不是5G。快两点办好入住，熟悉的地方，并没有上次那么炎热，但是静电还是一样多。三点是开幕式，所以要等晚上再去修电脑。室友是广东的高二小哥。开幕式后碰到了 wy 和 ztr，带我们去了刚开的新食堂，四楼有火锅，但是没有七人桌，我就自己去修电脑了，回来路上找了家麦当劳解决。本来以为这么热闹的地方的联想门店肯定是什么都有，虽然店员很多但是与我想象的还是不太一致。</p>
+<p>晚上九点多就睡了，睡着倒是没有太难，但是经常醒来。</p>
+<h1 id="day-1">12.8 - Day 1</h1>
+<p>零下十一度 lj 穿着拖鞋走到校门口。</p>
+<p>第一题是一个数学题，有一些数论和线性代数。第二题第一感觉是个大数据结构，多个区间询问让我很害怕。真的很害怕，我到比赛结束前两分钟才发现是签到题。我笑一下，也许自己也不觉得奇怪了。第三题是个有趣的交互题，后来知道是 pjy 出的。写了一个奇怪的做法得了 32 分，后来便再没有突破，改变随机种子和随机方式会少 2~4 分，我想也许是 fyj 的生日带给我的，但是我有什么资格拥有她呢。放弃治疗后试了自己生日也是 32，好难过。</p>
+<p>出来之后发现大家都是两百多，37+20+32，rank 60，一切都结束了。第三题是第四高分，真奇怪。</p>
+<p>讲题之后和 yzr 去逛 pku 校园，没有雪，明年就会见到吧，会有雪，也会有 fyj 吗。</p>
+<p>十点多睡觉，十一点多才睡着，不过质量比昨天改善不少。</p>
+<h1 id="day-2">12.9 - Day 2</h1>
+<p>五点多醒来继续睡着了。</p>
+<p>37 分钟过了第一题，重拾一丝信心。写了第三题暴力，再改成三方。不会第二题，自觉写不出分段函数，手算了 2 的答案得到了 5 分。猜是一个脑筋急转弯，但是凑不出来。第三题也不会再优化。最后一个小时发现很多人 ak 离场了，真的结束了。100+5+60，rank 45。</p>
+<p>鸽了讲题，在游戏里可以忘记一些哀伤。一直玩到晚上。</p>
+<h1 id="day-3">12.10 - Day 3</h1>
+<p>睡眠好了一些，也不紧张了。</p>
+<p>第一题不知道用行列式枚举排列，找了很久性质，可惜了。第二题冲上去写根号 log，发现要跑 20s，很难过，咬咬牙改成根号下 log，还是卡不进去。还剩二十分钟时发现数据结构学傻了，用了十几分钟改过了，虽然还要二分，但是跑得快极了。第三题来不及写暴力了。</p>
+<p>过的人最多的居然是第一题。集训队内排名 33，指望明天了。</p>
+<p>晚上 yzr 说要不要去外面玩，我说可以，但是没地方去。这种时候更喜欢一个人散步。yzr 去打狼人杀了，我却决定出去，八点骑车到了一个郊野公园，门口说调整关闭时间为八点，于是只能扫兴而返。但是我不想屈服，我沿清河而下，绕了圆明园外半边轮廓回到酒店。我不想现在去圆明园，想等到合适的人。</p>
+<h1 id="day-4">12.11 - Day 4</h1>
+<p>什么都不会，没有可写的了。</p>
+<p>最后一天最后的挣扎，我没有进前三十，没有冬令营，最后一场OI比赛来得比预想早了一些。</p>
+<p>考完去参加 pku 的座谈。相比大学生活什么的，我更向往和她的生活。有人信吗，我也不信，写这句话只是让自己感动一下罢了。</p>
+<p>下午去取了电脑，没修好，也没收我钱。</p>
+<p>晚上想刷光临时饭卡失败了，饮料喝不下，不过等到了 cwy 和 pjy，跟着混进了一节不去要写五百字报告的课——《王选的世界》。错误估计了时长，不过本来也没事做。</p>
+<p>回去发现电脑电池是固件问题，震撼我妈，遂打隔膜到第二天。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>学车日记</title>
     <url>/diary-of-driver-s-education/</url>
     <content><![CDATA[<p>基本康复后终于开始学车了！</p>
@@ -515,6 +586,13 @@ f(n) &amp; =\left[A^n \vec{f}\right]_ k \\
 <p>出考场打印了成绩，非常开心，重新把手机开机，刚下楼看见教练和 A，就直接上了车。开到路上教练让 A 来开，开到大路上教练让我来开，我一路心惊胆战平安开到了该下车的地方，熄了两次火，不知道被多少车用喇叭嘲讽过。路况好的地方速度到过80km/h（没记错的话）。教练发了我科目三灯光规则，通知我明天练车。</p>
 <h1 id="section-9">4.27</h1>
 <p>下午教练来接我，便让我开着去接 A，再到练习场地。今天练倒车入库，教练把油门封死了，撞墙概率大大降低。我和 A 轮流练了总共近三个小时，学会了大幅度打方向，已经基本可以在这个场地将这辆车停好。结束后 A 开车先送我回家，再送自己回家。</p>
+<h1 id="section-10">4.28</h1>
+<p>开车到场地的路上，急转进小路的地方熄火了两次，一慌便忘了离合怎么踩，切不能慌，最不济可以停下打方向。</p>
+<p>继续练了一下午的倒车入库，不用一会儿左脚就麻了。总觉得已经完全熟练了，再练却总能有新的经验。</p>
+<h1 id="section-11">4.29</h1>
+<p>先开车送人到湄池打疫苗，再开回场地，这次没有熄火，路上行车也逐渐熟练。</p>
+<p>先学习了左向的倒车入库，原先练习的只有右向，同时也大概知道了科目二的流程。在右向已经基本掌握的情况下，另一个方向就简单许多。练习几次后便开始学侧方位停车。侧方位停车比想象中容易，一个原因肯定是标线过于精确，生活中停车便要全凭经验判断和随机应变了。最难的一部分是从停车位出来后要准确进入到指定位置，以便开始下一次倒车，若没有调准，下一次倒车就会有意外了。</p>
+<p>若说每次新学内容由我开始是因为恰好我负责来程的行车，仍有一些差别可以让我满足一下小小的虚荣心。昨天教练下车让我自己练习，A 仍坐在后排；今天因事暂时离开时，让我坐副驾驶在紧急情况下帮 A 踩刹车。也许实际上 A 并没有多少不堪，也许 A 更需要这些鼓励，而如果 A 学得完全比我好，我也会更高兴的。</p>
 ]]></content>
       <categories>
         <category>杂谈</category>
@@ -522,77 +600,6 @@ f(n) &amp; =\left[A^n \vec{f}\right]_ k \\
       <tags>
         <tag>Life</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>CSP-S2019 退役记</title>
-    <url>/csp-s-2019/</url>
-    <content><![CDATA[<p>退役了</p>
-<a id="more"></a>
-<h1 id="day-0">Day 0</h1>
-<p>去秋游了，走了三万多步，人没了（退役 flag x 1）。</p>
-<p>回来就颓颓颓颓（退役 flag x 2）</p>
-<h1 id="day-1">Day 1</h1>
-<p>11 点睡觉的，1 点多被爆肝的室友吵醒，醒了大半个小时才睡着（退役 flag x 3），6 点多就得起床了。</p>
-<p>考场是学车的负一层教室（地下停车场），只提供睿智的移动厕所，没有冲水（退役 flag x 4）。</p>
-<p>座位对面就有一个显示屏，随时可以看到时间，觉得很爽（退役 flag x 5）。</p>
-<p>开考了，傻逼，直接把第一题走了。</p>
-<p>第二题调了很久傻逼错误（退役 flag x 6），比如什么左括号的点没算贡献、没做前缀和……</p>
-<p>我想 AK（退役 flag x 7）。</p>
-<p>第三题一开始去想一个拆子问题的算法了（退役 flag x 8），大概是 <span class="math inline">\(1\)</span> 一定会走到另外的编号最小点，于是对于这条链挂出的若干子树搞一搞，一开始还以为是对的，成功自闭。</p>
-<p>后来想到正解方向，只是模糊觉得限制都是一条边要在另一条边之前做，于是全局暴力维护一个顺序关系（优化以后再说）（退役 flag x 9），后来发现无法解决的是一条边必须紧接着一条边选的情况，成功自闭。</p>
-<p>还有一个小时就冲上去写暴力了，十分不冷静，写了一个假的链，然后不会做菊花，最后就是把阶乘和链和假的算法结合了一下。后来很开心地发现链挂了，然后意识到我的假算法对于链的情况应该是对的？获得了 10pts 的好成绩。</p>
-<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 10）。</p>
-<h1 id="day-2">Day 2</h1>
-<p>换了个寝室住，但是也没睡好（退役 flag x 11）。</p>
-<p>我想 AK（退役 flag x 12）。</p>
-<p>开考前在正常的厕所外面排了一会儿队，然后意识到好像不想上厕所。</p>
-<p>开考，看到一个 <span class="math inline">\(998244353\)</span>，傻逼，直接把 dp 走了。</p>
-<p>看到第二题慌的一批，有点点斜率优化的感觉（？）（退役 flag x 13）。先猜了一个段数相同情况下每一段尽量往右延伸的结论，然后再猜了一个段数越多越优的结论，乱写一通从前往后贪心，发现写不来，于是不会做（退役 flag x 14）。</p>
-<p>想扔了看第三题（退役 flag x 15），但是模糊意识到反过来做最后一段尽量短，然后写了一个二分，过不去大样例（退役 flag x 16）。冷静了一下，写了个暴力，发现右端点确定时段长不能二分。</p>
-<p>再冷静了一下，发现左端点确定时段长可以二分（注定了想不到单调队列优化（退役 flag x 17）），写了个 88pts 跑路了。</p>
-<p>第三题一开始想对于每条边求出具体两边中心的，搞了一会儿还是不会做。突然想到对每个点算贡献，随便推了一下发现好像是可以维护的，就把线段树合并走了（退役 flag x 18），到根的链单独拿个树状数组维护。大概 1h 后过了大样例，还有 20min，觉得自己好强（退役 flag x 19）。极限数据本机跑了 3.5s 不想卡，改了个用 <code>getchar()</code> 的读入优化没有任何变化，怕写挂就改回去了（退役 flag x 20）。</p>
-<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 21）。</p>
-<p>学会了德扑，赌了两局都破产了（退役 flag x 22），还重学了 UNO。</p>
-<p>100+100+10+100+88+(100-?)，大家再见。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>北大集训 2020 游记</title>
-    <url>/ctt2020/</url>
-    <content><![CDATA[<p>OI生活结束时，已不知道该如何提笔了。</p>
-<a id="more"></a>
-<h1 id="section">12.7</h1>
-<p>早上的高铁，信号比印象中好了很多，可能是因为换了手机吧，但路上肯定不是5G。快两点办好入住，熟悉的地方，并没有上次那么炎热，但是静电还是一样多。三点是开幕式，所以要等晚上再去修电脑。室友是广东的高二小哥。开幕式后碰到了 wy 和 ztr，带我们去了刚开的新食堂，四楼有火锅，但是没有七人桌，我就自己去修电脑了，回来路上找了家麦当劳解决。本来以为这么热闹的地方的联想门店肯定是什么都有，虽然店员很多但是与我想象的还是不太一致。</p>
-<p>晚上九点多就睡了，睡着倒是没有太难，但是经常醒来。</p>
-<h1 id="day-1">12.8 - Day 1</h1>
-<p>零下十一度 lj 穿着拖鞋走到校门口。</p>
-<p>第一题是一个数学题，有一些数论和线性代数。第二题第一感觉是个大数据结构，多个区间询问让我很害怕。真的很害怕，我到比赛结束前两分钟才发现是签到题。我笑一下，也许自己也不觉得奇怪了。第三题是个有趣的交互题，后来知道是 pjy 出的。写了一个奇怪的做法得了 32 分，后来便再没有突破，改变随机种子和随机方式会少 2~4 分，我想也许是 fyj 的生日带给我的，但是我有什么资格拥有她呢。放弃治疗后试了自己生日也是 32，好难过。</p>
-<p>出来之后发现大家都是两百多，37+20+32，rank 60，一切都结束了。第三题是第四高分，真奇怪。</p>
-<p>讲题之后和 yzr 去逛 pku 校园，没有雪，明年就会见到吧，会有雪，也会有 fyj 吗。</p>
-<p>十点多睡觉，十一点多才睡着，不过质量比昨天改善不少。</p>
-<h1 id="day-2">12.9 - Day 2</h1>
-<p>五点多醒来继续睡着了。</p>
-<p>37 分钟过了第一题，重拾一丝信心。写了第三题暴力，再改成三方。不会第二题，自觉写不出分段函数，手算了 2 的答案得到了 5 分。猜是一个脑筋急转弯，但是凑不出来。第三题也不会再优化。最后一个小时发现很多人 ak 离场了，真的结束了。100+5+60，rank 45。</p>
-<p>鸽了讲题，在游戏里可以忘记一些哀伤。一直玩到晚上。</p>
-<h1 id="day-3">12.10 - Day 3</h1>
-<p>睡眠好了一些，也不紧张了。</p>
-<p>第一题不知道用行列式枚举排列，找了很久性质，可惜了。第二题冲上去写根号 log，发现要跑 20s，很难过，咬咬牙改成根号下 log，还是卡不进去。还剩二十分钟时发现数据结构学傻了，用了十几分钟改过了，虽然还要二分，但是跑得快极了。第三题来不及写暴力了。</p>
-<p>过的人最多的居然是第一题。集训队内排名 33，指望明天了。</p>
-<p>晚上 yzr 说要不要去外面玩，我说可以，但是没地方去。这种时候更喜欢一个人散步。yzr 去打狼人杀了，我却决定出去，八点骑车到了一个郊野公园，门口说调整关闭时间为八点，于是只能扫兴而返。但是我不想屈服，我沿清河而下，绕了圆明园外半边轮廓回到酒店。我不想现在去圆明园，想等到合适的人。</p>
-<h1 id="day-4">12.11 - Day 4</h1>
-<p>什么都不会，没有可写的了。</p>
-<p>最后一天最后的挣扎，我没有进前三十，没有冬令营，最后一场OI比赛来得比预想早了一些。</p>
-<p>考完去参加 pku 的座谈。相比大学生活什么的，我更向往和她的生活。有人信吗，我也不信，写这句话只是让自己感动一下罢了。</p>
-<p>下午去取了电脑，没修好，也没收我钱。</p>
-<p>晚上想刷光临时饭卡失败了，饮料喝不下，不过等到了 cwy 和 pjy，跟着混进了一节不去要写五百字报告的课——《王选的世界》。错误估计了时长，不过本来也没事做。</p>
-<p>回去发现电脑电池是固件问题，震撼我妈，遂打隔膜到第二天。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
   </entry>
   <entry>
     <title>类欧几里得算法学习笔记</title>
@@ -861,6 +868,89 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       </categories>
   </entry>
   <entry>
+    <title>「UOJ 345」「清华集训2017」榕树之心</title>
+    <url>/uoj-345/</url>
+    <content><![CDATA[<p><a href="http://uoj.ac/problem/345">UOJ #345. 【清华集训2017】榕树之心</a></p>
+<h1 id="题目背景">题目背景</h1>
+<blockquote>
+<p>深秋。冷风吹散了最后一丝夏日的暑气，也吹落了榕树脚下灌木丛的叶子。相识数年的 Evan 和 Lyra 再次回到了小时候见面的茂盛榕树之下。小溪依旧，石桥依旧，榕树虽是历经荣枯更迭，依旧亭亭如盖，只是 Evan 和 Lyra 再也不是七八年前不经世事的少年了。</p>
+<p>……</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>“已经快是严冬了，榕树的叶子还没落呢……”</p>
+<p>“榕树是常绿树，是看不到明显的落叶季节的……”</p>
+<p>“唉……想不到已经七年了呢。榕树还是当年的榕树，你却不是当年的你了……”</p>
+<p>“其实又有什么是一成不变的呢，榕树常绿，翠绿树冠的宏观永恒，是由无数细小树叶的荣枯更迭组成的。在时间的流逝中一切都在不断变化着呢……”</p>
+<p>“但你看这榕树，日日如此，季季如此，年年如此，仿佛亘古不变般，盘根错节，郁郁葱葱。我在想，或许成为一棵树更好吧，任时间从枝叶间流过，我只守这一片绿荫就好。”</p>
+<p>“榕树固然长久，但在这无限的时光里，终归是要湮灭于尘土的。与其像榕树一般，植根于一方泥土中感受年复一年的四季更替。倒不如在有限的时间里看过尽可能多的世界吧。再说了，榕树虽生长缓慢，却依旧会在每年春天抽出一根新的枝条去向外探索的呢……”</p>
+<p>“真的吗，榕树在她漫长的一生里，就是这样往外一步步探索的吗？”</p>
+<p>“毕竟就算树冠看起来一成不变，榕树也会随着时间周期变化，春天到了自然就是生长的时候了，她也应当做出对应的表现吧……”</p>
+<p>“相比于对季节更替做出本能的生长，我倒宁愿相信，榕树有一颗活跃的的，探索的心。”</p>
+<p>“其实榕树是有心的，榕树刚刚种下的时候，心就在根的地方发芽了。以后每年春天榕树长出新枝条的时候，心就会向着新枝条的方向移动一点，这样就能更靠近外面的世界了。你看这头顶上的枝条，纵横交错，其实心已经在这枝杈间，移动了数十载了呢……”</p>
+<p>“哇，也就是说，这密密麻麻的树杈中的某个地方，藏着这棵榕树的心吗？”</p>
+<p>“没错，可是要知道它在哪，就得另花一番功夫了……”</p>
+<p>“呀，这时候想想，一株树还是不如一个人好……比如你，要是这样贴上去的话，就能听到跳动的声音呢……”</p>
+<p>……</p>
+</blockquote>
+<p><del>写这篇题解就是为了上面这一段话。</del></p>
+<p><del>听说 OIer 都是文学家。</del></p>
+<h1 id="题意">题意</h1>
+<p>有一棵 <span class="math inline">\(n\)</span> 个点的树，初始时只有 <span class="math inline">\(1\)</span> 号点，心也在 <span class="math inline">\(1\)</span> 号点。</p>
+<p>每次树会长出一个与当前某个已经存在节点相邻的点，心会沿着心到新点的简单路径移动一步。</p>
+<p>现在已知树的最终形态，求所有生长顺序下哪些点可能成为心最终所在的位置。</p>
+<p><span class="math inline">\(T\)</span> 组数据。</p>
+<p><span class="math inline">\(T\le 20, n\le 10^5\)</span>。</p>
+<h1 id="做法">做法</h1>
+<p>首先由于步数确定，把树黑白染色后会有一种颜色必然不能被走到。</p>
+<p>考虑一个子问题，只需要求 <span class="math inline">\(1\)</span> 号点是否能成为心最终的位置。</p>
+<p>令 <span class="math inline">\(f_i\)</span> 表示以 <span class="math inline">\(i\)</span> 为根的子树，初始只有 <span class="math inline">\(i\)</span> 号点，心也在 <span class="math inline">\(i\)</span> 号点，按任意顺序加完所有点后心离 <span class="math inline">\(i\)</span> 的最近距离。</p>
+<p>答案即为 <span class="math inline">\([f_1=0]\)</span>。</p>
+<p>计算 <span class="math inline">\(f_u\)</span> 时，找到一个 <span class="math inline">\(f_v\)</span> 最大的儿子 <span class="math inline">\(v\)</span>，长完这个子树之后心到 <span class="math inline">\(u\)</span> 的距离最小是 <span class="math inline">\(f_v+1\)</span>。之后如果心能够回到 <span class="math inline">\(u\)</span>，通过调整选取顺序，最终必然可以停留在 <span class="math inline">\(u\)</span> 或 <span class="math inline">\(u\)</span> 的某个儿子上；如果不能，得到的也一定是最浅的方案。</p>
+<hr />
+<p>考虑原来的问题，有点类似换根，再自上而下做一遍 dp 即可。</p>
+<p>有一些细节是选取当前点的时候，当前点到 <span class="math inline">\(1\)</span> 的所有点必须已经被选。</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN], *s, *t;</span><br><span class="line">	<span class="keyword">return</span> (s==t?t=(s=buf)+fread(buf,<span class="number">1</span>,IN_LEN,<span class="built_in">stdin</span>),(s==t?<span class="number">-1</span>:*s++):*s++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">bool</span> iosig;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (iosig=<span class="literal">false</span>, c=read(); !<span class="built_in">isdigit</span>(c); c=read()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) iosig=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>; <span class="built_in">isdigit</span>(c); c=read()) x=((x+(x&lt;&lt;<span class="number">2</span>))&lt;&lt;<span class="number">1</span>)+(c^<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (iosig) x=-x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> num, n, W, T, h[N], f[N], siz[N], e[N&lt;&lt;<span class="number">1</span>], pre[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">bool</span> ans[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123; e[++num]=y, pre[num]=h[x], h[x]=num;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">	siz[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		dfs1(e[i], u), siz[u]+=siz[e[i]];</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;=f[mx]) mx=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa &amp;&amp; e[i]!=mx) sum+=siz[e[i]];</span><br><span class="line">	<span class="keyword">if</span>(mx) f[u]=f[mx]+<span class="number">1</span>-sum, f[u]=max(f[u], f[u]&amp;<span class="number">1</span>); <span class="keyword">else</span> f[u]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>, <span class="keyword">int</span> dep=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=fa, mx2=<span class="number">0</span>, sum;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;f[mx]) mx2=mx, mx=e[i];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(f[e[i]]&gt;=f[mx2]) mx2=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mx==fa) sum=siz[u]; <span class="keyword">else</span> sum=n-siz[mx]<span class="number">-1</span>-dep;</span><br><span class="line">	ans[u]=(((dep^n)&amp;<span class="number">1</span>) &amp;&amp; sum&gt;=f[mx]+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> fmx=f[mx], fmx2=f[mx2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(e[i]!=mx) f[u]=fmx+<span class="number">1</span>-(sum-siz[e[i]]);</span><br><span class="line">		<span class="keyword">else</span> f[u]=fmx2+<span class="number">1</span>-(mx2==fa?siz[u]-siz[mx]:n-siz[mx]-siz[mx2]<span class="number">-1</span>-dep);</span><br><span class="line">		f[u]=max(f[u], f[u]&amp;<span class="number">1</span>), dfs2(e[i], u, dep+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	num=<span class="number">0</span>, <span class="built_in">memset</span>(h, <span class="number">0</span>, <span class="keyword">sizeof</span> h);</span><br><span class="line">	read(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>, x, y; i&lt;n; ++i) read(x), read(y), add(x, y), add(y, x);</span><br><span class="line">	dfs1(<span class="number">1</span>), dfs2(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=(W==<span class="number">3</span>?<span class="number">1</span>:n); ++i) <span class="built_in">putchar</span>(<span class="string">&#x27;0&#x27;</span>+ans[i]);</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	read(W), read(T);</span><br><span class="line">	<span class="keyword">while</span>(T--) solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>树</tag>
+        <tag>DP</tag>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>情人节随想</title>
+    <url>/valentine-s-day/</url>
+    <content><![CDATA[<p>对异地的她和他来说，相聚即是节，没有相聚的情人节往往是徒增感伤。</p>
+<a id="more"></a>
+<hr />
+<p>本想写一些文字记录这一段生活，不过赶不上在情人节这天完成，就暂时搁置了这个想法。所以这一篇文章也没有多少激动人心的内容。</p>
+<p>剧透警告！</p>
+<p>本想在除夕早上看的《La La Land》，阴差阳错地拖到了今天。这部电影在大陆上映的时间恰好是四年前的情人节。</p>
+<p>《Mia &amp; Sebastian’s Theme》和《City of Stars》真的好美！</p>
+<p>不过这部电影的情人节档是个骗局，男主和女主并没有在一起。</p>
+<blockquote>
+<p>“I'm always gonna love you.”</p>
+<p>“I'm always gonna love you, too.”</p>
+</blockquote>
+<p>当爱与理想分道扬镳，后者不失为一种选择。旧梦仍然会在，而最后的相视一笑让它不再是悲剧。</p>
+<p>理想是什么，我总是说不出一个答案，我知道正在接近它。也许不需要说得出来的答案，我的特质和所经历的一切已经决定了理想，如此想，初来时的恐惧便可以消散了。</p>
+<p align="right">
+2021年2月14日 情人节
+</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>Life</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WC2019游记</title>
     <url>/wc2019/</url>
     <content><![CDATA[<p><del>没得去 PKUWC</del></p>
@@ -1110,61 +1200,6 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       </categories>
   </entry>
   <entry>
-    <title>「UOJ 345」「清华集训2017」榕树之心</title>
-    <url>/uoj-345/</url>
-    <content><![CDATA[<p><a href="http://uoj.ac/problem/345">UOJ #345. 【清华集训2017】榕树之心</a></p>
-<h1 id="题目背景">题目背景</h1>
-<blockquote>
-<p>深秋。冷风吹散了最后一丝夏日的暑气，也吹落了榕树脚下灌木丛的叶子。相识数年的 Evan 和 Lyra 再次回到了小时候见面的茂盛榕树之下。小溪依旧，石桥依旧，榕树虽是历经荣枯更迭，依旧亭亭如盖，只是 Evan 和 Lyra 再也不是七八年前不经世事的少年了。</p>
-<p>……</p>
-</blockquote>
-<a id="more"></a>
-<blockquote>
-<p>“已经快是严冬了，榕树的叶子还没落呢……”</p>
-<p>“榕树是常绿树，是看不到明显的落叶季节的……”</p>
-<p>“唉……想不到已经七年了呢。榕树还是当年的榕树，你却不是当年的你了……”</p>
-<p>“其实又有什么是一成不变的呢，榕树常绿，翠绿树冠的宏观永恒，是由无数细小树叶的荣枯更迭组成的。在时间的流逝中一切都在不断变化着呢……”</p>
-<p>“但你看这榕树，日日如此，季季如此，年年如此，仿佛亘古不变般，盘根错节，郁郁葱葱。我在想，或许成为一棵树更好吧，任时间从枝叶间流过，我只守这一片绿荫就好。”</p>
-<p>“榕树固然长久，但在这无限的时光里，终归是要湮灭于尘土的。与其像榕树一般，植根于一方泥土中感受年复一年的四季更替。倒不如在有限的时间里看过尽可能多的世界吧。再说了，榕树虽生长缓慢，却依旧会在每年春天抽出一根新的枝条去向外探索的呢……”</p>
-<p>“真的吗，榕树在她漫长的一生里，就是这样往外一步步探索的吗？”</p>
-<p>“毕竟就算树冠看起来一成不变，榕树也会随着时间周期变化，春天到了自然就是生长的时候了，她也应当做出对应的表现吧……”</p>
-<p>“相比于对季节更替做出本能的生长，我倒宁愿相信，榕树有一颗活跃的的，探索的心。”</p>
-<p>“其实榕树是有心的，榕树刚刚种下的时候，心就在根的地方发芽了。以后每年春天榕树长出新枝条的时候，心就会向着新枝条的方向移动一点，这样就能更靠近外面的世界了。你看这头顶上的枝条，纵横交错，其实心已经在这枝杈间，移动了数十载了呢……”</p>
-<p>“哇，也就是说，这密密麻麻的树杈中的某个地方，藏着这棵榕树的心吗？”</p>
-<p>“没错，可是要知道它在哪，就得另花一番功夫了……”</p>
-<p>“呀，这时候想想，一株树还是不如一个人好……比如你，要是这样贴上去的话，就能听到跳动的声音呢……”</p>
-<p>……</p>
-</blockquote>
-<p><del>写这篇题解就是为了上面这一段话。</del></p>
-<p><del>听说 OIer 都是文学家。</del></p>
-<h1 id="题意">题意</h1>
-<p>有一棵 <span class="math inline">\(n\)</span> 个点的树，初始时只有 <span class="math inline">\(1\)</span> 号点，心也在 <span class="math inline">\(1\)</span> 号点。</p>
-<p>每次树会长出一个与当前某个已经存在节点相邻的点，心会沿着心到新点的简单路径移动一步。</p>
-<p>现在已知树的最终形态，求所有生长顺序下哪些点可能成为心最终所在的位置。</p>
-<p><span class="math inline">\(T\)</span> 组数据。</p>
-<p><span class="math inline">\(T\le 20, n\le 10^5\)</span>。</p>
-<h1 id="做法">做法</h1>
-<p>首先由于步数确定，把树黑白染色后会有一种颜色必然不能被走到。</p>
-<p>考虑一个子问题，只需要求 <span class="math inline">\(1\)</span> 号点是否能成为心最终的位置。</p>
-<p>令 <span class="math inline">\(f_i\)</span> 表示以 <span class="math inline">\(i\)</span> 为根的子树，初始只有 <span class="math inline">\(i\)</span> 号点，心也在 <span class="math inline">\(i\)</span> 号点，按任意顺序加完所有点后心离 <span class="math inline">\(i\)</span> 的最近距离。</p>
-<p>答案即为 <span class="math inline">\([f_1=0]\)</span>。</p>
-<p>计算 <span class="math inline">\(f_u\)</span> 时，找到一个 <span class="math inline">\(f_v\)</span> 最大的儿子 <span class="math inline">\(v\)</span>，长完这个子树之后心到 <span class="math inline">\(u\)</span> 的距离最小是 <span class="math inline">\(f_v+1\)</span>。之后如果心能够回到 <span class="math inline">\(u\)</span>，通过调整选取顺序，最终必然可以停留在 <span class="math inline">\(u\)</span> 或 <span class="math inline">\(u\)</span> 的某个儿子上；如果不能，得到的也一定是最浅的方案。</p>
-<hr />
-<p>考虑原来的问题，有点类似换根，再自上而下做一遍 dp 即可。</p>
-<p>有一些细节是选取当前点的时候，当前点到 <span class="math inline">\(1\)</span> 的所有点必须已经被选。</p>
-<h1 id="代码">代码</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN], *s, *t;</span><br><span class="line">	<span class="keyword">return</span> (s==t?t=(s=buf)+fread(buf,<span class="number">1</span>,IN_LEN,<span class="built_in">stdin</span>),(s==t?<span class="number">-1</span>:*s++):*s++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">bool</span> iosig;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (iosig=<span class="literal">false</span>, c=read(); !<span class="built_in">isdigit</span>(c); c=read()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) iosig=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>; <span class="built_in">isdigit</span>(c); c=read()) x=((x+(x&lt;&lt;<span class="number">2</span>))&lt;&lt;<span class="number">1</span>)+(c^<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (iosig) x=-x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> num, n, W, T, h[N], f[N], siz[N], e[N&lt;&lt;<span class="number">1</span>], pre[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">bool</span> ans[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123; e[++num]=y, pre[num]=h[x], h[x]=num;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">	siz[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		dfs1(e[i], u), siz[u]+=siz[e[i]];</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;=f[mx]) mx=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa &amp;&amp; e[i]!=mx) sum+=siz[e[i]];</span><br><span class="line">	<span class="keyword">if</span>(mx) f[u]=f[mx]+<span class="number">1</span>-sum, f[u]=max(f[u], f[u]&amp;<span class="number">1</span>); <span class="keyword">else</span> f[u]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>, <span class="keyword">int</span> dep=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=fa, mx2=<span class="number">0</span>, sum;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;f[mx]) mx2=mx, mx=e[i];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(f[e[i]]&gt;=f[mx2]) mx2=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mx==fa) sum=siz[u]; <span class="keyword">else</span> sum=n-siz[mx]<span class="number">-1</span>-dep;</span><br><span class="line">	ans[u]=(((dep^n)&amp;<span class="number">1</span>) &amp;&amp; sum&gt;=f[mx]+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> fmx=f[mx], fmx2=f[mx2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(e[i]!=mx) f[u]=fmx+<span class="number">1</span>-(sum-siz[e[i]]);</span><br><span class="line">		<span class="keyword">else</span> f[u]=fmx2+<span class="number">1</span>-(mx2==fa?siz[u]-siz[mx]:n-siz[mx]-siz[mx2]<span class="number">-1</span>-dep);</span><br><span class="line">		f[u]=max(f[u], f[u]&amp;<span class="number">1</span>), dfs2(e[i], u, dep+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	num=<span class="number">0</span>, <span class="built_in">memset</span>(h, <span class="number">0</span>, <span class="keyword">sizeof</span> h);</span><br><span class="line">	read(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>, x, y; i&lt;n; ++i) read(x), read(y), add(x, y), add(y, x);</span><br><span class="line">	dfs1(<span class="number">1</span>), dfs2(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=(W==<span class="number">3</span>?<span class="number">1</span>:n); ++i) <span class="built_in">putchar</span>(<span class="string">&#x27;0&#x27;</span>+ans[i]);</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	read(W), read(T);</span><br><span class="line">	<span class="keyword">while</span>(T--) solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>树</tag>
-        <tag>DP</tag>
-        <tag>贪心</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ZJOI2020 游记</title>
     <url>/zjoi2020/</url>
     <content><![CDATA[<p>最后一次参加 ZJOI 了，最后一个星期说要不颓，也没学进去什么。</p>
@@ -1197,34 +1232,6 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       <categories>
         <category>游记</category>
       </categories>
-  </entry>
-  <entry>
-    <title>情人节随想</title>
-    <url>/valentine-s-day/</url>
-    <content><![CDATA[<p>对异地的她和他来说，相聚即是节，没有相聚的情人节往往是徒增感伤。</p>
-<a id="more"></a>
-<hr />
-<p>本想写一些文字记录这一段生活，不过赶不上在情人节这天完成，就暂时搁置了这个想法。所以这一篇文章也没有多少激动人心的内容。</p>
-<p>剧透警告！</p>
-<p>本想在除夕早上看的《La La Land》，阴差阳错地拖到了今天。这部电影在大陆上映的时间恰好是四年前的情人节。</p>
-<p>《Mia &amp; Sebastian’s Theme》和《City of Stars》真的好美！</p>
-<p>不过这部电影的情人节档是个骗局，男主和女主并没有在一起。</p>
-<blockquote>
-<p>“I'm always gonna love you.”</p>
-<p>“I'm always gonna love you, too.”</p>
-</blockquote>
-<p>当爱与理想分道扬镳，后者不失为一种选择。旧梦仍然会在，而最后的相视一笑让它不再是悲剧。</p>
-<p>理想是什么，我总是说不出一个答案，我知道正在接近它。也许不需要说得出来的答案，我的特质和所经历的一切已经决定了理想，如此想，初来时的恐惧便可以消散了。</p>
-<p align="right">
-2021年2月14日 情人节
-</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>Life</tag>
-      </tags>
   </entry>
   <entry>
     <title>ICPC World Finals 2017 题解</title>
