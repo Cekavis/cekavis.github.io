@@ -198,73 +198,6 @@
       </categories>
   </entry>
   <entry>
-    <title>伯努利数学习笔记</title>
-    <url>/bernoulli-number-notes/</url>
-    <content><![CDATA[<p><a href="https://en.wikipedia.org/wiki/Bernoulli_number">Bernoulli number</a></p>
-<a id="more"></a>
-<h1 id="一些性质">一些性质</h1>
-<p>根据上面的链接</p>
-<p><span class="math display">\[
-\begin{aligned}
-B^-_0=1 \\
-\sum _{j=0}^{m}\binom{m+1}{j}B^-_{j}=0
-\end{aligned}
-\]</span></p>
-<p>通过上式可以计算伯努利数，计算得到的是第一伯努利数，记做 <span class="math inline">\(B^-_n\)</span>，与第二伯努利数 <span class="math inline">\(B^+_n\)</span> 仅有的区别是</p>
-<p><span class="math display">\[
-\begin{aligned}
-B^-_1=-\frac{1}{2} \\
-B^+_1=+\frac{1}{2}
-\end{aligned}
-\]</span></p>
-<p>通过转化可以得到</p>
-<p><span class="math display">\[
-{\frac {x}{e^{x}-1}}=\sum _{n=0}^{\infty }B^-_{n}{\frac {x^{n}}{n!}}
-\]</span></p>
-<p>可以用多项式求逆在 <span class="math inline">\(\mathcal O(n\log n)\)</span> 的复杂度内求出伯努利数的前 <span class="math inline">\(n\)</span> 项。</p>
-<p>第二伯努利数满足</p>
-<p><span class="math display">\[
-\begin{aligned}
-S_{m}(n)&amp;=\sum _{k=1}^{n}k^{m}=1^{m}+2^{m}+\cdots +{n}^{m} \\
-&amp;= \frac {1}{m+1}\sum _{k=0}^{m}\binom{m+1}{k} B_{k}^{+}n^{m+1-k}
-\end{aligned}
-\]</span></p>
-<p>可以用来求自然数幂和。</p>
-<h1 id="例题">例题</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P3711">Luogu P3711 仓鼠的数学题</a></p>
-<h2 id="题意">题意</h2>
-<p>设关于 <span class="math inline">\(x\)</span> 的 <span class="math inline">\(k+1\)</span> 次多项式 <span class="math inline">\(S_k(x)=\sum\limits_{i=0}^x i^k\)</span>。</p>
-<p>给出 <span class="math inline">\(n+1\)</span> 个数 <span class="math inline">\(a_0,a_1,\dotsc,a_n\)</span>，求 <span class="math inline">\(\sum\limits_{k=0}^n a_k S_k(x)\)</span> 的各项系数。</p>
-<h2 id="做法">做法</h2>
-<p>把上面的式子代入有</p>
-<p><span class="math display">\[
-\begin{aligned}
-&amp; \sum_{k=1}^n a_kS_{k}(x) \\
-= &amp; \sum_{k=1}^n \frac {a_k}{k+1}\sum _{i=0}^{k}\binom{k+1}{i} B_{i}^{+}x^{k+1-i} \\
-= &amp; \sum_{k=1}^n \frac {a_k}{k+1}\sum _{i=1}^{k+1}\binom{k+1}{i} B_{k+1-i}^{+}x^i \\
-= &amp; \sum_{k=1}^n a_k k! \sum _{i=1}^{k+1} \frac {B_{k+1-i}^{+}x^{i}}{i!(k+1-i)!} \\
-= &amp; \sum _{i=1}^{n+1} \frac{x^i}{i!} \sum_{k=i-1}^n a_k k!  \frac {B_{k+1-i}^{+}}{(k+1-i)!} \\
-\end{aligned}
-\]</span></p>
-<p>右边的部分可以求出伯努利数后卷积，总复杂度 <span class="math inline">\(\mathcal O(n\log n)\)</span>。</p>
-<p>注意通过</p>
-<p><span class="math display">\[
-{\frac {x}{e^{x}-1}}=\sum _{n=0}^{\infty }B^-_{n}{\frac {x^{n}}{n!}}
-\]</span></p>
-<p>求出来的是 <span class="math inline">\(B^-_n\)</span>，后面计算需要改动 <span class="math inline">\(B_1\)</span> 的值。</p>
-<h2 id="代码">代码</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN], *s, *t;</span><br><span class="line">	<span class="keyword">return</span> (s==t?t=(s=buf)+fread(buf,<span class="number">1</span>,IN_LEN,<span class="built_in">stdin</span>),(s==t?<span class="number">-1</span>:*s++):*s++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">bool</span> iosig;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (iosig=<span class="literal">false</span>, c=read(); !<span class="built_in">isdigit</span>(c); c=read()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) iosig=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>; <span class="built_in">isdigit</span>(c); c=read()) x=((x+(x&lt;&lt;<span class="number">2</span>))&lt;&lt;<span class="number">1</span>)+(c^<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (iosig) x=-x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> OUT_LEN = <span class="number">10000000</span>;</span><br><span class="line"><span class="keyword">char</span> obuf[OUT_LEN], *ooh=obuf;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ooh==obuf+OUT_LEN) fwrite(obuf, <span class="number">1</span>, OUT_LEN, <span class="built_in">stdout</span>), ooh=obuf;</span><br><span class="line">	*ooh++=c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> buf[<span class="number">30</span>], cnt;</span><br><span class="line">	<span class="keyword">if</span> (x==<span class="number">0</span>) print(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (x&lt;<span class="number">0</span>) print(<span class="string">&#x27;-&#x27;</span>), x=-x;</span><br><span class="line">		<span class="keyword">for</span> (cnt=<span class="number">0</span>; x; x/=<span class="number">10</span>) buf[++cnt]=x%<span class="number">10</span>+<span class="number">48</span>;</span><br><span class="line">		<span class="keyword">while</span>(cnt) print((<span class="keyword">char</span>)buf[cnt--]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> </span>&#123; fwrite(obuf, <span class="number">1</span>, ooh - obuf, <span class="built_in">stdout</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">250005</span>, M = <span class="number">1</span>&lt;&lt;<span class="number">19</span>, P = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">int</span> n, fac[N], ifac[N], w[M];</span><br><span class="line"><span class="keyword">unsigned</span> ll F[M];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ll x, <span class="keyword">int</span> y=P<span class="number">-2</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x%P) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x%P;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Calc</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123; <span class="keyword">int</span> ans=<span class="number">1</span>; <span class="keyword">while</span>(ans&lt;=x) ans&lt;&lt;=<span class="number">1</span>; <span class="keyword">return</span> ans;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">DFT</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;f, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>; i&lt;n; ++i)&#123;</span><br><span class="line">		F[i]=f[j];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k=n&gt;&gt;<span class="number">1</span>; (j^=k)&lt;k; k&gt;&gt;=<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n; i&lt;&lt;=<span class="number">1</span>) <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n; j+=i&lt;&lt;<span class="number">1</span>) <span class="keyword">for</span>(<span class="keyword">int</span> k=j; k&lt;j+i; ++k)&#123;</span><br><span class="line">		<span class="keyword">int</span> t=F[k+i]*w[i+k-j]%P;</span><br><span class="line">		F[k+i]=F[k]+P-t, F[k]+=t;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; ++i) f[i]=F[i]%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">IDFT</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;f, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	reverse(f.begin()+<span class="number">1</span>, f.end()), DFT(f, n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>, I=Pow(n); i&lt;n; ++i) f[i]=(ll)f[i]*I%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="keyword">operator</span> *(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;b)&#123;</span><br><span class="line">	<span class="keyword">int</span> n=Calc(a.size()+b.size()<span class="number">-2</span>);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A=a, B=b;</span><br><span class="line">	A.resize(n), B.resize(n), DFT(A, n), DFT(B, n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; ++i) A[i]=(ll)A[i]*B[i]%P;</span><br><span class="line">	IDFT(A, n);</span><br><span class="line">	<span class="keyword">return</span> A.resize(a.size()+b.size()<span class="number">-1</span>), A;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">PolyInv</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a, <span class="keyword">int</span> n=<span class="number">-1</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">-1</span>) n=a.size();</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> &#123;Pow(a[<span class="number">0</span>])&#125;;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans=PolyInv(a, (n+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>), A(a.begin(), a.begin()+n);</span><br><span class="line">	<span class="keyword">int</span> m=Calc(n*<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">	ans.resize(m), A.resize(m), DFT(ans, m), DFT(A, m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; ++i) ans[i]=(<span class="number">2</span>+(ll)(P-A[i])*ans[i])%P*ans[i]%P;</span><br><span class="line">	IDFT(ans, m);</span><br><span class="line">	<span class="keyword">return</span> ans.resize(n), ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;M; i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">		w[i]=<span class="number">1</span>, w[i+<span class="number">1</span>]=Pow(<span class="number">3</span>, (P<span class="number">-1</span>)/i/<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">2</span>; j&lt;i; ++j) w[i+j]=(ll)w[i+j<span class="number">-1</span>]*w[i+<span class="number">1</span>]%P;</span><br><span class="line">	&#125;</span><br><span class="line">	read(n);</span><br><span class="line">	vector&lt;int&gt; a(n+1), b(n+1);</span><br><span class="line">	fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n+<span class="number">1</span>; ++i) fac[i]=(ll)fac[i<span class="number">-1</span>]*i%P;</span><br><span class="line">	ifac[n+<span class="number">1</span>]=Pow(fac[n+<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n+<span class="number">1</span>; i; --i) ifac[i<span class="number">-1</span>]=(ll)ifac[i]*i%P;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=n; ++i) read(a[i]), a[i]=(ll)a[i]*fac[i]%P;</span><br><span class="line">	print(a[<span class="number">0</span>]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=n; ++i) b[i]=ifac[i+<span class="number">1</span>];</span><br><span class="line">	b=PolyInv(b), b[<span class="number">1</span>]=P-b[<span class="number">1</span>];</span><br><span class="line">	reverse(b.begin(), b.end());</span><br><span class="line">	a=a*b;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n+<span class="number">1</span>; ++i) print(<span class="string">&#x27; &#x27;</span>), print((<span class="keyword">int</span>)((ll)a[i+n<span class="number">-1</span>]*ifac[i]%P));</span><br><span class="line">	<span class="keyword">return</span> flush(), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Algorithms</category>
-      </categories>
-      <tags>
-        <tag>生成函数</tag>
-        <tag>伯努利数</tag>
-        <tag>多项式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最小树形图 朱刘算法学习笔记</title>
     <url>/chu-liu-edmonds-algorithm-notes/</url>
     <content><![CDATA[<p><del>好久没写博客了，不过之前文章的锅修了好多。</del></p>
@@ -329,42 +262,6 @@ S_{m}(n)&amp;=\sum _{k=1}^{n}k^{m}=1^{m}+2^{m}+\cdots +{n}^{m} \\
         <tag>最小树形图</tag>
         <tag>朱刘算法</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>CSP-S2019 退役记</title>
-    <url>/csp-s-2019/</url>
-    <content><![CDATA[<p>退役了</p>
-<a id="more"></a>
-<h1 id="day-0">Day 0</h1>
-<p>去秋游了，走了三万多步，人没了（退役 flag x 1）。</p>
-<p>回来就颓颓颓颓（退役 flag x 2）</p>
-<h1 id="day-1">Day 1</h1>
-<p>11 点睡觉的，1 点多被爆肝的室友吵醒，醒了大半个小时才睡着（退役 flag x 3），6 点多就得起床了。</p>
-<p>考场是学车的负一层教室（地下停车场），只提供睿智的移动厕所，没有冲水（退役 flag x 4）。</p>
-<p>座位对面就有一个显示屏，随时可以看到时间，觉得很爽（退役 flag x 5）。</p>
-<p>开考了，傻逼，直接把第一题走了。</p>
-<p>第二题调了很久傻逼错误（退役 flag x 6），比如什么左括号的点没算贡献、没做前缀和……</p>
-<p>我想 AK（退役 flag x 7）。</p>
-<p>第三题一开始去想一个拆子问题的算法了（退役 flag x 8），大概是 <span class="math inline">\(1\)</span> 一定会走到另外的编号最小点，于是对于这条链挂出的若干子树搞一搞，一开始还以为是对的，成功自闭。</p>
-<p>后来想到正解方向，只是模糊觉得限制都是一条边要在另一条边之前做，于是全局暴力维护一个顺序关系（优化以后再说）（退役 flag x 9），后来发现无法解决的是一条边必须紧接着一条边选的情况，成功自闭。</p>
-<p>还有一个小时就冲上去写暴力了，十分不冷静，写了一个假的链，然后不会做菊花，最后就是把阶乘和链和假的算法结合了一下。后来很开心地发现链挂了，然后意识到我的假算法对于链的情况应该是对的？获得了 10pts 的好成绩。</p>
-<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 10）。</p>
-<h1 id="day-2">Day 2</h1>
-<p>换了个寝室住，但是也没睡好（退役 flag x 11）。</p>
-<p>我想 AK（退役 flag x 12）。</p>
-<p>开考前在正常的厕所外面排了一会儿队，然后意识到好像不想上厕所。</p>
-<p>开考，看到一个 <span class="math inline">\(998244353\)</span>，傻逼，直接把 dp 走了。</p>
-<p>看到第二题慌的一批，有点点斜率优化的感觉（？）（退役 flag x 13）。先猜了一个段数相同情况下每一段尽量往右延伸的结论，然后再猜了一个段数越多越优的结论，乱写一通从前往后贪心，发现写不来，于是不会做（退役 flag x 14）。</p>
-<p>想扔了看第三题（退役 flag x 15），但是模糊意识到反过来做最后一段尽量短，然后写了一个二分，过不去大样例（退役 flag x 16）。冷静了一下，写了个暴力，发现右端点确定时段长不能二分。</p>
-<p>再冷静了一下，发现左端点确定时段长可以二分（注定了想不到单调队列优化（退役 flag x 17）），写了个 88pts 跑路了。</p>
-<p>第三题一开始想对于每条边求出具体两边中心的，搞了一会儿还是不会做。突然想到对每个点算贡献，随便推了一下发现好像是可以维护的，就把线段树合并走了（退役 flag x 18），到根的链单独拿个树状数组维护。大概 1h 后过了大样例，还有 20min，觉得自己好强（退役 flag x 19）。极限数据本机跑了 3.5s 不想卡，改了个用 <code>getchar()</code> 的读入优化没有任何变化，怕写挂就改回去了（退役 flag x 20）。</p>
-<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 21）。</p>
-<p>学会了德扑，赌了两局都破产了（退役 flag x 22），还重学了 UNO。</p>
-<p>100+100+10+100+88+(100-?)，大家再见。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
   </entry>
   <entry>
     <title>特征多项式和常系数线性齐次递推学习笔记</title>
@@ -488,9 +385,112 @@ f(n) &amp; =\left[A^n \vec{f}\right]_ k \\
         <category>Algorithms</category>
       </categories>
       <tags>
-        <tag>多项式</tag>
         <tag>特征多项式</tag>
+        <tag>多项式</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>伯努利数学习笔记</title>
+    <url>/bernoulli-number-notes/</url>
+    <content><![CDATA[<p><a href="https://en.wikipedia.org/wiki/Bernoulli_number">Bernoulli number</a></p>
+<a id="more"></a>
+<h1 id="一些性质">一些性质</h1>
+<p>根据上面的链接</p>
+<p><span class="math display">\[
+\begin{aligned}
+B^-_0=1 \\
+\sum _{j=0}^{m}\binom{m+1}{j}B^-_{j}=0
+\end{aligned}
+\]</span></p>
+<p>通过上式可以计算伯努利数，计算得到的是第一伯努利数，记做 <span class="math inline">\(B^-_n\)</span>，与第二伯努利数 <span class="math inline">\(B^+_n\)</span> 仅有的区别是</p>
+<p><span class="math display">\[
+\begin{aligned}
+B^-_1=-\frac{1}{2} \\
+B^+_1=+\frac{1}{2}
+\end{aligned}
+\]</span></p>
+<p>通过转化可以得到</p>
+<p><span class="math display">\[
+{\frac {x}{e^{x}-1}}=\sum _{n=0}^{\infty }B^-_{n}{\frac {x^{n}}{n!}}
+\]</span></p>
+<p>可以用多项式求逆在 <span class="math inline">\(\mathcal O(n\log n)\)</span> 的复杂度内求出伯努利数的前 <span class="math inline">\(n\)</span> 项。</p>
+<p>第二伯努利数满足</p>
+<p><span class="math display">\[
+\begin{aligned}
+S_{m}(n)&amp;=\sum _{k=1}^{n}k^{m}=1^{m}+2^{m}+\cdots +{n}^{m} \\
+&amp;= \frac {1}{m+1}\sum _{k=0}^{m}\binom{m+1}{k} B_{k}^{+}n^{m+1-k}
+\end{aligned}
+\]</span></p>
+<p>可以用来求自然数幂和。</p>
+<h1 id="例题">例题</h1>
+<p><a href="https://www.luogu.org/problemnew/show/P3711">Luogu P3711 仓鼠的数学题</a></p>
+<h2 id="题意">题意</h2>
+<p>设关于 <span class="math inline">\(x\)</span> 的 <span class="math inline">\(k+1\)</span> 次多项式 <span class="math inline">\(S_k(x)=\sum\limits_{i=0}^x i^k\)</span>。</p>
+<p>给出 <span class="math inline">\(n+1\)</span> 个数 <span class="math inline">\(a_0,a_1,\dotsc,a_n\)</span>，求 <span class="math inline">\(\sum\limits_{k=0}^n a_k S_k(x)\)</span> 的各项系数。</p>
+<h2 id="做法">做法</h2>
+<p>把上面的式子代入有</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \sum_{k=1}^n a_kS_{k}(x) \\
+= &amp; \sum_{k=1}^n \frac {a_k}{k+1}\sum _{i=0}^{k}\binom{k+1}{i} B_{i}^{+}x^{k+1-i} \\
+= &amp; \sum_{k=1}^n \frac {a_k}{k+1}\sum _{i=1}^{k+1}\binom{k+1}{i} B_{k+1-i}^{+}x^i \\
+= &amp; \sum_{k=1}^n a_k k! \sum _{i=1}^{k+1} \frac {B_{k+1-i}^{+}x^{i}}{i!(k+1-i)!} \\
+= &amp; \sum _{i=1}^{n+1} \frac{x^i}{i!} \sum_{k=i-1}^n a_k k!  \frac {B_{k+1-i}^{+}}{(k+1-i)!} \\
+\end{aligned}
+\]</span></p>
+<p>右边的部分可以求出伯努利数后卷积，总复杂度 <span class="math inline">\(\mathcal O(n\log n)\)</span>。</p>
+<p>注意通过</p>
+<p><span class="math display">\[
+{\frac {x}{e^{x}-1}}=\sum _{n=0}^{\infty }B^-_{n}{\frac {x^{n}}{n!}}
+\]</span></p>
+<p>求出来的是 <span class="math inline">\(B^-_n\)</span>，后面计算需要改动 <span class="math inline">\(B_1\)</span> 的值。</p>
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN], *s, *t;</span><br><span class="line">	<span class="keyword">return</span> (s==t?t=(s=buf)+fread(buf,<span class="number">1</span>,IN_LEN,<span class="built_in">stdin</span>),(s==t?<span class="number">-1</span>:*s++):*s++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">bool</span> iosig;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (iosig=<span class="literal">false</span>, c=read(); !<span class="built_in">isdigit</span>(c); c=read()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) iosig=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>; <span class="built_in">isdigit</span>(c); c=read()) x=((x+(x&lt;&lt;<span class="number">2</span>))&lt;&lt;<span class="number">1</span>)+(c^<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (iosig) x=-x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> OUT_LEN = <span class="number">10000000</span>;</span><br><span class="line"><span class="keyword">char</span> obuf[OUT_LEN], *ooh=obuf;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ooh==obuf+OUT_LEN) fwrite(obuf, <span class="number">1</span>, OUT_LEN, <span class="built_in">stdout</span>), ooh=obuf;</span><br><span class="line">	*ooh++=c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> buf[<span class="number">30</span>], cnt;</span><br><span class="line">	<span class="keyword">if</span> (x==<span class="number">0</span>) print(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (x&lt;<span class="number">0</span>) print(<span class="string">&#x27;-&#x27;</span>), x=-x;</span><br><span class="line">		<span class="keyword">for</span> (cnt=<span class="number">0</span>; x; x/=<span class="number">10</span>) buf[++cnt]=x%<span class="number">10</span>+<span class="number">48</span>;</span><br><span class="line">		<span class="keyword">while</span>(cnt) print((<span class="keyword">char</span>)buf[cnt--]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> </span>&#123; fwrite(obuf, <span class="number">1</span>, ooh - obuf, <span class="built_in">stdout</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">250005</span>, M = <span class="number">1</span>&lt;&lt;<span class="number">19</span>, P = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">int</span> n, fac[N], ifac[N], w[M];</span><br><span class="line"><span class="keyword">unsigned</span> ll F[M];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ll x, <span class="keyword">int</span> y=P<span class="number">-2</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x%P) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x%P;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Calc</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123; <span class="keyword">int</span> ans=<span class="number">1</span>; <span class="keyword">while</span>(ans&lt;=x) ans&lt;&lt;=<span class="number">1</span>; <span class="keyword">return</span> ans;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">DFT</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;f, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>; i&lt;n; ++i)&#123;</span><br><span class="line">		F[i]=f[j];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k=n&gt;&gt;<span class="number">1</span>; (j^=k)&lt;k; k&gt;&gt;=<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n; i&lt;&lt;=<span class="number">1</span>) <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n; j+=i&lt;&lt;<span class="number">1</span>) <span class="keyword">for</span>(<span class="keyword">int</span> k=j; k&lt;j+i; ++k)&#123;</span><br><span class="line">		<span class="keyword">int</span> t=F[k+i]*w[i+k-j]%P;</span><br><span class="line">		F[k+i]=F[k]+P-t, F[k]+=t;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; ++i) f[i]=F[i]%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">IDFT</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;f, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	reverse(f.begin()+<span class="number">1</span>, f.end()), DFT(f, n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>, I=Pow(n); i&lt;n; ++i) f[i]=(ll)f[i]*I%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="keyword">operator</span> *(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;b)&#123;</span><br><span class="line">	<span class="keyword">int</span> n=Calc(a.size()+b.size()<span class="number">-2</span>);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; A=a, B=b;</span><br><span class="line">	A.resize(n), B.resize(n), DFT(A, n), DFT(B, n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; ++i) A[i]=(ll)A[i]*B[i]%P;</span><br><span class="line">	IDFT(A, n);</span><br><span class="line">	<span class="keyword">return</span> A.resize(a.size()+b.size()<span class="number">-1</span>), A;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">PolyInv</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a, <span class="keyword">int</span> n=<span class="number">-1</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">-1</span>) n=a.size();</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> &#123;Pow(a[<span class="number">0</span>])&#125;;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans=PolyInv(a, (n+<span class="number">1</span>)&gt;&gt;<span class="number">1</span>), A(a.begin(), a.begin()+n);</span><br><span class="line">	<span class="keyword">int</span> m=Calc(n*<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">	ans.resize(m), A.resize(m), DFT(ans, m), DFT(A, m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; ++i) ans[i]=(<span class="number">2</span>+(ll)(P-A[i])*ans[i])%P*ans[i]%P;</span><br><span class="line">	IDFT(ans, m);</span><br><span class="line">	<span class="keyword">return</span> ans.resize(n), ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;M; i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">		w[i]=<span class="number">1</span>, w[i+<span class="number">1</span>]=Pow(<span class="number">3</span>, (P<span class="number">-1</span>)/i/<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">2</span>; j&lt;i; ++j) w[i+j]=(ll)w[i+j<span class="number">-1</span>]*w[i+<span class="number">1</span>]%P;</span><br><span class="line">	&#125;</span><br><span class="line">	read(n);</span><br><span class="line">	vector&lt;int&gt; a(n+1), b(n+1);</span><br><span class="line">	fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n+<span class="number">1</span>; ++i) fac[i]=(ll)fac[i<span class="number">-1</span>]*i%P;</span><br><span class="line">	ifac[n+<span class="number">1</span>]=Pow(fac[n+<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n+<span class="number">1</span>; i; --i) ifac[i<span class="number">-1</span>]=(ll)ifac[i]*i%P;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=n; ++i) read(a[i]), a[i]=(ll)a[i]*fac[i]%P;</span><br><span class="line">	print(a[<span class="number">0</span>]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=n; ++i) b[i]=ifac[i+<span class="number">1</span>];</span><br><span class="line">	b=PolyInv(b), b[<span class="number">1</span>]=P-b[<span class="number">1</span>];</span><br><span class="line">	reverse(b.begin(), b.end());</span><br><span class="line">	a=a*b;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n+<span class="number">1</span>; ++i) print(<span class="string">&#x27; &#x27;</span>), print((<span class="keyword">int</span>)((ll)a[i+n<span class="number">-1</span>]*ifac[i]%P));</span><br><span class="line">	<span class="keyword">return</span> flush(), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Algorithms</category>
+      </categories>
+      <tags>
+        <tag>多项式</tag>
+        <tag>生成函数</tag>
+        <tag>伯努利数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSP-S2019 退役记</title>
+    <url>/csp-s-2019/</url>
+    <content><![CDATA[<p>退役了</p>
+<a id="more"></a>
+<h1 id="day-0">Day 0</h1>
+<p>去秋游了，走了三万多步，人没了（退役 flag x 1）。</p>
+<p>回来就颓颓颓颓（退役 flag x 2）</p>
+<h1 id="day-1">Day 1</h1>
+<p>11 点睡觉的，1 点多被爆肝的室友吵醒，醒了大半个小时才睡着（退役 flag x 3），6 点多就得起床了。</p>
+<p>考场是学车的负一层教室（地下停车场），只提供睿智的移动厕所，没有冲水（退役 flag x 4）。</p>
+<p>座位对面就有一个显示屏，随时可以看到时间，觉得很爽（退役 flag x 5）。</p>
+<p>开考了，傻逼，直接把第一题走了。</p>
+<p>第二题调了很久傻逼错误（退役 flag x 6），比如什么左括号的点没算贡献、没做前缀和……</p>
+<p>我想 AK（退役 flag x 7）。</p>
+<p>第三题一开始去想一个拆子问题的算法了（退役 flag x 8），大概是 <span class="math inline">\(1\)</span> 一定会走到另外的编号最小点，于是对于这条链挂出的若干子树搞一搞，一开始还以为是对的，成功自闭。</p>
+<p>后来想到正解方向，只是模糊觉得限制都是一条边要在另一条边之前做，于是全局暴力维护一个顺序关系（优化以后再说）（退役 flag x 9），后来发现无法解决的是一条边必须紧接着一条边选的情况，成功自闭。</p>
+<p>还有一个小时就冲上去写暴力了，十分不冷静，写了一个假的链，然后不会做菊花，最后就是把阶乘和链和假的算法结合了一下。后来很开心地发现链挂了，然后意识到我的假算法对于链的情况应该是对的？获得了 10pts 的好成绩。</p>
+<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 10）。</p>
+<h1 id="day-2">Day 2</h1>
+<p>换了个寝室住，但是也没睡好（退役 flag x 11）。</p>
+<p>我想 AK（退役 flag x 12）。</p>
+<p>开考前在正常的厕所外面排了一会儿队，然后意识到好像不想上厕所。</p>
+<p>开考，看到一个 <span class="math inline">\(998244353\)</span>，傻逼，直接把 dp 走了。</p>
+<p>看到第二题慌的一批，有点点斜率优化的感觉（？）（退役 flag x 13）。先猜了一个段数相同情况下每一段尽量往右延伸的结论，然后再猜了一个段数越多越优的结论，乱写一通从前往后贪心，发现写不来，于是不会做（退役 flag x 14）。</p>
+<p>想扔了看第三题（退役 flag x 15），但是模糊意识到反过来做最后一段尽量短，然后写了一个二分，过不去大样例（退役 flag x 16）。冷静了一下，写了个暴力，发现右端点确定时段长不能二分。</p>
+<p>再冷静了一下，发现左端点确定时段长可以二分（注定了想不到单调队列优化（退役 flag x 17）），写了个 88pts 跑路了。</p>
+<p>第三题一开始想对于每条边求出具体两边中心的，搞了一会儿还是不会做。突然想到对每个点算贡献，随便推了一下发现好像是可以维护的，就把线段树合并走了（退役 flag x 18），到根的链单独拿个树状数组维护。大概 1h 后过了大样例，还有 20min，觉得自己好强（退役 flag x 19）。极限数据本机跑了 3.5s 不想卡，改了个用 <code>getchar()</code> 的读入优化没有任何变化，怕写挂就改回去了（退役 flag x 20）。</p>
+<p>出来发现大家都 AK 了，滚回学校继续颓（退役 flag x 21）。</p>
+<p>学会了德扑，赌了两局都破产了（退役 flag x 22），还重学了 UNO。</p>
+<p>100+100+10+100+88+(100-?)，大家再见。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
   </entry>
   <entry>
     <title>北大集训 2019 游记</title>
@@ -501,125 +501,6 @@ f(n) &amp; =\left[A^n \vec{f}\right]_ k \\
       <categories>
         <category>游记</category>
       </categories>
-  </entry>
-  <entry>
-    <title>学车日记</title>
-    <url>/diary-of-driver-s-education/</url>
-    <content><![CDATA[<p>基本康复后终于开始学车了！</p>
-<a id="more"></a>
-<h1 id="报名">4.16（报名）</h1>
-<p>我：如果我方言讲不清楚怎么办？</p>
-<p>我妈：那你就跟他讲普通话。</p>
-<hr />
-<p>下午被师傅接去报名。因为前一天没随身带着身份证就推迟了一天。先去了医院做了四十块钱的检查，医院仍然是我诊断出急性肠胃炎和自发性气胸时的那副模样，不过这次不那么让人害怕。随后到了驾校，驾校是一块场地加上一间活动房。同时另外有两个人也是来报名的，其中一个在医院刚碰见过；另一个是个四十岁左右的光头先生，手机用的是类似EMUI“简易模式”的巨大字体。安装完注册完三个App，阿姨说你居然自己都弄好了。我尴尬地笑笑，直到看见光头先生用微信扫描二维码下载一个App的时候，跳转到了给微信开启“应用内安装其他应用”权限的界面后问这样好了吗，才体会到阿姨那句夸奖的分量。</p>
-<h1 id="section">4.17</h1>
-<p>“机动车驾驶人互联网学习软件”里有总长两小时的八个视频必须看完，基本都是一些血腥的案例，马赛克时有时无，是否降低了画面的血腥程度我不知道，当事人隐私肯定被泄露光了。</p>
-<p>今天鼻炎和发烧随着扁桃体炎一起来了，为什么病总是找上我？</p>
-<h1 id="section-1">4.18</h1>
-<p>半夜醒了两次，第一次醒自己估摸着应该是三点多，听见外面我爸的声音，觉得很奇怪，看了一下时间原来才十二点多。</p>
-<p>把昨天没看完的视频看完了，坐在椅子看着淋漓的鲜血，不安全感随着发烧的酸痛穿透了我的全身。</p>
-<h1 id="section-2">4.19</h1>
-<p>做题数236。</p>
-<h1 id="section-3">4.20</h1>
-<p>第一次模拟考试61/72。90/100为通过。</p>
-<p>第二次模拟考试69/80。</p>
-<p>第三次模拟考试85/100。</p>
-<h1 id="section-4">4.21</h1>
-<p>第四次模拟考试94/100。</p>
-<h1 id="section-5">4.22</h1>
-<p>第五次模拟考试91/100。</p>
-<p>做题数817。</p>
-<h1 id="section-6">4.23</h1>
-<p>第六次模拟考试96/100。</p>
-<p>做题数917。</p>
-<h1 id="section-7">4.24</h1>
-<p>第七次模拟考试92/100。</p>
-<p>做题数998。</p>
-<h1 id="section-8">4.25</h1>
-<p>第八次模拟考试92/100。</p>
-<p>第九次模拟考试93/100。</p>
-<p>第十次模拟考试91/100。</p>
-<p>做题数1292。</p>
-<h1 id="周一">4.26 周一</h1>
-<p>早上去参加科目一考试，同行还有一个学员，就叫他 A 吧。</p>
-<p>A 是上周五考的科目一，教练把车开到大路上，停车让 A 开，我便赶紧系好安全带。后来教练还说考完回来要我开，非常害怕。A 开车在每个红灯停下后起步太慢都会被后车催，但是后车也不敢撞我们。到了考场直接去排队，教练和 A 就去附近场地练习。队伍很长，前面大概有五十个人，开考还有半小时，等候的时候又做了两次模拟考试。</p>
-<p>第十一次模拟考试94/100。</p>
-<p>第十二次模拟考试97/100。</p>
-<p>做题数1422。</p>
-<p>交了80块钱，总共刷了两次身份证，刷了三次人脸，开始考试。</p>
-<p>我并不知道一道题做错是否有即时的提示，不过没关系，亲切的第二题就打消了我的疑虑。题目在我的印象里是C1证能否驾驶轻型载货汽车，但是肯定是我记错或是读错了，不然就不会错。我一下慌了起来，到目前为止50%的错误率，如果这是我的真实水平，预计后面还要错49题。我赶紧骗自己，我的水平不会那么低。重拾信心后我开始小心地对待每一道题。终于在接近20分钟后得到了99分的好成绩。考试软件卡了好几次，甚至有一次我不小心多点了一次“下一题”，所幸未选答案不会进行提交，可以返回再来。</p>
-<p>出考场打印了成绩，非常开心，重新把手机开机，刚下楼看见教练和 A，就直接上了车。开到路上教练让 A 来开，开到大路上教练让我来开，我一路心惊胆战平安开到了该下车的地方，熄了两次火，不知道被多少车用喇叭嘲讽过。路况好的地方速度到过80km/h（没记错的话）。教练发了我科目三灯光规则，通知我明天练车。</p>
-<h1 id="section-9">4.27</h1>
-<p>下午教练来接我，便让我开着去接 A，再到练习场地。今天练倒车入库，教练把油门封死了，撞墙概率大大降低。我和 A 轮流练了总共近三个小时，学会了大幅度打方向，已经基本可以在这个场地将这辆车停好。结束后 A 开车先送我回家，再送自己回家。</p>
-<h1 id="section-10">4.28</h1>
-<p>开车到场地的路上，急转进小路的地方熄火了两次，一慌便忘了离合怎么踩，切不能慌，最不济可以停下打方向。</p>
-<p>继续练了一下午的倒车入库，不用一会儿左脚就麻了。总觉得已经完全熟练了，再练却总能有新的经验。</p>
-<h1 id="section-11">4.29</h1>
-<p>先开车送人到湄池打疫苗，再开回场地，这次没有熄火，路上行车也逐渐熟练。</p>
-<p>先学习了左向的倒车入库，原先练习的只有右向，同时也大概知道了科目二的流程。在右向已经基本掌握的情况下，另一个方向就简单许多。练习几次后便开始学侧方位停车。侧方位停车比想象中容易，一个原因肯定是标线过于精确，生活中停车便要全凭经验判断和随机应变了。最难的一部分是从停车位出来后要准确进入到指定位置，以便开始下一次倒车，若没有调准，下一次倒车就会有意外了。</p>
-<p>若说每次新学内容由我开始是因为恰好我负责来程的行车，仍有一些差别可以让我满足一下小小的虚荣心。昨天教练下车让我自己练习，A 仍坐在后排；今天因事暂时离开时，让我坐副驾驶在紧急情况下帮 A 踩刹车。也许实际上 A 并没有多少不堪，也许 A 更需要这些鼓励，而如果 A 学得完全比我好，我也会更高兴的。</p>
-<h1 id="section-12">4.30</h1>
-<p>今天是去驾校练车的第一天，早上去接 A 时他还没睡醒，手机也没带到自己家，所以在等待了一会儿后我和教练先去了驾校。上午练车都是七点，下午都是一点半，七点出头的时间意味着在我们到达时还没有其他人，大门也关着，这不禁让我为自己的勤奋感到鼓舞。驾校场地是一块不大不小的科目二练习场地————也许不如正式考试的地方，用了一处额外的转弯才将整条路线串联起来————但是足以容纳许多车辆一起练习，为枯燥的练习时间增添了些许轻松的氛围。</p>
-<p>倒车入库和侧方位停车与先前练习的并无多少区别，新环节的加入也更令我振奋。上坡起步与我猜想的似乎有许多出入，本以为需要手刹配合离合和油门进行一通迅速而精确的操作，并不会知道手刹是抬起便放下，而全部的戏份给了离合，压力也落在了左脚上。直角转弯需要在入弯前关闭转向灯，这一规定恰与科目一所要求明白的行车规则相反。曲线行驶在知道方法后就不是很难了，但是进一步的，直接凭感觉确定整车在路上的方位还有很远的路要走。</p>
-<p>在连续练了几圈后，又一次回到起点等待前车出发时，一个中年男子走到我的车窗边。</p>
-<p>“小师傅，我刚才看你开这个侧方位停车，全都是错的。”</p>
-<p>虽然觉得这是一个夸夸其谈之人，听到这些不免让我有些紧张。</p>
-<p>“我看了你三次，进来出去，都压线了。”</p>
-<p>“啊……”</p>
-<p>“你上去的时候停的离那个线太近了，一般要出去四五十公分，停都没停好后面怎么倒得好？”</p>
-<p>似懂非懂，努力理解着我说了声谢谢，然后才逐渐明白压的是哪条线，是哪里出了问题。有人指出问题，我还是很开心的。后来 A 问教练那个男子是不是也是教练，教练说是学员，教练都在空调房里睡觉，或者打牌。</p>
-<h1 id="section-13">5.1</h1>
-<p>今天是劳动节，教练带我和 A 去诸暨科目三实地练习，但是要先取回刷卡的机器，记录足够的学时才能报考。于是我们先去了在大唐的总部，到了后却得知机器在城区的报名点，拿到机器却因为我和 A 都没带身份证办不了学员卡（后来似乎办出来了）。而机器的接线又需要找到另外一个教练，在大唐的另外一个场地，他最后也并没有完全接好机器，大概是教练回店口之后弄好的。因为 A 第二天要上班，一个学员一天只能刷四小时的卡，于是我下午空了出来不必再去，将时间都让给了 A。</p>
-<h1 id="section-14">5.2</h1>
-<p>今天是劳动节假期的第二天，两年前的今天第一次见到 fyj。那时候做了多少的幼稚事，与 fyj 好时仍可以现状自慰，而如今只剩后悔悲哀。</p>
-<p>今天带上了另一个（新？）学员去诸暨练习，就叫她 B 吧。B 因为照片没有更换的原因人脸检测通不过，最终我在上午打了三小时的卡，距离要求的近四十小时还遥遥无期。快到中午时因为 A 说今天并没有上班，教练临时决定回去让 A 多记录一些学时，因此下午我又不必再去。</p>
-<p>若没有学时要求，想必不过几天我就可以去参加考试了。</p>
-<h1 id="section-15">5.3</h1>
-<p>休息。</p>
-<h1 id="section-16">5.4</h1>
-<p>早上被叫去学车，醒来看到已经略晚，于是比原定时间晚了半小时，九点半去练车。到十一点半的两个小时里，一半时间停车休息，我坐着背了单词，读《安娜·卡列尼娜》。大部分时间教练外放小说，实在扰人宁静。若只有令我反感的爽文剧情倒也罢了（从我听到的部分来看，主角竟是强奸犯出狱，不知道是不是受冤（update: 确实是受冤）），但机器朗读的声音实在不堪入耳，就像在b站听到一些 up 的配音是明显的机器人，我总是难以忍受。虽然给 cwy 做的视频里也用的机器人，但是 Microsoft Xiaoxiao Online 比一般听到的好到不知道哪里去了，而且视频里的讲解词相比小说的语言是更适合平淡的语气的（想象机器人读“哈哈哈”）。</p>
-<h1 id="section-17">5.5</h1>
-<p>出游，休息。</p>
-<h1 id="section-18">5.6</h1>
-<p>到学校办事，休息。</p>
-<h1 id="section-19">5.7</h1>
-<p>练了一上午。</p>
-<h1 id="section-20">5.8</h1>
-<p>练了一上午</p>
-<h1 id="section-21">5.9</h1>
-<p>去科目三考场练了一整天，标准的靠边停车有点点难。反复绕圈练靠边停车的时候，有一个开着奥迪（型号我不记得了，车也从来不是我关注的点）的中年人时走时停，好一会儿我们才明白他也在练习靠边停车，停一次下车看一圈，也有几分滑稽。但是既然是独自在练习，以普遍理性而论，他已经有驾照了；而有了驾照还想做到考试标准的靠边停车，着实令人费解。</p>
-<p>久坐真是会屁股疼，教练是习惯了吗？</p>
-<h1 id="section-22">5.10</h1>
-<p>到学校打工，休息。</p>
-<h1 id="section-23">5.11</h1>
-<p>继续在学校打工，休息。</p>
-<h1 id="section-24">5.12</h1>
-<p>继续在学校打工，休息。</p>
-<h1 id="section-25">5.13</h1>
-<p>上午学车，教练换了一本小说在读。</p>
-<p>小说讲的是男主在一个练功的世界里拥有其他人所没有的游戏系统，凭借这个系统和出类拔萃的天赋在几乎每一次冲突中取得胜利。各种条件被量化到具体数字，比如金钱、声望、经验值，确实符合一个游戏的设定；而打斗的细节（暂且忽略其不合理性）是现有的游戏无法模拟出来的，于是制造了一种奇异的结合体。</p>
-<p>我内心总是鄙夷这类文字，认为除了一个人被困荒岛且别无选择（或被人以性命相逼）时，去读它们都是不可取的。像上一段提到的，主观上我还觉得它对于主角用以取胜的招式的描写时常是有违常理的，且几乎所有的对手选择的态度都是轻视而导致主角总是以弱胜强，有时候利用囤积的经验值在战斗过程中升级以恢复体能的方式也实在不合我的胃口。读者在阅读时，完全不必担心主角会遭遇什么不测，只需要准备好接受一次次看似侥幸实则必然的突破和胜利就万事大吉了。好在这一本书没有上一本那么多色情描写，主角也没有那么多情人，我十分庆幸。</p>
-<h1 id="section-26">5.14</h1>
-<p>上午学车，科目二快刷完 16h 了，练的时间越来越短，坐的时间越来越长。</p>
-<h1 id="section-27">5.15</h1>
-<p>下午学车，开始刷科目三，36℃的气温，坐在车上出着汗，想着要是没有住院早就已经考完驾照了，顿时开始讨厌自己不争气的身体，恨铁不成钢。</p>
-<h1 id="section-28">5.16</h1>
-<p>继续刷科目三，在办证中心门口停车休息，停两小时去圆盘绕一圈再回来，天微凉，但仍有些闷。</p>
-<h1 id="section-29">5.17</h1>
-<p>天冷了，是我最喜欢的温度，车里有些偏热，只能把刚穿上的外套脱了。这几天里大概知道了真实情况下侧方位停车的一些方法。</p>
-<h1 id="section-30">5.18</h1>
-<p>被征召到学校寻找丢失的素材和进行排练，暂缓了还剩一天的学车打卡。</p>
-<h1 id="section-31">5.19</h1>
-<p>进行（原以为）最后一天的打卡，没有想到记录时间被减少了七小时左右，一时间觉得审查人员真是该死，冷静之后想到也不能怪这些执行命令的人。也许是之前玩手机被发现了，或者是科目三的平均速度过低的时候会被取消记录，因为科目二的记录并没有被取消，第二条理由似乎更合理一些。</p>
-<p>仔细考虑一下三十八小时强制要求的合理性，假设改成十八小时，且不提学员积极性会提高，有效学习时间或许不降反升（如果这个假设成立，那后面的设想就都是多余的了），只考虑截至去年六月的四亿汽车驾驶人每人节省的学习时间二十小时，不包括额外的时间消耗如每日往返驾校，共计约 913242 年。这里不讨论教练的时间，因为这个政策改变可能影响教练的收入和失业或就业，不可能由我来预测。以车祸丧生者比预期寿命减少 50 年为例，以上时间相当于 18264 个人减少的寿命，这里包括了睡觉的时间，实际上那么多时间中很多是没有意义的。作为参考，2018年，中国汽车发生交通事故166906起，导致46161人死亡，169046人受伤（注意这只是一年的数据，而以上计算的是所有汽车驾驶人在一生中被浪费的时间）。此外，学车浪费的多是青春的大好时光，我几天前就与一同学谈起高考后学车的问题，达成的一致是这个暑假学车的确格外令人烦恼。当然，我也同意意外死亡造成的损失绝不是浪费一小部分生命可以相比的。</p>
-<p>综上所述，鉴于不知道这个改变对交通事故发生率的影响究竟有多少，我不能说三十八小时是形式主义的、脱离现实的，但也不能否认十八小时制存在一定的合理性。</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>Life</tag>
-      </tags>
   </entry>
   <entry>
     <title>北大集训 2020 游记</title>
@@ -832,52 +713,6 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       </tags>
   </entry>
   <entry>
-    <title>NOI2019 游记</title>
-    <url>/noi2019/</url>
-    <content><![CDATA[<p>写了六题暴力</p>
-<a id="more"></a>
-<p>都考完了来记一下吧 = =</p>
-<h1 id="section">7.13</h1>
-<p>感觉到最后一周才开始节制摸鱼，药丸。打了场 LNR，B 题多一个 <span class="math inline">\(\log\)</span> 卡了卡就过了感觉还可以。</p>
-<p>昨天回了家却被大雨和夜色束缚，有些失落，等到今天才有机会出去。虽然走了很多路被淋得很湿，但我自己是不怕的，只是辛苦了她。</p>
-<h1 id="section-1">7.14</h1>
-<p>很早的高铁，很晚才到，到了就被热死了。</p>
-<p>和 zx 跑到了接站的大巴上，另外有些人被丢下了，不过自己打车比大巴快 = =</p>
-<p>寝室没有网，冬令营的时候住女寝 F 五楼还没这个问题的，中国移动真垃圾。</p>
-<p>晚上突然雷雨，别人刚去报告厅，明天就要笔试了好慌，今天背了说不定还会忘。</p>
-<h1 id="section-2">7.15</h1>
-<p>上午是开幕式，还有直播。</p>
-<p>听说每个省要喊口号，<del>ftq 说喊“浙江浙江，没人得奖；膜拜大佬，你们真强”好了</del>，但是最后很多省也没喊于是鸽了。</p>
-<p>下午是练习赛，前半个小时是笔试，紧张，不过都蒙对了。</p>
-<p>晚上是国家队见面会。</p>
-<p>明天就一试了，复习了下二次剩余什么的，好慌。</p>
-<h1 id="day-1">7.16 - Day 1</h1>
-<p>开场看第一题感觉直接暴力 <span class="math inline">\(2\times 10^8\)</span> 挺稳，自己卡了卡也只要 0.3s 左右。</p>
-<p>第三题一脸可做的样子但是水平太低，看上去好像可以模拟费用流的样子但是就算知道也不一定会做吧。</p>
-<p>把每个元素按照 <span class="math inline">\(a-b\)</span> 排序之后就有简单的 <span class="math inline">\(\mathcal O(n^3)\)</span> 的暴力了，之后一直在这个基础上想也没有新的进展。</p>
-<p>听说数据有梯度但是懒得写滚动（不知道为什么），只是把数组略微开大了点于是就没有额外的分数了。</p>
-<p>第二题分析出最大值分治之后很开心（？）但是一直没想到拿满暴力的写法，直到比较迟了去搜了一下区间数量才改出来，顺便写了个插值就跑了。</p>
-<p>下午复评的时候感觉整个人都死了，还好没挂不然又要像冬令营的时候想跳下去。</p>
-<p>100+60+40 三题暴力好像勉强卡进队线，被摁在地上摩擦。</p>
-<h1 id="section-3">7.17</h1>
-<p>社会活动，热死了，广东省博物馆的广东省历史都不开放也是服了，基本上把能走的地方走完了。</p>
-<p>晚上有见面会，明天就二试了，新学了 PAM 和 Pollard's rho 什么的，啥都不会，感觉好慌。</p>
-<h1 id="day-2">7.18 - Day 2</h1>
-<p>开场看第一题感觉直接 k-d tree 就没了，自己也不会卡，造了组随机数据 0.1s，后来加了个不平衡重构，出来之后听说重构复杂度可能是错的，但是最后的确跑了 0.1s 多一点，也不想管了 = =</p>
-<p>第二题感觉好难先扔了后来就写了 40 分跑路了。</p>
-<p>第三题是看上去很有趣的交互，想特殊性质 A 的时候就想到了后来出题人说的无环图的优美做法，但是一开始没想到 D 怎么做，于是有 54 分。</p>
-<p>后来感觉 D 就是加个随机的校验值来判叶子就好了，于是就有 68 分。</p>
-<p>Scape 提前告诉了我分数，于是复评的时候就不慌了。</p>
-<p>100+40+68 三题暴力，也被摁在地上摩擦。</p>
-<p>真实六题暴力。</p>
-<h1 id="section-4">7.19</h1>
-<p>活力嘉年华鸽了，一个人颓废也这么累。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>NOI2020 退役记</title>
     <url>/noi2020/</url>
     <content><![CDATA[<p>这大概是最后一次重要比赛了。</p>
@@ -914,6 +749,15 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       </categories>
   </entry>
   <entry>
+    <title>翻新</title>
+    <url>/renovation/</url>
+    <content><![CDATA[<p>一个阶段快要结束，在这个时间重新整理以前所写的，留下其中的一些。</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+  </entry>
+  <entry>
     <title>情人节随想</title>
     <url>/valentine-s-day/</url>
     <content><![CDATA[<p>对异地的她和他来说，相聚即是节，没有相聚的情人节往往是徒增感伤。</p>
@@ -940,6 +784,76 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       <tags>
         <tag>Life</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>ZJOI2019 Day1 游记</title>
+    <url>/zjoi2019-day1/</url>
+    <content><![CDATA[<p>这么快就到了啊</p>
+<a id="more"></a>
+<h1 id="day--3">Day -3</h1>
+<p>听说昨天被奶了</p>
+<p>= =</p>
+<p>这怎么轮得到我的</p>
+<h1 id="day--2">Day -2</h1>
+<p><del>跟贺指导打荒野行动，两次落地成盒之后就吃到鸡了，讲真的贺指导不太行。</del></p>
+<p>睡得还算早。</p>
+<h1 id="day--1">Day -1</h1>
+<p>听课体验 至少比以前好吧 虽然还是有掉线。</p>
+<p>雀魂是真的好玩= =</p>
+<p>填海机房的键盘好垃圾，B 按下去都有问题，跑起来倒挺快。</p>
+<p>晚上下自走棋被打爆了，怀疑智商，要退役了。</p>
+<p>睡得稍微有点迟，也没一直颓。</p>
+<h1 id="day-0">Day 0</h1>
+<p>上午数据结构选讲，有些还挺小清新的= =</p>
+<p>中午和 fls 一起吃饭 rp++</p>
+<p>下午讲课海星，好好准备省选了，不想退役啊。</p>
+<p>晚上也挺早睡了，有点紧张，有喜欢的人陪着真好。</p>
+<h1 id="day-1">Day 1</h1>
+<p>考试了</p>
+<p><del>退役了，不更了</del></p>
+<p><strong>update 4.8</strong></p>
+<p>还是简单记一下吧..</p>
+<p>早上 5 点十几醒了，上了厕所然后 cwy 也醒了 = =</p>
+<p>继续睡</p>
+<p>坐车到填海校门口已经 7:56 了，走到考场已经是 8:00，但是好像刚开门。</p>
+<p>8:10 发密码，密码还错了一次。</p>
+<p>开题发现有麻将，有纯正九莲宝灯，还有吉利，心态崩了。</p>
+<p>会 20 pts 直接搞搞就好了，先扔了。</p>
+<p>看 B，也会 20 pts，随便看了眼 C 回来继续乱想，想不出什么多项式的复杂度。</p>
+<p>然后开 C，会 10 pts，<del>去年也就 60 pts，今年这样 20+20+10 也差不多了吧。</del></p>
+<p>看到极强的性质 <span class="math inline">\(l=r=n\)</span> 就再也没去想 50 后面的部分分了= =</p>
+<p>发现可以记个二元组搞搞，就先写了个应该是 <span class="math inline">\(\mathcal O(n^5)\)</span> 的暴力，可以轻易优化得到 30 pts = =</p>
+<p>还想继续优化但是没什么用，很多也压不到 <span class="math inline">\(\mathcal O(n^2)\)</span>。</p>
+<p>然后发现只要根节点权值改变就行了，本质不同的二元组只有三种，这样就线性了。但是一开始以为是两种，写完调完已经 2h 了。</p>
+<p><del>去年才 60 pts，今年 2h 就拿到 50 已经很棒了吧，精神大振</del></p>
+<p>回来开 B</p>
+<p>想到计算一个位置对答案的贡献，然后 xjb 凑状态。</p>
+<p>后来分析了一下有标记的条件，有三种情况，转移也比较清楚，直接拿矩阵维护复杂度 <span class="math inline">\(\mathcal O(n\log n)\)</span>，<del>数据范围才 1e5 稳得一逼啊。</del></p>
+<p>看了一下大概还有 2.5h，感觉最后 1h 补暴力也够了，就开始写</p>
+<p>好像也挺好写的，就是要跑 6s = =</p>
+<p>听说评测机很慢啊，然后就绝望了。</p>
+<p>就一直卡常卡常卡常，<del>卡到最后也没把答案矩阵改成向量</del></p>
+<p>卡到 2.9s 了放弃了，想扔了搞搞 A，突然又看到一点可以卡的地方 = =</p>
+<p>离结束 1h 的时候卡到了 2.4s 就不管了。</p>
+<p><del>有点飘</del> A 就直接写 20 了，好像还有点难写的 = =</p>
+<p>延迟了 10min，不过最后 20min 都无所事事。</p>
+<p>怕放错位置，把代码复制了好多个地方。</p>
+<p>出来之后有些人说没写 B 的 <span class="math inline">\(\mathcal O(n\log n)\)</span>，好像有的还是 <span class="math inline">\(\mathcal O(n\log ^2n)\)</span>，不过跑得差不多快 = =</p>
+<p>感觉卡常已经很明确了，只有一个询问的 30 pts 感觉卡定了，另外 30 出题人放一半修改一半询问的话说不定还有戏 = =</p>
+<p>很慌，一题都没拍，A 甚至没有样例可以测。</p>
+<p>C 要是 f 了怎么办啊，再算上 B 卡掉 60，那..</p>
+<p>但是感觉，感觉也没理由写挂啊，但是真的，真的一点都不清晰，那 5h 又干了什么呢。</p>
+<p>后来两个同学接连发现 A 的 20 pts fst 了，可能我要等成绩出来才能发现吧。</p>
+<hr />
+<p><del>4.1 出成绩了一直没来更= =</del></p>
+<p><del>评测机好像不是很慢，2.4s 的卡过去了，别的也没 fst</del></p>
+<p><del>有些人还是被卡了啊 = =</del></p>
+<p><del>他们都好强啊</del></p>
+<p><del>Day 2 见了</del></p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
   </entry>
   <entry>
     <title>WC2019游记</title>
@@ -1033,83 +947,59 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       </categories>
   </entry>
   <entry>
-    <title>ZJOI2019 Day1 游记</title>
-    <url>/zjoi2019-day1/</url>
-    <content><![CDATA[<p>这么快就到了啊</p>
+    <title>「UOJ 345」「清华集训2017」榕树之心</title>
+    <url>/uoj-345/</url>
+    <content><![CDATA[<p><a href="http://uoj.ac/problem/345">UOJ #345. 【清华集训2017】榕树之心</a></p>
+<h1 id="题目背景">题目背景</h1>
+<blockquote>
+<p>深秋。冷风吹散了最后一丝夏日的暑气，也吹落了榕树脚下灌木丛的叶子。相识数年的 Evan 和 Lyra 再次回到了小时候见面的茂盛榕树之下。小溪依旧，石桥依旧，榕树虽是历经荣枯更迭，依旧亭亭如盖，只是 Evan 和 Lyra 再也不是七八年前不经世事的少年了。</p>
+<p>……</p>
+</blockquote>
 <a id="more"></a>
-<h1 id="day--3">Day -3</h1>
-<p>听说昨天被奶了</p>
-<p>= =</p>
-<p>这怎么轮得到我的</p>
-<h1 id="day--2">Day -2</h1>
-<p><del>跟贺指导打荒野行动，两次落地成盒之后就吃到鸡了，讲真的贺指导不太行。</del></p>
-<p>睡得还算早。</p>
-<h1 id="day--1">Day -1</h1>
-<p>听课体验 至少比以前好吧 虽然还是有掉线。</p>
-<p>雀魂是真的好玩= =</p>
-<p>填海机房的键盘好垃圾，B 按下去都有问题，跑起来倒挺快。</p>
-<p>晚上下自走棋被打爆了，怀疑智商，要退役了。</p>
-<p>睡得稍微有点迟，也没一直颓。</p>
-<h1 id="day-0">Day 0</h1>
-<p>上午数据结构选讲，有些还挺小清新的= =</p>
-<p>中午和 fls 一起吃饭 rp++</p>
-<p>下午讲课海星，好好准备省选了，不想退役啊。</p>
-<p>晚上也挺早睡了，有点紧张，有喜欢的人陪着真好。</p>
-<h1 id="day-1">Day 1</h1>
-<p>考试了</p>
-<p><del>退役了，不更了</del></p>
-<p><strong>update 4.8</strong></p>
-<p>还是简单记一下吧..</p>
-<p>早上 5 点十几醒了，上了厕所然后 cwy 也醒了 = =</p>
-<p>继续睡</p>
-<p>坐车到填海校门口已经 7:56 了，走到考场已经是 8:00，但是好像刚开门。</p>
-<p>8:10 发密码，密码还错了一次。</p>
-<p>开题发现有麻将，有纯正九莲宝灯，还有吉利，心态崩了。</p>
-<p>会 20 pts 直接搞搞就好了，先扔了。</p>
-<p>看 B，也会 20 pts，随便看了眼 C 回来继续乱想，想不出什么多项式的复杂度。</p>
-<p>然后开 C，会 10 pts，<del>去年也就 60 pts，今年这样 20+20+10 也差不多了吧。</del></p>
-<p>看到极强的性质 <span class="math inline">\(l=r=n\)</span> 就再也没去想 50 后面的部分分了= =</p>
-<p>发现可以记个二元组搞搞，就先写了个应该是 <span class="math inline">\(\mathcal O(n^5)\)</span> 的暴力，可以轻易优化得到 30 pts = =</p>
-<p>还想继续优化但是没什么用，很多也压不到 <span class="math inline">\(\mathcal O(n^2)\)</span>。</p>
-<p>然后发现只要根节点权值改变就行了，本质不同的二元组只有三种，这样就线性了。但是一开始以为是两种，写完调完已经 2h 了。</p>
-<p><del>去年才 60 pts，今年 2h 就拿到 50 已经很棒了吧，精神大振</del></p>
-<p>回来开 B</p>
-<p>想到计算一个位置对答案的贡献，然后 xjb 凑状态。</p>
-<p>后来分析了一下有标记的条件，有三种情况，转移也比较清楚，直接拿矩阵维护复杂度 <span class="math inline">\(\mathcal O(n\log n)\)</span>，<del>数据范围才 1e5 稳得一逼啊。</del></p>
-<p>看了一下大概还有 2.5h，感觉最后 1h 补暴力也够了，就开始写</p>
-<p>好像也挺好写的，就是要跑 6s = =</p>
-<p>听说评测机很慢啊，然后就绝望了。</p>
-<p>就一直卡常卡常卡常，<del>卡到最后也没把答案矩阵改成向量</del></p>
-<p>卡到 2.9s 了放弃了，想扔了搞搞 A，突然又看到一点可以卡的地方 = =</p>
-<p>离结束 1h 的时候卡到了 2.4s 就不管了。</p>
-<p><del>有点飘</del> A 就直接写 20 了，好像还有点难写的 = =</p>
-<p>延迟了 10min，不过最后 20min 都无所事事。</p>
-<p>怕放错位置，把代码复制了好多个地方。</p>
-<p>出来之后有些人说没写 B 的 <span class="math inline">\(\mathcal O(n\log n)\)</span>，好像有的还是 <span class="math inline">\(\mathcal O(n\log ^2n)\)</span>，不过跑得差不多快 = =</p>
-<p>感觉卡常已经很明确了，只有一个询问的 30 pts 感觉卡定了，另外 30 出题人放一半修改一半询问的话说不定还有戏 = =</p>
-<p>很慌，一题都没拍，A 甚至没有样例可以测。</p>
-<p>C 要是 f 了怎么办啊，再算上 B 卡掉 60，那..</p>
-<p>但是感觉，感觉也没理由写挂啊，但是真的，真的一点都不清晰，那 5h 又干了什么呢。</p>
-<p>后来两个同学接连发现 A 的 20 pts fst 了，可能我要等成绩出来才能发现吧。</p>
+<blockquote>
+<p>“已经快是严冬了，榕树的叶子还没落呢……”</p>
+<p>“榕树是常绿树，是看不到明显的落叶季节的……”</p>
+<p>“唉……想不到已经七年了呢。榕树还是当年的榕树，你却不是当年的你了……”</p>
+<p>“其实又有什么是一成不变的呢，榕树常绿，翠绿树冠的宏观永恒，是由无数细小树叶的荣枯更迭组成的。在时间的流逝中一切都在不断变化着呢……”</p>
+<p>“但你看这榕树，日日如此，季季如此，年年如此，仿佛亘古不变般，盘根错节，郁郁葱葱。我在想，或许成为一棵树更好吧，任时间从枝叶间流过，我只守这一片绿荫就好。”</p>
+<p>“榕树固然长久，但在这无限的时光里，终归是要湮灭于尘土的。与其像榕树一般，植根于一方泥土中感受年复一年的四季更替。倒不如在有限的时间里看过尽可能多的世界吧。再说了，榕树虽生长缓慢，却依旧会在每年春天抽出一根新的枝条去向外探索的呢……”</p>
+<p>“真的吗，榕树在她漫长的一生里，就是这样往外一步步探索的吗？”</p>
+<p>“毕竟就算树冠看起来一成不变，榕树也会随着时间周期变化，春天到了自然就是生长的时候了，她也应当做出对应的表现吧……”</p>
+<p>“相比于对季节更替做出本能的生长，我倒宁愿相信，榕树有一颗活跃的的，探索的心。”</p>
+<p>“其实榕树是有心的，榕树刚刚种下的时候，心就在根的地方发芽了。以后每年春天榕树长出新枝条的时候，心就会向着新枝条的方向移动一点，这样就能更靠近外面的世界了。你看这头顶上的枝条，纵横交错，其实心已经在这枝杈间，移动了数十载了呢……”</p>
+<p>“哇，也就是说，这密密麻麻的树杈中的某个地方，藏着这棵榕树的心吗？”</p>
+<p>“没错，可是要知道它在哪，就得另花一番功夫了……”</p>
+<p>“呀，这时候想想，一株树还是不如一个人好……比如你，要是这样贴上去的话，就能听到跳动的声音呢……”</p>
+<p>……</p>
+</blockquote>
+<p><del>写这篇题解就是为了上面这一段话。</del></p>
+<p><del>听说 OIer 都是文学家。</del></p>
+<h1 id="题意">题意</h1>
+<p>有一棵 <span class="math inline">\(n\)</span> 个点的树，初始时只有 <span class="math inline">\(1\)</span> 号点，心也在 <span class="math inline">\(1\)</span> 号点。</p>
+<p>每次树会长出一个与当前某个已经存在节点相邻的点，心会沿着心到新点的简单路径移动一步。</p>
+<p>现在已知树的最终形态，求所有生长顺序下哪些点可能成为心最终所在的位置。</p>
+<p><span class="math inline">\(T\)</span> 组数据。</p>
+<p><span class="math inline">\(T\le 20, n\le 10^5\)</span>。</p>
+<h1 id="做法">做法</h1>
+<p>首先由于步数确定，把树黑白染色后会有一种颜色必然不能被走到。</p>
+<p>考虑一个子问题，只需要求 <span class="math inline">\(1\)</span> 号点是否能成为心最终的位置。</p>
+<p>令 <span class="math inline">\(f_i\)</span> 表示以 <span class="math inline">\(i\)</span> 为根的子树，初始只有 <span class="math inline">\(i\)</span> 号点，心也在 <span class="math inline">\(i\)</span> 号点，按任意顺序加完所有点后心离 <span class="math inline">\(i\)</span> 的最近距离。</p>
+<p>答案即为 <span class="math inline">\([f_1=0]\)</span>。</p>
+<p>计算 <span class="math inline">\(f_u\)</span> 时，找到一个 <span class="math inline">\(f_v\)</span> 最大的儿子 <span class="math inline">\(v\)</span>，长完这个子树之后心到 <span class="math inline">\(u\)</span> 的距离最小是 <span class="math inline">\(f_v+1\)</span>。之后如果心能够回到 <span class="math inline">\(u\)</span>，通过调整选取顺序，最终必然可以停留在 <span class="math inline">\(u\)</span> 或 <span class="math inline">\(u\)</span> 的某个儿子上；如果不能，得到的也一定是最浅的方案。</p>
 <hr />
-<p><del>4.1 出成绩了一直没来更= =</del></p>
-<p><del>评测机好像不是很慢，2.4s 的卡过去了，别的也没 fst</del></p>
-<p><del>有些人还是被卡了啊 = =</del></p>
-<p><del>他们都好强啊</del></p>
-<p><del>Day 2 见了</del></p>
+<p>考虑原来的问题，有点类似换根，再自上而下做一遍 dp 即可。</p>
+<p>有一些细节是选取当前点的时候，当前点到 <span class="math inline">\(1\)</span> 的所有点必须已经被选。</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN], *s, *t;</span><br><span class="line">	<span class="keyword">return</span> (s==t?t=(s=buf)+fread(buf,<span class="number">1</span>,IN_LEN,<span class="built_in">stdin</span>),(s==t?<span class="number">-1</span>:*s++):*s++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">bool</span> iosig;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (iosig=<span class="literal">false</span>, c=read(); !<span class="built_in">isdigit</span>(c); c=read()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) iosig=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>; <span class="built_in">isdigit</span>(c); c=read()) x=((x+(x&lt;&lt;<span class="number">2</span>))&lt;&lt;<span class="number">1</span>)+(c^<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (iosig) x=-x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> num, n, W, T, h[N], f[N], siz[N], e[N&lt;&lt;<span class="number">1</span>], pre[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">bool</span> ans[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123; e[++num]=y, pre[num]=h[x], h[x]=num;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">	siz[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		dfs1(e[i], u), siz[u]+=siz[e[i]];</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;=f[mx]) mx=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa &amp;&amp; e[i]!=mx) sum+=siz[e[i]];</span><br><span class="line">	<span class="keyword">if</span>(mx) f[u]=f[mx]+<span class="number">1</span>-sum, f[u]=max(f[u], f[u]&amp;<span class="number">1</span>); <span class="keyword">else</span> f[u]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>, <span class="keyword">int</span> dep=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=fa, mx2=<span class="number">0</span>, sum;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;f[mx]) mx2=mx, mx=e[i];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(f[e[i]]&gt;=f[mx2]) mx2=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mx==fa) sum=siz[u]; <span class="keyword">else</span> sum=n-siz[mx]<span class="number">-1</span>-dep;</span><br><span class="line">	ans[u]=(((dep^n)&amp;<span class="number">1</span>) &amp;&amp; sum&gt;=f[mx]+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> fmx=f[mx], fmx2=f[mx2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(e[i]!=mx) f[u]=fmx+<span class="number">1</span>-(sum-siz[e[i]]);</span><br><span class="line">		<span class="keyword">else</span> f[u]=fmx2+<span class="number">1</span>-(mx2==fa?siz[u]-siz[mx]:n-siz[mx]-siz[mx2]<span class="number">-1</span>-dep);</span><br><span class="line">		f[u]=max(f[u], f[u]&amp;<span class="number">1</span>), dfs2(e[i], u, dep+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	num=<span class="number">0</span>, <span class="built_in">memset</span>(h, <span class="number">0</span>, <span class="keyword">sizeof</span> h);</span><br><span class="line">	read(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>, x, y; i&lt;n; ++i) read(x), read(y), add(x, y), add(y, x);</span><br><span class="line">	dfs1(<span class="number">1</span>), dfs2(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=(W==<span class="number">3</span>?<span class="number">1</span>:n); ++i) <span class="built_in">putchar</span>(<span class="string">&#x27;0&#x27;</span>+ans[i]);</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	read(W), read(T);</span><br><span class="line">	<span class="keyword">while</span>(T--) solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>游记</category>
+        <category>题解</category>
       </categories>
-  </entry>
-  <entry>
-    <title>翻新</title>
-    <url>/renovation/</url>
-    <content><![CDATA[<p>一个阶段快要结束，在这个时间重新整理以前所写的，留下其中的一些。</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
+      <tags>
+        <tag>树</tag>
+        <tag>DP</tag>
+        <tag>贪心</tag>
+      </tags>
   </entry>
   <entry>
     <title>ZJOI2019 Day2 游记</title>
@@ -1234,58 +1124,190 @@ f(a,b,c,n) &amp; = \sum_{i=1}^n \sum_{j=1}^m [j\le \left\lfloor i\times \frac{a\
       </categories>
   </entry>
   <entry>
-    <title>「UOJ 345」「清华集训2017」榕树之心</title>
-    <url>/uoj-345/</url>
-    <content><![CDATA[<p><a href="http://uoj.ac/problem/345">UOJ #345. 【清华集训2017】榕树之心</a></p>
-<h1 id="题目背景">题目背景</h1>
-<blockquote>
-<p>深秋。冷风吹散了最后一丝夏日的暑气，也吹落了榕树脚下灌木丛的叶子。相识数年的 Evan 和 Lyra 再次回到了小时候见面的茂盛榕树之下。小溪依旧，石桥依旧，榕树虽是历经荣枯更迭，依旧亭亭如盖，只是 Evan 和 Lyra 再也不是七八年前不经世事的少年了。</p>
-<p>……</p>
-</blockquote>
+    <title>NOI2019 游记</title>
+    <url>/noi2019/</url>
+    <content><![CDATA[<p>写了六题暴力</p>
 <a id="more"></a>
-<blockquote>
-<p>“已经快是严冬了，榕树的叶子还没落呢……”</p>
-<p>“榕树是常绿树，是看不到明显的落叶季节的……”</p>
-<p>“唉……想不到已经七年了呢。榕树还是当年的榕树，你却不是当年的你了……”</p>
-<p>“其实又有什么是一成不变的呢，榕树常绿，翠绿树冠的宏观永恒，是由无数细小树叶的荣枯更迭组成的。在时间的流逝中一切都在不断变化着呢……”</p>
-<p>“但你看这榕树，日日如此，季季如此，年年如此，仿佛亘古不变般，盘根错节，郁郁葱葱。我在想，或许成为一棵树更好吧，任时间从枝叶间流过，我只守这一片绿荫就好。”</p>
-<p>“榕树固然长久，但在这无限的时光里，终归是要湮灭于尘土的。与其像榕树一般，植根于一方泥土中感受年复一年的四季更替。倒不如在有限的时间里看过尽可能多的世界吧。再说了，榕树虽生长缓慢，却依旧会在每年春天抽出一根新的枝条去向外探索的呢……”</p>
-<p>“真的吗，榕树在她漫长的一生里，就是这样往外一步步探索的吗？”</p>
-<p>“毕竟就算树冠看起来一成不变，榕树也会随着时间周期变化，春天到了自然就是生长的时候了，她也应当做出对应的表现吧……”</p>
-<p>“相比于对季节更替做出本能的生长，我倒宁愿相信，榕树有一颗活跃的的，探索的心。”</p>
-<p>“其实榕树是有心的，榕树刚刚种下的时候，心就在根的地方发芽了。以后每年春天榕树长出新枝条的时候，心就会向着新枝条的方向移动一点，这样就能更靠近外面的世界了。你看这头顶上的枝条，纵横交错，其实心已经在这枝杈间，移动了数十载了呢……”</p>
-<p>“哇，也就是说，这密密麻麻的树杈中的某个地方，藏着这棵榕树的心吗？”</p>
-<p>“没错，可是要知道它在哪，就得另花一番功夫了……”</p>
-<p>“呀，这时候想想，一株树还是不如一个人好……比如你，要是这样贴上去的话，就能听到跳动的声音呢……”</p>
-<p>……</p>
-</blockquote>
-<p><del>写这篇题解就是为了上面这一段话。</del></p>
-<p><del>听说 OIer 都是文学家。</del></p>
-<h1 id="题意">题意</h1>
-<p>有一棵 <span class="math inline">\(n\)</span> 个点的树，初始时只有 <span class="math inline">\(1\)</span> 号点，心也在 <span class="math inline">\(1\)</span> 号点。</p>
-<p>每次树会长出一个与当前某个已经存在节点相邻的点，心会沿着心到新点的简单路径移动一步。</p>
-<p>现在已知树的最终形态，求所有生长顺序下哪些点可能成为心最终所在的位置。</p>
-<p><span class="math inline">\(T\)</span> 组数据。</p>
-<p><span class="math inline">\(T\le 20, n\le 10^5\)</span>。</p>
-<h1 id="做法">做法</h1>
-<p>首先由于步数确定，把树黑白染色后会有一种颜色必然不能被走到。</p>
-<p>考虑一个子问题，只需要求 <span class="math inline">\(1\)</span> 号点是否能成为心最终的位置。</p>
-<p>令 <span class="math inline">\(f_i\)</span> 表示以 <span class="math inline">\(i\)</span> 为根的子树，初始只有 <span class="math inline">\(i\)</span> 号点，心也在 <span class="math inline">\(i\)</span> 号点，按任意顺序加完所有点后心离 <span class="math inline">\(i\)</span> 的最近距离。</p>
-<p>答案即为 <span class="math inline">\([f_1=0]\)</span>。</p>
-<p>计算 <span class="math inline">\(f_u\)</span> 时，找到一个 <span class="math inline">\(f_v\)</span> 最大的儿子 <span class="math inline">\(v\)</span>，长完这个子树之后心到 <span class="math inline">\(u\)</span> 的距离最小是 <span class="math inline">\(f_v+1\)</span>。之后如果心能够回到 <span class="math inline">\(u\)</span>，通过调整选取顺序，最终必然可以停留在 <span class="math inline">\(u\)</span> 或 <span class="math inline">\(u\)</span> 的某个儿子上；如果不能，得到的也一定是最浅的方案。</p>
-<hr />
-<p>考虑原来的问题，有点类似换根，再自上而下做一遍 dp 即可。</p>
-<p>有一些细节是选取当前点的时候，当前点到 <span class="math inline">\(1\)</span> 的所有点必须已经被选。</p>
-<h1 id="代码">代码</h1>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN], *s, *t;</span><br><span class="line">	<span class="keyword">return</span> (s==t?t=(s=buf)+fread(buf,<span class="number">1</span>,IN_LEN,<span class="built_in">stdin</span>),(s==t?<span class="number">-1</span>:*s++):*s++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">bool</span> iosig;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (iosig=<span class="literal">false</span>, c=read(); !<span class="built_in">isdigit</span>(c); c=read()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) iosig=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>; <span class="built_in">isdigit</span>(c); c=read()) x=((x+(x&lt;&lt;<span class="number">2</span>))&lt;&lt;<span class="number">1</span>)+(c^<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (iosig) x=-x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> num, n, W, T, h[N], f[N], siz[N], e[N&lt;&lt;<span class="number">1</span>], pre[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">bool</span> ans[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123; e[++num]=y, pre[num]=h[x], h[x]=num;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">	siz[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		dfs1(e[i], u), siz[u]+=siz[e[i]];</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;=f[mx]) mx=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa &amp;&amp; e[i]!=mx) sum+=siz[e[i]];</span><br><span class="line">	<span class="keyword">if</span>(mx) f[u]=f[mx]+<span class="number">1</span>-sum, f[u]=max(f[u], f[u]&amp;<span class="number">1</span>); <span class="keyword">else</span> f[u]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa=<span class="number">0</span>, <span class="keyword">int</span> dep=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> mx=fa, mx2=<span class="number">0</span>, sum;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(f[e[i]]&gt;f[mx]) mx2=mx, mx=e[i];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(f[e[i]]&gt;=f[mx2]) mx2=e[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mx==fa) sum=siz[u]; <span class="keyword">else</span> sum=n-siz[mx]<span class="number">-1</span>-dep;</span><br><span class="line">	ans[u]=(((dep^n)&amp;<span class="number">1</span>) &amp;&amp; sum&gt;=f[mx]+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> fmx=f[mx], fmx2=f[mx2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=h[u]; i; i=pre[i]) <span class="keyword">if</span>(e[i]!=fa)&#123;</span><br><span class="line">		<span class="keyword">if</span>(e[i]!=mx) f[u]=fmx+<span class="number">1</span>-(sum-siz[e[i]]);</span><br><span class="line">		<span class="keyword">else</span> f[u]=fmx2+<span class="number">1</span>-(mx2==fa?siz[u]-siz[mx]:n-siz[mx]-siz[mx2]<span class="number">-1</span>-dep);</span><br><span class="line">		f[u]=max(f[u], f[u]&amp;<span class="number">1</span>), dfs2(e[i], u, dep+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	num=<span class="number">0</span>, <span class="built_in">memset</span>(h, <span class="number">0</span>, <span class="keyword">sizeof</span> h);</span><br><span class="line">	read(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>, x, y; i&lt;n; ++i) read(x), read(y), add(x, y), add(y, x);</span><br><span class="line">	dfs1(<span class="number">1</span>), dfs2(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=(W==<span class="number">3</span>?<span class="number">1</span>:n); ++i) <span class="built_in">putchar</span>(<span class="string">&#x27;0&#x27;</span>+ans[i]);</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	read(W), read(T);</span><br><span class="line">	<span class="keyword">while</span>(T--) solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>都考完了来记一下吧 = =</p>
+<h1 id="section">7.13</h1>
+<p>感觉到最后一周才开始节制摸鱼，药丸。打了场 LNR，B 题多一个 <span class="math inline">\(\log\)</span> 卡了卡就过了感觉还可以。</p>
+<p>昨天回了家却被大雨和夜色束缚，有些失落，等到今天才有机会出去。虽然走了很多路被淋得很湿，但我自己是不怕的，只是辛苦了她。</p>
+<h1 id="section-1">7.14</h1>
+<p>很早的高铁，很晚才到，到了就被热死了。</p>
+<p>和 zx 跑到了接站的大巴上，另外有些人被丢下了，不过自己打车比大巴快 = =</p>
+<p>寝室没有网，冬令营的时候住女寝 F 五楼还没这个问题的，中国移动真垃圾。</p>
+<p>晚上突然雷雨，别人刚去报告厅，明天就要笔试了好慌，今天背了说不定还会忘。</p>
+<h1 id="section-2">7.15</h1>
+<p>上午是开幕式，还有直播。</p>
+<p>听说每个省要喊口号，<del>ftq 说喊“浙江浙江，没人得奖；膜拜大佬，你们真强”好了</del>，但是最后很多省也没喊于是鸽了。</p>
+<p>下午是练习赛，前半个小时是笔试，紧张，不过都蒙对了。</p>
+<p>晚上是国家队见面会。</p>
+<p>明天就一试了，复习了下二次剩余什么的，好慌。</p>
+<h1 id="day-1">7.16 - Day 1</h1>
+<p>开场看第一题感觉直接暴力 <span class="math inline">\(2\times 10^8\)</span> 挺稳，自己卡了卡也只要 0.3s 左右。</p>
+<p>第三题一脸可做的样子但是水平太低，看上去好像可以模拟费用流的样子但是就算知道也不一定会做吧。</p>
+<p>把每个元素按照 <span class="math inline">\(a-b\)</span> 排序之后就有简单的 <span class="math inline">\(\mathcal O(n^3)\)</span> 的暴力了，之后一直在这个基础上想也没有新的进展。</p>
+<p>听说数据有梯度但是懒得写滚动（不知道为什么），只是把数组略微开大了点于是就没有额外的分数了。</p>
+<p>第二题分析出最大值分治之后很开心（？）但是一直没想到拿满暴力的写法，直到比较迟了去搜了一下区间数量才改出来，顺便写了个插值就跑了。</p>
+<p>下午复评的时候感觉整个人都死了，还好没挂不然又要像冬令营的时候想跳下去。</p>
+<p>100+60+40 三题暴力好像勉强卡进队线，被摁在地上摩擦。</p>
+<h1 id="section-3">7.17</h1>
+<p>社会活动，热死了，广东省博物馆的广东省历史都不开放也是服了，基本上把能走的地方走完了。</p>
+<p>晚上有见面会，明天就二试了，新学了 PAM 和 Pollard's rho 什么的，啥都不会，感觉好慌。</p>
+<h1 id="day-2">7.18 - Day 2</h1>
+<p>开场看第一题感觉直接 k-d tree 就没了，自己也不会卡，造了组随机数据 0.1s，后来加了个不平衡重构，出来之后听说重构复杂度可能是错的，但是最后的确跑了 0.1s 多一点，也不想管了 = =</p>
+<p>第二题感觉好难先扔了后来就写了 40 分跑路了。</p>
+<p>第三题是看上去很有趣的交互，想特殊性质 A 的时候就想到了后来出题人说的无环图的优美做法，但是一开始没想到 D 怎么做，于是有 54 分。</p>
+<p>后来感觉 D 就是加个随机的校验值来判叶子就好了，于是就有 68 分。</p>
+<p>Scape 提前告诉了我分数，于是复评的时候就不慌了。</p>
+<p>100+40+68 三题暴力，也被摁在地上摩擦。</p>
+<p>真实六题暴力。</p>
+<h1 id="section-4">7.19</h1>
+<p>活力嘉年华鸽了，一个人颓废也这么累。</p>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>游记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>学车日记</title>
+    <url>/diary-of-driver-s-education/</url>
+    <content><![CDATA[<p>基本康复后终于开始学车了！</p>
+<a id="more"></a>
+<h1 id="报名">4.16（报名）</h1>
+<p>我：如果我方言讲不清楚怎么办？</p>
+<p>我妈：那你就跟他讲普通话。</p>
+<hr />
+<p>下午被师傅接去报名。因为前一天没随身带着身份证就推迟了一天。先去了医院做了四十块钱的检查，医院仍然是我诊断出急性肠胃炎和自发性气胸时的那副模样，不过这次不那么让人害怕。随后到了驾校，驾校是一块场地加上一间活动房。同时另外有两个人也是来报名的，其中一个在医院刚碰见过；另一个是个四十岁左右的光头先生，手机用的是类似EMUI“简易模式”的巨大字体。安装完注册完三个App，阿姨说你居然自己都弄好了。我尴尬地笑笑，直到看见光头先生用微信扫描二维码下载一个App的时候，跳转到了给微信开启“应用内安装其他应用”权限的界面后问这样好了吗，才体会到阿姨那句夸奖的分量。</p>
+<h1 id="section">4.17</h1>
+<p>“机动车驾驶人互联网学习软件”里有总长两小时的八个视频必须看完，基本都是一些血腥的案例，马赛克时有时无，是否降低了画面的血腥程度我不知道，当事人隐私肯定被泄露光了。</p>
+<p>今天鼻炎和发烧随着扁桃体炎一起来了，为什么病总是找上我？</p>
+<h1 id="section-1">4.18</h1>
+<p>半夜醒了两次，第一次醒自己估摸着应该是三点多，听见外面我爸的声音，觉得很奇怪，看了一下时间原来才十二点多。</p>
+<p>把昨天没看完的视频看完了，坐在椅子看着淋漓的鲜血，不安全感随着发烧的酸痛穿透了我的全身。</p>
+<h1 id="section-2">4.19</h1>
+<p>做题数236。</p>
+<h1 id="section-3">4.20</h1>
+<p>第一次模拟考试61/72。90/100为通过。</p>
+<p>第二次模拟考试69/80。</p>
+<p>第三次模拟考试85/100。</p>
+<h1 id="section-4">4.21</h1>
+<p>第四次模拟考试94/100。</p>
+<h1 id="section-5">4.22</h1>
+<p>第五次模拟考试91/100。</p>
+<p>做题数817。</p>
+<h1 id="section-6">4.23</h1>
+<p>第六次模拟考试96/100。</p>
+<p>做题数917。</p>
+<h1 id="section-7">4.24</h1>
+<p>第七次模拟考试92/100。</p>
+<p>做题数998。</p>
+<h1 id="section-8">4.25</h1>
+<p>第八次模拟考试92/100。</p>
+<p>第九次模拟考试93/100。</p>
+<p>第十次模拟考试91/100。</p>
+<p>做题数1292。</p>
+<h1 id="周一">4.26 周一</h1>
+<p>早上去参加科目一考试，同行还有一个学员，就叫他 A 吧。</p>
+<p>A 是上周五考的科目一，教练把车开到大路上，停车让 A 开，我便赶紧系好安全带。后来教练还说考完回来要我开，非常害怕。A 开车在每个红灯停下后起步太慢都会被后车催，但是后车也不敢撞我们。到了考场直接去排队，教练和 A 就去附近场地练习。队伍很长，前面大概有五十个人，开考还有半小时，等候的时候又做了两次模拟考试。</p>
+<p>第十一次模拟考试94/100。</p>
+<p>第十二次模拟考试97/100。</p>
+<p>做题数1422。</p>
+<p>交了80块钱，总共刷了两次身份证，刷了三次人脸，开始考试。</p>
+<p>我并不知道一道题做错是否有即时的提示，不过没关系，亲切的第二题就打消了我的疑虑。题目在我的印象里是C1证能否驾驶轻型载货汽车，但是肯定是我记错或是读错了，不然就不会错。我一下慌了起来，到目前为止50%的错误率，如果这是我的真实水平，预计后面还要错49题。我赶紧骗自己，我的水平不会那么低。重拾信心后我开始小心地对待每一道题。终于在接近20分钟后得到了99分的好成绩。考试软件卡了好几次，甚至有一次我不小心多点了一次“下一题”，所幸未选答案不会进行提交，可以返回再来。</p>
+<p>出考场打印了成绩，非常开心，重新把手机开机，刚下楼看见教练和 A，就直接上了车。开到路上教练让 A 来开，开到大路上教练让我来开，我一路心惊胆战平安开到了该下车的地方，熄了两次火，不知道被多少车用喇叭嘲讽过。路况好的地方速度到过80km/h（没记错的话）。教练发了我科目三灯光规则，通知我明天练车。</p>
+<h1 id="section-9">4.27</h1>
+<p>下午教练来接我，便让我开着去接 A，再到练习场地。今天练倒车入库，教练把油门封死了，撞墙概率大大降低。我和 A 轮流练了总共近三个小时，学会了大幅度打方向，已经基本可以在这个场地将这辆车停好。结束后 A 开车先送我回家，再送自己回家。</p>
+<h1 id="section-10">4.28</h1>
+<p>开车到场地的路上，急转进小路的地方熄火了两次，一慌便忘了离合怎么踩，切不能慌，最不济可以停下打方向。</p>
+<p>继续练了一下午的倒车入库，不用一会儿左脚就麻了。总觉得已经完全熟练了，再练却总能有新的经验。</p>
+<h1 id="section-11">4.29</h1>
+<p>先开车送人到湄池打疫苗，再开回场地，这次没有熄火，路上行车也逐渐熟练。</p>
+<p>先学习了左向的倒车入库，原先练习的只有右向，同时也大概知道了科目二的流程。在右向已经基本掌握的情况下，另一个方向就简单许多。练习几次后便开始学侧方位停车。侧方位停车比想象中容易，一个原因肯定是标线过于精确，生活中停车便要全凭经验判断和随机应变了。最难的一部分是从停车位出来后要准确进入到指定位置，以便开始下一次倒车，若没有调准，下一次倒车就会有意外了。</p>
+<p>若说每次新学内容由我开始是因为恰好我负责来程的行车，仍有一些差别可以让我满足一下小小的虚荣心。昨天教练下车让我自己练习，A 仍坐在后排；今天因事暂时离开时，让我坐副驾驶在紧急情况下帮 A 踩刹车。也许实际上 A 并没有多少不堪，也许 A 更需要这些鼓励，而如果 A 学得完全比我好，我也会更高兴的。</p>
+<h1 id="section-12">4.30</h1>
+<p>今天是去驾校练车的第一天，早上去接 A 时他还没睡醒，手机也没带到自己家，所以在等待了一会儿后我和教练先去了驾校。上午练车都是七点，下午都是一点半，七点出头的时间意味着在我们到达时还没有其他人，大门也关着，这不禁让我为自己的勤奋感到鼓舞。驾校场地是一块不大不小的科目二练习场地————也许不如正式考试的地方，用了一处额外的转弯才将整条路线串联起来————但是足以容纳许多车辆一起练习，为枯燥的练习时间增添了些许轻松的氛围。</p>
+<p>倒车入库和侧方位停车与先前练习的并无多少区别，新环节的加入也更令我振奋。上坡起步与我猜想的似乎有许多出入，本以为需要手刹配合离合和油门进行一通迅速而精确的操作，并不会知道手刹是抬起便放下，而全部的戏份给了离合，压力也落在了左脚上。直角转弯需要在入弯前关闭转向灯，这一规定恰与科目一所要求明白的行车规则相反。曲线行驶在知道方法后就不是很难了，但是进一步的，直接凭感觉确定整车在路上的方位还有很远的路要走。</p>
+<p>在连续练了几圈后，又一次回到起点等待前车出发时，一个中年男子走到我的车窗边。</p>
+<p>“小师傅，我刚才看你开这个侧方位停车，全都是错的。”</p>
+<p>虽然觉得这是一个夸夸其谈之人，听到这些不免让我有些紧张。</p>
+<p>“我看了你三次，进来出去，都压线了。”</p>
+<p>“啊……”</p>
+<p>“你上去的时候停的离那个线太近了，一般要出去四五十公分，停都没停好后面怎么倒得好？”</p>
+<p>似懂非懂，努力理解着我说了声谢谢，然后才逐渐明白压的是哪条线，是哪里出了问题。有人指出问题，我还是很开心的。后来 A 问教练那个男子是不是也是教练，教练说是学员，教练都在空调房里睡觉，或者打牌。</p>
+<h1 id="section-13">5.1</h1>
+<p>今天是劳动节，教练带我和 A 去诸暨科目三实地练习，但是要先取回刷卡的机器，记录足够的学时才能报考。于是我们先去了在大唐的总部，到了后却得知机器在城区的报名点，拿到机器却因为我和 A 都没带身份证办不了学员卡（后来似乎办出来了）。而机器的接线又需要找到另外一个教练，在大唐的另外一个场地，他最后也并没有完全接好机器，大概是教练回店口之后弄好的。因为 A 第二天要上班，一个学员一天只能刷四小时的卡，于是我下午空了出来不必再去，将时间都让给了 A。</p>
+<h1 id="section-14">5.2</h1>
+<p>今天是劳动节假期的第二天，两年前的今天第一次见到 fyj。那时候做了多少的幼稚事，与 fyj 好时仍可以现状自慰，而如今只剩后悔悲哀。</p>
+<p>今天带上了另一个（新？）学员去诸暨练习，就叫她 B 吧。B 因为照片没有更换的原因人脸检测通不过，最终我在上午打了三小时的卡，距离要求的近四十小时还遥遥无期。快到中午时因为 A 说今天并没有上班，教练临时决定回去让 A 多记录一些学时，因此下午我又不必再去。</p>
+<p>若没有学时要求，想必不过几天我就可以去参加考试了。</p>
+<h1 id="section-15">5.3</h1>
+<p>休息。</p>
+<h1 id="section-16">5.4</h1>
+<p>早上被叫去学车，醒来看到已经略晚，于是比原定时间晚了半小时，九点半去练车。到十一点半的两个小时里，一半时间停车休息，我坐着背了单词，读《安娜·卡列尼娜》。大部分时间教练外放小说，实在扰人宁静。若只有令我反感的爽文剧情倒也罢了（从我听到的部分来看，主角竟是强奸犯出狱，不知道是不是受冤（update: 确实是受冤）），但机器朗读的声音实在不堪入耳，就像在b站听到一些 up 的配音是明显的机器人，我总是难以忍受。虽然给 cwy 做的视频里也用的机器人，但是 Microsoft Xiaoxiao Online 比一般听到的好到不知道哪里去了，而且视频里的讲解词相比小说的语言是更适合平淡的语气的（想象机器人读“哈哈哈”）。</p>
+<h1 id="section-17">5.5</h1>
+<p>出游，休息。</p>
+<h1 id="section-18">5.6</h1>
+<p>到学校办事，休息。</p>
+<h1 id="section-19">5.7</h1>
+<p>练了一上午。</p>
+<h1 id="section-20">5.8</h1>
+<p>练了一上午</p>
+<h1 id="section-21">5.9</h1>
+<p>去科目三考场练了一整天，标准的靠边停车有点点难。反复绕圈练靠边停车的时候，有一个开着奥迪（型号我不记得了，车也从来不是我关注的点）的中年人时走时停，好一会儿我们才明白他也在练习靠边停车，停一次下车看一圈，也有几分滑稽。但是既然是独自在练习，以普遍理性而论，他已经有驾照了；而有了驾照还想做到考试标准的靠边停车，着实令人费解。</p>
+<p>久坐真是会屁股疼，教练是习惯了吗？</p>
+<h1 id="section-22">5.10</h1>
+<p>到学校打工，休息。</p>
+<h1 id="section-23">5.11</h1>
+<p>继续在学校打工，休息。</p>
+<h1 id="section-24">5.12</h1>
+<p>继续在学校打工，休息。</p>
+<h1 id="section-25">5.13</h1>
+<p>上午学车，教练换了一本小说在读。</p>
+<p>小说讲的是男主在一个练功的世界里拥有其他人所没有的游戏系统，凭借这个系统和出类拔萃的天赋在几乎每一次冲突中取得胜利。各种条件被量化到具体数字，比如金钱、声望、经验值，确实符合一个游戏的设定；而打斗的细节（暂且忽略其不合理性）是现有的游戏无法模拟出来的，于是制造了一种奇异的结合体。</p>
+<p>我内心总是鄙夷这类文字，认为除了一个人被困荒岛且别无选择（或被人以性命相逼）时，去读它们都是不可取的。像上一段提到的，主观上我还觉得它对于主角用以取胜的招式的描写时常是有违常理的，且几乎所有的对手选择的态度都是轻视而导致主角总是以弱胜强，有时候利用囤积的经验值在战斗过程中升级以恢复体能的方式也实在不合我的胃口。读者在阅读时，完全不必担心主角会遭遇什么不测，只需要准备好接受一次次看似侥幸实则必然的突破和胜利就万事大吉了。好在这一本书没有上一本那么多色情描写，主角也没有那么多情人，我十分庆幸。</p>
+<h1 id="section-26">5.14</h1>
+<p>上午学车，科目二快刷完 16h 了，练的时间越来越短，坐的时间越来越长。</p>
+<h1 id="section-27">5.15</h1>
+<p>下午学车，开始刷科目三，36℃的气温，坐在车上出着汗，想着要是没有住院早就已经考完驾照了，顿时开始讨厌自己不争气的身体，恨铁不成钢。</p>
+<h1 id="section-28">5.16</h1>
+<p>继续刷科目三，在办证中心门口停车休息，停两小时去圆盘绕一圈再回来，天微凉，但仍有些闷。</p>
+<h1 id="section-29">5.17</h1>
+<p>天冷了，是我最喜欢的温度，车里有些偏热，只能把刚穿上的外套脱了。这几天里大概知道了真实情况下侧方位停车的一些方法。</p>
+<h1 id="section-30">5.18</h1>
+<p>被征召到学校寻找丢失的素材和进行排练，暂缓了还剩一天的学车打卡。</p>
+<h1 id="section-31">5.19</h1>
+<p>进行（原以为）最后一天的打卡，没有想到记录时间被减少了七小时左右，一时间觉得审查人员真是该死，冷静之后想到也不能怪这些执行命令的人。也许是之前玩手机被发现了，或者是科目三的平均速度过低的时候会被取消记录，因为科目二的记录并没有被取消，第二条理由似乎更合理一些。</p>
+<p>仔细考虑一下三十八小时强制要求的合理性，假设改成十八小时，且不提学员积极性会提高，有效学习时间或许不降反升（如果这个假设成立，那后面的设想就都是多余的了），只考虑截至去年六月的四亿汽车驾驶人每人节省的学习时间二十小时，不包括额外的时间消耗如每日往返驾校，共计约 913242 年。这里不讨论教练的时间，因为这个政策改变可能影响教练的收入和失业或就业，不可能由我来预测。以车祸丧生者比预期寿命减少 50 年为例，以上时间相当于 18264 个人减少的寿命，这里包括了睡觉的时间，实际上那么多时间中很多是没有意义的。作为参考，2018年，中国汽车发生交通事故 166906 起，导致 46161 人死亡，169046 人受伤（注意这只是一年的数据，而以上计算的是所有汽车驾驶人在一生中被浪费的时间）。此外，学车浪费的多是青春的大好时光，我几天前就与一同学谈起高考后学车的问题，达成的一致是这个暑假学车的确格外令人烦恼。当然，我也同意意外死亡造成的损失绝不是浪费一小部分生命可以相比的。</p>
+<p>综上所述，鉴于不知道这个改变对交通事故发生率的影响究竟有多少，我不能说三十八小时是形式主义的、脱离现实的，但也不能否认十八小时制存在一定的合理性。</p>
+<h1 id="section-32">5.27</h1>
+<p>考科目二的前一天，到考场实地练习。下午就要去学校拍毕业照，以为科目二和科一科三是同一个地方，离高铁站不远，于是提前买了到杭州的高铁票。早上上路发现事情不太对，结果到达后发现离高铁站也不远，惊讶之余也松了一口气。</p>
+<p>六点不到就已经上路，阴云未散的晴天，太阳斜照下来，山林田地便比天空亮上许多，是不多见的景象。虽然太阳晒到后不免发烫，晨风还是很清凉，拨去了我的困意。</p>
+<p>场地有四条线路，两条在外围，比较长，是属于旧桑塔纳的，另两条则是新桑塔纳。大概是因为已经淘汰得差不多了，旧桑塔纳的线路练习的车相对少了很多，尽管有时仍然需要排队；而隔壁的车辆已经排到了入口，说整个圈都挤满了也不为过。</p>
+<p>三四个人轮流练起来并不是很快，几轮下来，直角转弯还没有完全的把握，但时间告急，我便离开到外面路口打车赶高铁去了，其他几人到日落才结束。</p>
+<h1 id="section-33">5.28</h1>
+<p>时隔一个月再次走上正式的考场，不免十分紧张。一起考试共有四人，C 是三号线，AB 和我都是四号线。三号线进度快，很快 C 就开考了，一次就满分通过了。在 C 进去大半个小时之后我和 AB 分别去起点等待，再分别开始了考试。等待过程中紧张的感觉已经消磨殆尽，上车时新出现的害怕，在车开动起来后也逐渐消散。在第一个项目侧方位停车前的一长段路上我不断调着反光镜的角度，大概是因为本来就装得有点歪，所以总是有不对劲的感觉，虽然并不会有很大的影响。一切顺利来到了直角转弯，因为考试车与平时练习的车有些区别，我一直没有很认真对待车窗下的标点，大部分时候只是凭借感觉判断时机，所幸有惊无险，没有压到实线，转过了弯。曲线行驶不是很完美，但足够正常通过了。最后的倒车入库是我最喜欢的环节，胜利的喜悦已经逐渐充满了我的内心。一切仍是那么平凡，除了在第二次倒车时有蚊子趴到了我的左腿上，半踩着离合不能松开，手却又够不到，一番挣扎后，我抬起管着刹车的右脚在蚊子的位置蹭了一下，再赶忙恢复原样。</p>
+<p>考完后拿着满分的成绩单找到教练，得知 B 第一次在侧方停车的时候前后压了三次线，每次是 10 分，已经在准备第二次出发了。大厅的监看很有趣，有一个车内视角，一个场地视角，在进入对应项目时会切换到合适的摄像头，和一个用简单线条组成的遥感俯视图。我看着学员们做着一个个的动作，擦过一条又一条的边线。几分钟后去迎接 90 分的 B，再后来是补考 100 的 A。</p>
+<p>下午教练并没有像我预想中那样放我们回家，在镇上一个餐馆解决午饭后又去了科三场地。科三实际上有 A 区和 B 区两个部分，每个区有若干条线，每天考的是其中一个区，每周内 A 区和 B 区交替。B 区较难，于是大部分人可以预见地选择了 A 区。以前时间的安排会提前公布，因为一些原因，可能是 31 日预约 A 区的人实在太多，新的公告说所有人待定，会在 30 日早上公布新的决定。这天下午我们还是继续练习 A 区，同以前一样，在晚饭前结束。</p>
+<h1 id="section-34">5.30</h1>
+<p>今天是 AB 和另一个老头的科三最后一次练习，我也四点多起床跟着去熟悉环境。租了考试用的车，刚出发发现右后轮瘪了，便又回到停车场，充气后似乎没有再瘪下去的迹象。工作人员（也许是交警）给我的印象是十分的凶，再没有其他了。别人练车于我没有太大的帮助，跟着熟悉了几次灯光模拟，大概感觉没有问题了。我想这一个上午是不是多余了，因为两天后我自己也还要租车练习。</p>
+<h1 id="section-35">5.31</h1>
+<p>三人都考出了。</p>
+<h1 id="section-36">6.1</h1>
+<p>今天是儿童节。</p>
+<p>早早去到了场地，考试车的计算机系统似乎是 Windows XP 的音效，一开始出了问题，在没有用系统的情况下先练了一圈，随后找到工作人员修理。修好之后原地开始，因为启动不在规定的地方，扣 100 分，不过我继续开完了一圈。第二圈通过了。第三圈在直线行驶处避让停着的大货车，方向不稳，扣 100 分。第四次很慌，在直线行驶处不敢动方向盘，方向不稳，扣 100 分。第五次没有开完，但至少完成了直线行驶。一个半小时的时间已经结束了。</p>
+<p>也许是一个人练习效果会差一些，也许是我的错觉，但无论如何，我不敢说再多一些练习也是没有必要的了。</p>
+<h1 id="section-37">6.2</h1>
+<p>在候考厅，有警官教育大家不要给考官塞钱，看上去也十分和蔼，不像之前看到的那些人。科三人工扣分项目贴在了墙上，起步前居然要环顾四周，否则扣 100 分，让我大吃一惊。等候一段时间后开考了。</p>
+<p>考试车的感觉和昨天练习的大有不同，不敢调座位，于是左脚几乎要伸直才能将离合踩到底，所幸离合有效的一段在比较高的位置，还算容易控制。唯一一个没有红绿灯的路口有人管着路过的车辆，这样考试车都可以顺利通过而不至于被逼停在路口。考到一半开始下雨，我开了雨刮器。在完成掉头后，我发现车的怠速有些过于快了，等到变道处我几乎已经追上前车，慌乱之中我加油门选择超越，却已经来不及，越过了完成变道的范围。大脑一片空白，我问考官是否需要停车，他让我在右转后靠边。我下车坐到后排，考官将车开回起点进行补考。我问这辆车的怠速是不是太快，刚才的地方应该怎么做。他平静地说这也不快，刚才的地方要超车就要在刚完成掉头的地方加速，而如果晚了就应该停车等待。</p>
+<p>尽管感动于考官的和善，我也无法除去心中的紧张，若是补考出现失误，那等待我的是一个多星期的额外的煎熬，而同学们即将在高考后解放出来，我更不愿在那时去面对可怕的驾考。好在补考时前方完全没有一辆考试车，我便一个人做着烂熟在心的动作，终于到了靠边停车。拉起手刹的一刻，我焦急等待着系统提示“考试合格，请回中心打印成绩单”。语音说道正在等待中心确认，我的心总归是放下了。考官已经走到车边打开了我的车门，下车我问他需不需要我关车门（不关可以扣 100 分），他却说不用了。坐回后座，这次是与前一次相反的心情，我看着窗外的风景，急于把消息告诉所有人，而又沉浸在这片刻的美好宁静。</p>
+<p>最后成绩是 90 分，靠边停车靠得不够边。倘若再有任何一个小失误，我今天便要敲烂自己的头了。</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
       </categories>
       <tags>
-        <tag>树</tag>
-        <tag>DP</tag>
-        <tag>贪心</tag>
+        <tag>Life</tag>
       </tags>
   </entry>
   <entry>
