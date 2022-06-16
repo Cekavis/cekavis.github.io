@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>关于同时求序列的 $0$ 次幂和到 $k$ 次幂和的一些想法 - Cekavis&#039;s notes</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Cekavis&#039;s notes"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Cekavis&#039;s notes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="问题 应该是个挺简单的问题 对于 \(k&amp;#x3D;0,1,\dotsc,m\) 求 \[ f_k&amp;#x3D;\sum_{i&amp;#x3D;1}^n a_i^k \]"><meta property="og:type" content="blog"><meta property="og:title" content="关于同时求序列的 $0$ 次幂和到 $k$ 次幂和的一些想法"><meta property="og:url" content="https://cekavis.github.io/power-sum/"><meta property="og:site_name" content="Cekavis&#039;s notes"><meta property="og:description" content="问题 应该是个挺简单的问题 对于 \(k&amp;#x3D;0,1,\dotsc,m\) 求 \[ f_k&amp;#x3D;\sum_{i&amp;#x3D;1}^n a_i^k \]"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cekavis.github.io/img/og_image.png"><meta property="article:published_time" content="2019-02-03T02:28:32.000Z"><meta property="article:modified_time" content="2022-06-16T08:31:40.791Z"><meta property="article:author" content="Cekavis"><meta property="article:tag" content="多项式"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cekavis.github.io/power-sum/"},"headline":"关于同时求序列的 $0$ 次幂和到 $k$ 次幂和的一些想法","image":["https://cekavis.github.io/img/og_image.png"],"datePublished":"2019-02-03T02:28:32.000Z","dateModified":"2022-06-16T08:31:40.791Z","author":{"@type":"Person","name":"Cekavis"},"publisher":{"@type":"Organization","name":"Cekavis's notes","logo":{"@type":"ImageObject","url":"https://cekavis.github.io/power-sum/logo.svg"}},"description":"问题\r 应该是个挺简单的问题\r 对于 \\(k&#x3D;0,1,\\dotsc,m\\) 求\r \\[\r f_k&#x3D;\\sum_{i&#x3D;1}^n a_i^k\r \\]"}</script><link rel="canonical" href="https://cekavis.github.io/power-sum/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2019-02-03T02:28:32.000Z" title="2019/2/3 10:28:32">2019-02-03</time></span><span class="level-item"><a class="link-muted" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span><span class="level-item">4 minutes read (About 580 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">关于同时求序列的 $0$ 次幂和到 $k$ 次幂和的一些想法</h1><div class="content"><h1 id="问题">问题</h1>
+<p><del>应该是个挺简单的问题</del></p>
+<p>对于 <span class="math inline">\(k=0,1,\dotsc,m\)</span> 求</p>
+<p><span class="math display">\[
+f_k=\sum_{i=1}^n a_i^k
+\]</span></p>
+<span id="more"></span>
+<h1 id="算法-1">算法 1</h1>
+<p>考虑答案的生成函数</p>
+<p><span class="math display">\[
+f(x)=\sum_{i=0}^\infty f_k x^k
+\]</span></p>
+<p>一个数 <span class="math inline">\(a\)</span> 的贡献是</p>
+<p><span class="math display">\[
+\sum_{i=0}^\infty a^i x^i
+=
+\frac{1}{1-ax}
+\]</span></p>
+<p>因此 <span class="math inline">\(f(x)=\sum_{i=1}^n
+\frac{1}{1-a_ix}\)</span></p>
+<p>可以发现</p>
+<p><span class="math display">\[
+\sum_{i=1}^n \frac{1}{1-a_ix}
+=
+\frac{\sum_{i=1}^n \prod_{j\ne i} (1-a_jx)}{\prod_{i=1}^n (1-a_i x)}
+\]</span></p>
+<p>其中分子的部分可以用分治 NTT
+计算，即记录每段的分子分母这两个部分，可以用三次乘法合并</p>
+<p>常数比较大</p>
+<h1 id="算法-2">算法 2</h1>
+<p>继续优化上面的算法</p>
+<p>令</p>
+<p><span class="math display">\[
+\begin{align}
+g(x)&amp;=\prod_{i=1}^n (1-a_i x) \\
+h(x)&amp;=\sum_{i=1}^n \prod_{j\ne i} (1-a_jx) \\
+f(x)&amp;=\frac{h(x)}{g(x)}
+\end{align}
+\]</span></p>
+<p>可以发现 <span class="math inline">\(g(x)\)</span> 的 <span
+class="math inline">\(i\)</span> 次项系数 <span
+class="math inline">\(|g_i|\)</span> 即从 <span
+class="math inline">\(a_1,a_2,\dotsc,a_n\)</span> 中选出 <span
+class="math inline">\(i\)</span> 个乘积的总和</p>
+<p><span class="math inline">\(|h_i|\)</span> 即枚举删去一个元素 <span
+class="math inline">\(a_j\)</span> 后选出 <span
+class="math inline">\(i\)</span> 个乘积的和</p>
+<p>一种选出 <span class="math inline">\(i\)</span> 个的方案在 <span
+class="math inline">\(|g_i|\)</span> 中被恰好计算一次，而在 <span
+class="math inline">\(|h_i|\)</span> 中被计算 <span
+class="math inline">\((n-i)\)</span> 次（只要枚举删掉的那个数不是这
+<span class="math inline">\(i\)</span> 个中的都可以）</p>
+<p>于是我们有 <span class="math inline">\(h_i=(n-i)g_i\)</span></p>
+<p>只需要分治求出 <span class="math inline">\(g(x)\)</span> 就可以计算
+<span
+class="math inline">\(h(x)\)</span>，而这个分治每次只需要一次乘法</p>
+<hr />
+<p>考虑形式化这个求 <span class="math inline">\(h(x)\)</span> 的过程</p>
+<p>可以发现 <span class="math inline">\(h(x)=g(x)\times
+n-(g(x))&#39;x\)</span></p>
+<p>因此</p>
+<p><span class="math display">\[
+\begin{align}
+f(x)&amp;=\frac{h(x)}{g(x)} \\
+&amp;=\frac{g(x)\times n-(g(x))&#39;x}{g(x)} \\
+&amp;=n-x\frac{(g(x))&#39;}{g(x)}
+\end{align}
+\]</span></p>
+<p>这和之后的算法有一定的联系</p>
+<h1 id="算法-3">算法 3</h1>
+<p>沿用上面的符号</p>
+<p>由 <span class="math inline">\(\ln(1-ax)=-\sum\limits_{i=1}^\infty
+\frac{a^i}{i}x^i\)</span></p>
+<p><span class="math display">\[
+\begin{align}
+\ln(g(x))&amp;=\sum_{i=1}^n \ln(\frac{1}{1-a_ix}) \\
+&amp;=\sum_{i=1}^n \sum\limits_{j=1}^\infty \frac{a_i^j}{j}x^j \\
+&amp;=\sum_{i=1}^\infty \sum_{j=1}^n \frac{a_j^i}{i} x^i
+\end{align}
+\]</span></p>
+<p>分治求出 <span class="math inline">\(g(x)\)</span> 后求 <span
+class="math inline">\(\ln(g(x))\)</span>，去掉 <span
+class="math inline">\(\frac{1}{i}\)</span> 的系数即可</p>
+<p>这其实和算法 2 本质相同</p>
+<p><span class="math display">\[
+\begin{align}
+\ln(g(x))&amp;=\int \frac{g&#39;(x)}{g(x)}
+\end{align}
+\]</span></p>
+<p>对于这个式子求导相当于去掉了 <span
+class="math inline">\(\frac{1}{i}\)</span>
+的系数，位移回来后补上常数项，和算法 2 完全相同</p>
+<h1 id="算法-4">算法 4</h1>
+<p><a
+target="_blank" rel="noopener" href="https://www.luogu.org/blog/user48173/solution-p4705">这里</a>
+有，但是我没看懂，反正式子是一样的</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>关于同时求序列的 $0$ 次幂和到 $k$ 次幂和的一些想法</p><p><a href="https://cekavis.github.io/power-sum/">https://cekavis.github.io/power-sum/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Cekavis</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2019-02-03</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-06-16</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/">多项式</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/bzoj-3684/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">「BZOJ 3684」大朋友和多叉树</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/loj-6391/"><span class="level-item">「LOJ 6391」「THUPC2018」淘米神的树 / Tommy</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cekavis.github.io/power-sum/';
+            this.page.identifier = 'power-sum/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'cekaviss-notes' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/avatar.jpg" alt="Cekavis"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Cekavis</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Earth, Solar System</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">95</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">71</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/cekavis" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/cekavis"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:cmxrynp@gmail.com"><i class="fas fa-envelope"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#问题"><span class="level-left"><span class="level-item">1</span><span class="level-item">问题</span></span></a></li><li><a class="level is-mobile" href="#算法-1"><span class="level-left"><span class="level-item">2</span><span class="level-item">算法 1</span></span></a></li><li><a class="level is-mobile" href="#算法-2"><span class="level-left"><span class="level-item">3</span><span class="level-item">算法 2</span></span></a></li><li><a class="level is-mobile" href="#算法-3"><span class="level-left"><span class="level-item">4</span><span class="level-item">算法 3</span></span></a></li><li><a class="level is-mobile" href="#算法-4"><span class="level-left"><span class="level-item">5</span><span class="level-item">算法 4</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a><p class="is-size-7"><span>&copy; 2022 Cekavis</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><!-- hexo injector body_end start -->
+<script src="/js/custom.js"></script>
+<!-- hexo injector body_end end --></body></html>

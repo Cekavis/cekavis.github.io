@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>单位根反演 - Cekavis&#039;s notes</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Cekavis&#039;s notes"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Cekavis&#039;s notes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="恒等式 \[ [d|n]&amp;#x3D;\frac{1}{d} \sum_{i&amp;#x3D;0}^{d-1} \omega_d^{i\times n} \] 其中 \(\omega_d\) 是 \(d\) 次单位根  当 \(d|n\)，右边和式中每一项都为 \(1\) 当 \(d\nmid n\)，容易得到右边为 \(0\)"><meta property="og:type" content="blog"><meta property="og:title" content="单位根反演"><meta property="og:url" content="https://cekavis.github.io/identity-of-roots-of-unity-notes/"><meta property="og:site_name" content="Cekavis&#039;s notes"><meta property="og:description" content="恒等式 \[ [d|n]&amp;#x3D;\frac{1}{d} \sum_{i&amp;#x3D;0}^{d-1} \omega_d^{i\times n} \] 其中 \(\omega_d\) 是 \(d\) 次单位根  当 \(d|n\)，右边和式中每一项都为 \(1\) 当 \(d\nmid n\)，容易得到右边为 \(0\)"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cekavis.github.io/img/og_image.png"><meta property="article:published_time" content="2019-03-19T12:55:58.000Z"><meta property="article:modified_time" content="2022-06-16T08:28:21.097Z"><meta property="article:author" content="Cekavis"><meta property="article:tag" content="单位根反演"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cekavis.github.io/identity-of-roots-of-unity-notes/"},"headline":"单位根反演","image":["https://cekavis.github.io/img/og_image.png"],"datePublished":"2019-03-19T12:55:58.000Z","dateModified":"2022-06-16T08:28:21.097Z","author":{"@type":"Person","name":"Cekavis"},"publisher":{"@type":"Organization","name":"Cekavis's notes","logo":{"@type":"ImageObject","url":"https://cekavis.github.io/identity-of-roots-of-unity-notes/logo.svg"}},"description":"恒等式\r \\[\r [d|n]&#x3D;\\frac{1}{d} \\sum_{i&#x3D;0}^{d-1} \\omega_d^{i\\times n}\r \\]\r 其中 \\(\\omega_d\\) 是 \\(d\\) 次单位根\r \r 当 \\(d|n\\)，右边和式中每一项都为\r \\(1\\)\r 当 \\(d\\nmid n\\)，容易得到右边为\r \\(0\\)"}</script><link rel="canonical" href="https://cekavis.github.io/identity-of-roots-of-unity-notes/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2019-03-19T12:55:58.000Z" title="2019/3/19 20:55:58">2019-03-19</time></span><span class="level-item"><a class="link-muted" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span><span class="level-item">15 minutes read (About 2219 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">单位根反演</h1><div class="content"><h2 id="恒等式">恒等式</h2>
+<p><span class="math display">\[
+[d|n]=\frac{1}{d} \sum_{i=0}^{d-1} \omega_d^{i\times n}
+\]</span></p>
+<p>其中 <span class="math inline">\(\omega_d\)</span> 是 <span
+class="math inline">\(d\)</span> 次单位根</p>
+<ul>
+<li><p>当 <span class="math inline">\(d|n\)</span>，右边和式中每一项都为
+<span class="math inline">\(1\)</span></p></li>
+<li><p>当 <span class="math inline">\(d\nmid n\)</span>，容易得到右边为
+<span class="math inline">\(0\)</span></p></li>
+</ul>
+<span id="more"></span>
+<h2 id="例题">例题</h2>
+<h3 id="pyxfib">PYXFIB</h3>
+<p><a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=3328">BZOJ
+3328: PYXFIB</a></p>
+<h4 id="题意">题意</h4>
+<p>令数列 <span
+class="math inline">\(f_0=f_1=1,f_n=f_{n-1}+f_{n-2}\)</span></p>
+<p>给出 <span class="math inline">\(n,k,p\)</span></p>
+<p>求</p>
+<p><span class="math display">\[
+\sum_{i=0}^{\lfloor \frac{n}{k} \rfloor} \binom{n}{i\times k}\times
+f_{i\times k}
+\]</span></p>
+<p>模质数 <span class="math inline">\(p\)</span> 的值，且 <span
+class="math inline">\(p \equiv 1 \pmod{k}\)</span></p>
+<p>不超过 <span class="math inline">\(20\)</span> 组数据</p>
+<p><span class="math inline">\(n\le 10^{18}, p\le 10^9, k\le
+20000\)</span></p>
+<h4 id="做法">做法</h4>
+<p>所求转化为</p>
+<p><span class="math display">\[
+\sum_{i=0}^n [k|i] \binom{n}{i}\times f_{i}
+\]</span></p>
+<p>考虑用递推矩阵代替 <span class="math inline">\(f\)</span> 数列</p>
+<p>令</p>
+<p><span class="math display">\[
+A=
+\begin{bmatrix}
+1 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>所求即为</p>
+<p><span class="math display">\[
+\sum_{i=0}^n [k|i] \binom{n}{i}\times A^i
+\]</span></p>
+<p>第一行第一列的元素</p>
+<p>把恒等式代入得到</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \frac{1}{k}\sum_{i=0}^n \binom{n}{i}\times A^i
+\sum_{j=0}^{k-1} \omega_k^{i\times j} \\
+= &amp; \frac{1}{k} \sum_{j=0}^{k-1} \sum_{i=1}^n \binom{n}{i}\times A^i
+\times \omega_{k}^{i\times j} \\
+= &amp; \frac{1}{k} \sum_{j=0}^{k-1}\left(\omega_k^jA+I \right)^n
+\end{aligned}
+\]</span></p>
+<p>最后一步用了二项式定理，其中 <span
+class="math inline">\(I=\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1
+\end{bmatrix}\)</span></p>
+<p>由于保证了 <span class="math inline">\(p \equiv 1
+\pmod{k}\)</span>，直接在模意义下计算 <span
+class="math inline">\(\omega_k\)</span> 即可</p>
+<p>复杂度 <span class="math inline">\(\mathcal O(k\log n)\)</span></p>
+<h4 id="代码">代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> k, p, T;</span><br><span class="line">ll n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">matrix</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> f[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="title">matrix</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="title">matrix</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, <span class="keyword">int</span> d)</span></span>&#123; f[<span class="number">0</span>][<span class="number">0</span>]=a, f[<span class="number">0</span>][<span class="number">1</span>]=b, f[<span class="number">1</span>][<span class="number">0</span>]=c, f[<span class="number">1</span>][<span class="number">1</span>]=d;&#125;</span><br><span class="line">	<span class="keyword">inline</span> matrix <span class="keyword">operator</span> +(<span class="keyword">const</span> matrix &amp;rhs)<span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">matrix</span>(</span><br><span class="line">			(f[<span class="number">0</span>][<span class="number">0</span>]+rhs.f[<span class="number">0</span>][<span class="number">0</span>])%p,</span><br><span class="line">			(f[<span class="number">0</span>][<span class="number">1</span>]+rhs.f[<span class="number">0</span>][<span class="number">1</span>])%p,</span><br><span class="line">			(f[<span class="number">1</span>][<span class="number">0</span>]+rhs.f[<span class="number">1</span>][<span class="number">0</span>])%p,</span><br><span class="line">			(f[<span class="number">1</span>][<span class="number">1</span>]+rhs.f[<span class="number">1</span>][<span class="number">1</span>])%p</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> matrix <span class="keyword">operator</span> *(<span class="keyword">const</span> <span class="keyword">int</span> rhs)<span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">matrix</span>(</span><br><span class="line">			(ll)f[<span class="number">0</span>][<span class="number">0</span>]*rhs%p,</span><br><span class="line">			(ll)f[<span class="number">0</span>][<span class="number">1</span>]*rhs%p,</span><br><span class="line">			(ll)f[<span class="number">1</span>][<span class="number">0</span>]*rhs%p,</span><br><span class="line">			(ll)f[<span class="number">1</span>][<span class="number">1</span>]*rhs%p</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> matrix <span class="keyword">operator</span> *(<span class="keyword">const</span> matrix &amp;rhs)<span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">matrix</span>(</span><br><span class="line">			((ll)f[<span class="number">0</span>][<span class="number">0</span>]*rhs.f[<span class="number">0</span>][<span class="number">0</span>]+(ll)f[<span class="number">0</span>][<span class="number">1</span>]*rhs.f[<span class="number">1</span>][<span class="number">0</span>])%p,</span><br><span class="line">			((ll)f[<span class="number">0</span>][<span class="number">0</span>]*rhs.f[<span class="number">0</span>][<span class="number">1</span>]+(ll)f[<span class="number">0</span>][<span class="number">1</span>]*rhs.f[<span class="number">1</span>][<span class="number">1</span>])%p,</span><br><span class="line">			((ll)f[<span class="number">1</span>][<span class="number">0</span>]*rhs.f[<span class="number">0</span>][<span class="number">0</span>]+(ll)f[<span class="number">1</span>][<span class="number">1</span>]*rhs.f[<span class="number">1</span>][<span class="number">0</span>])%p,</span><br><span class="line">			((ll)f[<span class="number">1</span>][<span class="number">0</span>]*rhs.f[<span class="number">0</span>][<span class="number">1</span>]+(ll)f[<span class="number">1</span>][<span class="number">1</span>]*rhs.f[<span class="number">1</span>][<span class="number">1</span>])%p</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br><span class="line">&#125; A=<span class="built_in">matrix</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>), I=<span class="built_in">matrix</span>(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ll x, <span class="keyword">int</span> y=p<span class="number">-2</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x%p) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x%p;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> matrix <span class="title">Pow</span><span class="params">(matrix x, ll y)</span></span>&#123;</span><br><span class="line">	matrix ans=I;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getroot</span><span class="params">(<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	vector&lt;<span class="keyword">int</span>&gt; d;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>, x=p<span class="number">-1</span>; i*i&lt;=x; ++i) <span class="keyword">if</span>(x%i==<span class="number">0</span>)&#123;</span><br><span class="line">		d.<span class="built_in">push_back</span>(p/i), x/=i;</span><br><span class="line">		<span class="keyword">while</span>(x%i==<span class="number">0</span>) x/=i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;p; ++i)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">unsigned</span> j=<span class="number">0</span>; j&lt;d.<span class="built_in">size</span>(); ++j) <span class="keyword">if</span>(<span class="built_in">Pow</span>(i, d[j])==<span class="number">1</span>) <span class="keyword">goto</span> nxt;</span><br><span class="line">		<span class="keyword">return</span> i;</span><br><span class="line">		nxt:;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%lld%d%d&quot;</span>, &amp;n, &amp;k, &amp;p);</span><br><span class="line">		<span class="keyword">int</span> w=<span class="built_in">Pow</span>(<span class="built_in">getroot</span>(p), (p<span class="number">-1</span>)/k);</span><br><span class="line">		ll ans=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>, now=<span class="number">1</span>; i&lt;k; now=(ll)now*w%p, ++i) ans+=<span class="built_in">Pow</span>(A*now+I, n).f[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans%p*<span class="built_in">Pow</span>(k)%p);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ljj-学二项式定理">LJJ 学二项式定理</h3>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/problem/6485">LOJ #6485. LJJ
+学二项式定理</a></p>
+<h4 id="题意-1">题意</h4>
+<p><span class="math inline">\(T\)</span> 组数据，给出 <span
+class="math inline">\(n,s,a_0,a_1,a_2,a_3\)</span></p>
+<p>求</p>
+<p><span class="math display">\[
+\left(\sum_{i=0}^n \binom{n}{i}\times s^i\times a_{i\bmod 4}\right)
+\bmod 998244353
+\]</span></p>
+<p><span class="math inline">\(T\le 10^5,n\le 10^{18}\)</span></p>
+<p><span class="math inline">\(s,a_0,a_1,a_2,a_3\le 10^8\)</span></p>
+<h4 id="做法-1">做法</h4>
+<p>考虑计算 <span class="math inline">\(i\)</span> 是 <span
+class="math inline">\(4\)</span> 的倍数情况</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \sum_{i=0}^n [4|i] \binom{n}{i}\times s^i\times a_0 \\
+= &amp; \frac{1}{4} \sum_{i=0}^n \binom{n}{i}\times s^i\times a_0
+\sum_{j=0}^3 \omega_4^{i\times j} \\
+= &amp; \frac{a_0}{4}\sum_{j=0}^3 \sum_{i=0}^n \omega_4^{i\times j}
+\times \binom{n}{i}\times s^i \\
+= &amp; \frac{a_0}{4}\sum_{j=0}^3 (\omega_4^j\times s +1)^n
+\end{aligned}
+\]</span></p>
+<p>其他 <span class="math inline">\(3\)</span> 种情况也类似，以 <span
+class="math inline">\(i\equiv 1\pmod 4\)</span> 为例</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \sum_{i=0}^n [4|(i-1)] \binom{n}{i}\times s^i\times a_1 \\
+= &amp; \frac{1}{4} \sum_{i=0}^n \binom{n}{i}\times s^i\times a_1
+\sum_{j=0}^3 \omega_4^{(i-1)\times j} \\
+= &amp; \frac{a_1}{4}\sum_{j=0}^3 \sum_{i=0}^n \omega_4^{(i-1)\times j}
+\times \binom{n}{i}\times s^i \\
+= &amp; \frac{a_1}{4}\sum_{j=0}^3 \omega_4^{-j} (\omega_4^j\times s
++1)^n
+\end{aligned}
+\]</span></p>
+<p>复杂度 <span class="math inline">\(\mathcal O(\log n)\)</span></p>
+<h4 id="代码-1">代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1000000</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN], *s, *t;</span><br><span class="line">	<span class="keyword">return</span> (s==t?t=(s=buf)+<span class="built_in">fread</span>(buf,<span class="number">1</span>,IN_LEN,stdin),(s==t?<span class="number">-1</span>:*s++):*s++);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;class T&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T &amp;x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">bool</span> iosig;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (iosig=<span class="literal">false</span>, c=<span class="built_in">read</span>(); !<span class="built_in">isdigit</span>(c); c=<span class="built_in">read</span>()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;-&#x27;</span>) iosig=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (x=<span class="number">0</span>; <span class="built_in">isdigit</span>(c); c=<span class="built_in">read</span>()) x=((x+(x&lt;&lt;<span class="number">2</span>))&lt;&lt;<span class="number">1</span>)+(c^<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (iosig) x=-x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> OUT_LEN = <span class="number">10000000</span>;</span><br><span class="line"><span class="keyword">char</span> obuf[OUT_LEN], *ooh=obuf;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ooh==obuf+OUT_LEN) <span class="built_in">fwrite</span>(obuf, <span class="number">1</span>, OUT_LEN, stdout), ooh=obuf;</span><br><span class="line">	*ooh++=c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;class T&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> buf[<span class="number">30</span>], cnt;</span><br><span class="line">	<span class="keyword">if</span> (x==<span class="number">0</span>) <span class="built_in">print</span>(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (x&lt;<span class="number">0</span>) <span class="built_in">print</span>(<span class="string">&#x27;-&#x27;</span>), x=-x;</span><br><span class="line">		<span class="keyword">for</span> (cnt=<span class="number">0</span>; x; x/=<span class="number">10</span>) buf[++cnt]=x%<span class="number">10</span>+<span class="number">48</span>;</span><br><span class="line">		<span class="keyword">while</span>(cnt) <span class="built_in">print</span>((<span class="keyword">char</span>)buf[cnt--]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> </span>&#123; <span class="built_in">fwrite</span>(obuf, <span class="number">1</span>, ooh - obuf, stdout); &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P = <span class="number">998244353</span>, w4 = <span class="number">911660635</span>, i4 = <span class="number">748683265</span>;</span><br><span class="line"><span class="keyword">int</span> T, s, a[<span class="number">4</span>];</span><br><span class="line">ll n;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ll x, <span class="keyword">int</span> y=P<span class="number">-2</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x%P) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x%P;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">read</span>(T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">read</span>(n), <span class="built_in">read</span>(s), <span class="built_in">read</span>(a[<span class="number">0</span>]), <span class="built_in">read</span>(a[<span class="number">1</span>]), <span class="built_in">read</span>(a[<span class="number">2</span>]), <span class="built_in">read</span>(a[<span class="number">3</span>]), n%=P<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>, w=<span class="number">1</span>, iw=<span class="number">1</span>; j&lt;<span class="number">4</span>; ++j, w=(ll)w*w4%P, iw=(ll)iw*(P-w4)%P)&#123;</span><br><span class="line">			<span class="keyword">int</span> t=<span class="built_in">Pow</span>((ll)s*w%P+<span class="number">1</span>, n);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>, ww=<span class="number">1</span>; i&lt;<span class="number">4</span>; ++i, ww=(ll)ww*iw%P) ans=(ans+(ll)t*ww%P*a[i])%P;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">print</span>((<span class="keyword">int</span>)((ll)i4*ans%P)), <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">flush</span>(), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="复读机">复读机</h3>
+<p><a target="_blank" rel="noopener" href="http://uoj.ac/problem/450">UOJ #450.
+【集训队作业2018】复读机</a></p>
+<h4 id="题意-2">题意</h4>
+<p>有 <span class="math inline">\(k\)</span> 个不同的复读机，接下来
+<span class="math inline">\(n\)</span>
+秒中每秒都会挑一个复读机复读，一个复读机复读了 <span
+class="math inline">\(d\)</span> 的倍数次才会感到快乐</p>
+<p>求有多少种方案使得所有复读机都感到快乐，模 <span
+class="math inline">\(19491001\)</span></p>
+<p>三种子任务</p>
+<ol type="1">
+<li><span class="math inline">\(k\le 500000,d=1\)</span></li>
+<li><span class="math inline">\(k\le 500000,d=2\)</span></li>
+<li><span class="math inline">\(k\le 1000,d=3\)</span></li>
+</ol>
+<p><span class="math inline">\(n\le 10^9\)</span></p>
+<h4 id="做法-2">做法</h4>
+<p>当 <span class="math inline">\(d=1\)</span> 时，答案即为 <span
+class="math inline">\(k^n\)</span></p>
+<p><span class="math inline">\(d&gt;1\)</span> 时考虑 dp</p>
+<p>令 <span class="math inline">\(f_{i,j}\)</span> 表示 <span
+class="math inline">\(i\)</span> 个复读机，一共复读了 <span
+class="math inline">\(j\)</span> 次的方案数（方案不同当且仅当存在第
+<span class="math inline">\(x\)</span> 次复读的复读机不同）</p>
+<p>于是</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{i,j} &amp; = \sum_{x=0}^{j} [d|x] f_{i-1,j-x}\binom{j}{x} \\
+&amp; = \frac{1}{d} \sum_{x=0}^j f_{i-1,j-x} \binom{j}{x}
+\sum_{t=0}^{d-1} \omega_d^{tx} \\
+\frac{f_{i,j}}{j!} &amp;= \frac{1}{d} \sum_{x=0}^j
+\frac{f_{i-1,j-x}}{(j-x)!} \times \frac{\sum_{t=0}^{d-1}
+\omega_d^{tx}}{x!}
+\end{aligned}
+\]</span></p>
+<p>用生成函数表示第二维的转移即</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_i(x)  &amp; = \sum_{j=0}^{\infty} f_{i,j}x^j \\
+f_i(x) &amp; = f_{i-1}(x)\times
+\left(\frac{\sum_{j=0}^{\infty}  \sum_{t=0}^{d-1}
+\frac{\omega_d^{tj}}{j!}x^j }{d}\right) \\
+f_k(x) &amp; = \left(\frac{\sum_{j=0}^{\infty}  \sum_{t=0}^{d-1}
+\frac{\omega_d^{tj}}{j!}x^j }{d}\right) ^k \\
+&amp; = \left(\frac{\sum_{t=0}^{d-1} \sum_{j=0}^{\infty}
+\frac{\omega_d^{tj}}{j!}x^j }{d}\right) ^k
+\end{aligned}
+\]</span></p>
+<p>当 <span class="math inline">\(d=2\)</span> 时，展开 <span
+class="math inline">\(t\)</span> 的枚举，得到</p>
+<p><span class="math display">\[
+\left(\sum_{j=0}^{\infty}
+\frac{x^j}{j!}\right)+\left(\sum_{j=0}^{\infty} \frac{\omega_2^j
+x^j}{j!}\right) = e^x+e^{\omega_2x}
+\]</span></p>
+<p>其中 <span class="math inline">\(\omega_2=-1\)</span></p>
+<p>所求</p>
+<p><span class="math display">\[
+\begin{aligned}
+f_{k,n} &amp; = n![x^n]f_k(x) \\
+&amp; = n![x^n]\left(\frac{e^x+e^{-x}}{2}\right)^k \\
+&amp; = \frac{n![x^n]\left(\sum_{i=0}^k e^{ix} \times e^{-(k-i)x}\times
+\binom{k}{i}\right)}{2^k}
+\end{aligned}
+\]</span></p>
+<p>复杂度 <span class="math inline">\(\mathcal O(k\log n)\)</span></p>
+<p><span class="math inline">\(d=3\)</span> 同理，展开</p>
+<p><span class="math display">\[
+\left( \frac{e^x+e^{\omega_3 x}+e^{\omega_3^2 x}}{3}\right)^k
+\]</span></p>
+<p>枚举其中两项，复杂度 <span class="math inline">\(\mathcal O(k^2\log
+n)\)</span></p>
+<h4 id="代码-2">代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">500005</span>, P = <span class="number">19491001</span>, w = <span class="number">18827933</span>, ww = (ll)w*w%P, inv2 = (P+<span class="number">1</span>)/<span class="number">2</span>, inv3 = (P*<span class="number">2</span>+<span class="number">1</span>)/<span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, d, ans, fac[N], ifac[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ll x, <span class="keyword">int</span> y=P<span class="number">-2</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x%P) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x%P;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;k, &amp;d);</span><br><span class="line">	<span class="keyword">if</span>(d==<span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">Pow</span>(k, n));</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=k; ++i) fac[i]=(ll)fac[i<span class="number">-1</span>]*i%P;</span><br><span class="line">		ifac[k]=<span class="built_in">Pow</span>(fac[k]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=k; i; --i) ifac[i<span class="number">-1</span>]=(ll)ifac[i]*i%P;</span><br><span class="line">		<span class="keyword">if</span>(d==<span class="number">2</span>)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=k; ++i) ans=(ans+(ll)<span class="built_in">Pow</span>(i*<span class="number">2</span>-k+P, n)*ifac[i]%P*ifac[k-i])%P;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, (ll)ans*fac[k]%P*<span class="built_in">Pow</span>(inv2, k)%P);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=k; ++i) <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; i+j&lt;=k; ++j)</span><br><span class="line">				ans=(ans+(ll)<span class="built_in">Pow</span>((i+(ll)j*w+(ll)(k-i-j)*ww)%P, n)*ifac[i]%P*ifac[j]%P*ifac[k-i-j])%P;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, (ll)ans*fac[k]%P*<span class="built_in">Pow</span>(inv3, k)%P);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="倍数倍数">倍数？倍数！</h3>
+<p><a target="_blank" rel="noopener" href="https://www.lydsy.com/JudgeOnline/problem.php?id=4314">BZOJ
+4314: 倍数？倍数！</a></p>
+<h4 id="题意-3">题意</h4>
+<p>求从 <span class="math inline">\(0,1,\dotsc,n-1\)</span> 选出 <span
+class="math inline">\(k\)</span> 个互不相同的数和为 <span
+class="math inline">\(n\)</span> 的倍数的方案数，模 <span
+class="math inline">\(10^9+7\)</span></p>
+<p><span class="math inline">\(n\le 10^9, k\le 1000\)</span></p>
+<h4 id="做法-3">做法</h4>
+<p>神仙题</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/DreamlessDreams/p/10567084.html">膜
+YX 大爷</a></p>
+<p>先不考虑 <span class="math inline">\(k\)</span> 的限制，求从 <span
+class="math inline">\(0,1,\dotsc,n-1\)</span> 中选出任意个数和为 <span
+class="math inline">\(n\)</span> 的倍数的方案数</p>
+<p>考虑生成函数，答案为</p>
+<p><span class="math display">\[
+f(x) = \prod_{i=0}^{n-1} (x^i+1) = \sum_{i=0}^\infty f_ix^i
+\]</span></p>
+<p>的所有 <span class="math inline">\(n\)</span>
+的倍数次项系数的和，即</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \sum_{i=0}^\infty [n|i]\times f_i \\
+= &amp; \frac{1}{n} \sum_{i=0}^\infty f_i \sum_{j=0}^{n-1}
+\omega_n^{i\times j} \\
+= &amp; \frac{1}{n} \sum_{j=0}^{n-1} \sum_{i=0}^\infty f_i(\omega_n^j)^i
+\\
+= &amp; \frac{1}{n} \sum_{j=0}^{n-1} f(\omega_n^j) \\
+= &amp; \frac{1}{n} \sum_{j=0}^{n-1} \prod_{i=0}^{n-1}
+(\omega_n^{i\times j}+1)
+\end{aligned}
+\]</span></p>
+<p>枚举 <span
+class="math inline">\(g=\gcd(j,n)\)</span>，由单位根的性质，上式等于</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \frac{1}{n} \sum_{g|n} \sum_{j=0}^{\frac{n}{g} -1} [j \perp
+\frac{n}{g}] \prod_{i=0}^{n-1} (\omega_{\frac{n}{g}}^{i\times j}+1) \\
+= &amp; \frac{1}{n} \sum_{g|n} \sum_{j=0}^{\frac{n}{g} -1} [j \perp
+\frac{n}{g}] \left( \prod_{i=0}^{\frac{n}{g}-1}
+(\omega_{\frac{n}{g}}^{i\times j}+1)\right)^g \\
+\end{aligned}
+\]</span></p>
+<p>由于 <span class="math inline">\(j\)</span> 与 <span
+class="math inline">\(\frac{n}{g}\)</span> 互质，上式等于</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \frac{1}{n} \sum_{g|n} \sum_{j=0}^{\frac{n}{g} -1} [j \perp
+\frac{n}{g}] \left( \prod_{i=0}^{\frac{n}{g}-1}
+(\omega_{\frac{n}{g}}^{i}+1)\right)^g \\
+= &amp; \frac{1}{n} \sum_{g|n} \varphi(\frac{n}{g}) \left(
+\prod_{i=0}^{\frac{n}{g}-1} (\omega_{\frac{n}{g}}^{i}+1)\right)^g
+\end{aligned}
+\]</span></p>
+<p>考虑单位根的意义 <span
+class="math inline">\(x^n-1=0=\prod_{i=0}^{n-1}
+(x-\omega_n^i)\)</span></p>
+<p>代入 <span class="math inline">\(x=-1\)</span> 得到 <span
+class="math inline">\((-1)^n-1=(-1)^n \prod_{i=0}^{n-1}
+(\omega_n^i+1)\)</span></p>
+<p>因此 <span class="math inline">\(\prod_{i=0}^{n-1}
+(\omega_n^i+1)=1-(-1)^n\)</span></p>
+<p>答案等于</p>
+<p><span class="math display">\[
+\frac{1}{n} \sum_{g|n} \varphi(\frac{n}{g})
+\left(1-(-1)^{\frac{n}{g}}\right)^g
+\]</span></p>
+<p>考虑有了选 <span class="math inline">\(k\)</span> 个的限制</p>
+<p>答案为</p>
+<p><span class="math display">\[
+[y^k]\prod_{i=0}^{n-1} (x^iy+1)
+\]</span></p>
+<p>的所有 <span class="math inline">\(n\)</span> 的倍数次项系数的和</p>
+<p>大致过程与上面相同，把 <span class="math inline">\(y\)</span>
+保留，在代入时代入 <span
+class="math inline">\(-\frac{1}{y}\)</span>，最后得到</p>
+<p><span class="math display">\[
+\frac{1}{n} \sum_{g|n} \varphi(\frac{n}{g})
+\left(1-(-y)^{\frac{n}{g}}\right)^g
+\]</span></p>
+<p>求第 <span class="math inline">\(k\)</span> 项系数</p>
+<p>要对答案有贡献，记 <span
+class="math inline">\(d=\frac{n}{g}\)</span></p>
+<p>必须满足 <span class="math inline">\(d|k\)</span>，因此 <span
+class="math inline">\(\varphi(d)\)</span> 的部分可以做到 <span
+class="math inline">\(\mathcal O(k)\)</span></p>
+<p>另外还要求 <span
+class="math inline">\(\binom{g}{\frac{k}{d}}\)</span>，单次 <span
+class="math inline">\(\mathcal O(\frac{k}{d})\)</span>，总复杂度 <span
+class="math inline">\(\mathcal O(\sigma_1(k))\approx \mathcal O(k\log
+\log k)\)</span></p>
+<p>所以 <span class="math inline">\(k\)</span> 还可以放大一点</p>
+<h4 id="代码-3">代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1005</span>, P = <span class="number">1000000007</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, ans, cnt, phi[N], prime[N], ifac[N];</span><br><span class="line"><span class="keyword">bool</span> p[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ll x, <span class="keyword">int</span> y=P<span class="number">-2</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x%P) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x%P;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;y; ++i) ans=(ll)ans*(x-i)%P;</span><br><span class="line">	<span class="keyword">return</span> (ll)ans*ifac[y]%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line">	ifac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=k; ++i) ifac[i]=(ll)ifac[i<span class="number">-1</span>]*i%P;</span><br><span class="line">	ifac[k]=<span class="built_in">Pow</span>(ifac[k]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=k; i; --i) ifac[i<span class="number">-1</span>]=(ll)ifac[i]*i%P;</span><br><span class="line">	phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=k; ++i)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!p[i]) phi[i]=i<span class="number">-1</span>, prime[++cnt]=i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=cnt &amp;&amp; i*prime[j]&lt;=k; ++j)&#123;</span><br><span class="line">			p[i*prime[j]]=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>)&#123;</span><br><span class="line">				phi[i*prime[j]]=phi[i]*prime[j];</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> phi[i*prime[j]]=phi[i]*(prime[j]<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=k; ++i) <span class="keyword">if</span>(k%i==<span class="number">0</span> &amp;&amp; n%i==<span class="number">0</span>) ans=(ans+(k&amp;<span class="number">1</span>?<span class="number">1ll</span>:(k/i&amp;<span class="number">1</span>?<span class="number">-1ll</span>:<span class="number">1ll</span>))*phi[i]*<span class="built_in">C</span>(n/i, k/i))%P;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, (ll)<span class="built_in">Pow</span>(n)*(ans+P)%P), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>单位根反演</p><p><a href="https://cekavis.github.io/identity-of-roots-of-unity-notes/">https://cekavis.github.io/identity-of-roots-of-unity-notes/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Cekavis</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2019-03-19</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-06-16</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/">单位根反演</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/zjoi2019-day1/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">ZJOI2019 Day1 游记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/uoj-345/"><span class="level-item">「UOJ 345」「清华集训2017」榕树之心</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cekavis.github.io/identity-of-roots-of-unity-notes/';
+            this.page.identifier = 'identity-of-roots-of-unity-notes/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'cekaviss-notes' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/avatar.jpg" alt="Cekavis"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Cekavis</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Earth, Solar System</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">95</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">71</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/cekavis" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/cekavis"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:cmxrynp@gmail.com"><i class="fas fa-envelope"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#恒等式"><span class="level-left"><span class="level-item">1</span><span class="level-item">恒等式</span></span></a></li><li><a class="level is-mobile" href="#例题"><span class="level-left"><span class="level-item">2</span><span class="level-item">例题</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#pyxfib"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">PYXFIB</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意"><span class="level-left"><span class="level-item">2.1.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#做法"><span class="level-left"><span class="level-item">2.1.2</span><span class="level-item">做法</span></span></a></li><li><a class="level is-mobile" href="#代码"><span class="level-left"><span class="level-item">2.1.3</span><span class="level-item">代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#ljj-学二项式定理"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">LJJ 学二项式定理</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意-1"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#做法-1"><span class="level-left"><span class="level-item">2.2.2</span><span class="level-item">做法</span></span></a></li><li><a class="level is-mobile" href="#代码-1"><span class="level-left"><span class="level-item">2.2.3</span><span class="level-item">代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#复读机"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">复读机</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意-2"><span class="level-left"><span class="level-item">2.3.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#做法-2"><span class="level-left"><span class="level-item">2.3.2</span><span class="level-item">做法</span></span></a></li><li><a class="level is-mobile" href="#代码-2"><span class="level-left"><span class="level-item">2.3.3</span><span class="level-item">代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#倍数倍数"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">倍数？倍数！</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意-3"><span class="level-left"><span class="level-item">2.4.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#做法-3"><span class="level-left"><span class="level-item">2.4.2</span><span class="level-item">做法</span></span></a></li><li><a class="level is-mobile" href="#代码-3"><span class="level-left"><span class="level-item">2.4.3</span><span class="level-item">代码</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a><p class="is-size-7"><span>&copy; 2022 Cekavis</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><!-- hexo injector body_end start -->
+<script src="/js/custom.js"></script>
+<!-- hexo injector body_end end --></body></html>

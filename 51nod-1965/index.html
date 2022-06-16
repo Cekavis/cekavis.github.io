@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>「51nod 1965」奇怪的式子 - Cekavis&#039;s notes</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Cekavis&#039;s notes"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Cekavis&#039;s notes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="为什么模数是偶数我都敢先取模后除以2了。不知道是不是傻了。 51nod 1965 题意 求 \[\prod_{i&amp;#x3D;1}^n \sigma_0(i)^{\mu(i)+i} \mod(10^{12}+39)\] 其中 \(\sigma_0(i)\) 表示 \(i\) 的正约数个数，\(10^{12}+39\) 是质数 \(n\le 10^{11}\)"><meta property="og:type" content="blog"><meta property="og:title" content="「51nod 1965」奇怪的式子"><meta property="og:url" content="https://cekavis.github.io/51nod-1965/"><meta property="og:site_name" content="Cekavis&#039;s notes"><meta property="og:description" content="为什么模数是偶数我都敢先取模后除以2了。不知道是不是傻了。 51nod 1965 题意 求 \[\prod_{i&amp;#x3D;1}^n \sigma_0(i)^{\mu(i)+i} \mod(10^{12}+39)\] 其中 \(\sigma_0(i)\) 表示 \(i\) 的正约数个数，\(10^{12}+39\) 是质数 \(n\le 10^{11}\)"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cekavis.github.io/img/og_image.png"><meta property="article:published_time" content="2018-12-05T10:13:21.000Z"><meta property="article:modified_time" content="2022-06-16T08:27:43.511Z"><meta property="article:author" content="Cekavis"><meta property="article:tag" content="数论"><meta property="article:tag" content="筛法"><meta property="article:tag" content="Min_25筛"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cekavis.github.io/51nod-1965/"},"headline":"「51nod 1965」奇怪的式子","image":["https://cekavis.github.io/img/og_image.png"],"datePublished":"2018-12-05T10:13:21.000Z","dateModified":"2022-06-16T08:27:43.511Z","author":{"@type":"Person","name":"Cekavis"},"publisher":{"@type":"Organization","name":"Cekavis's notes","logo":{"@type":"ImageObject","url":"https://cekavis.github.io/51nod-1965/logo.svg"}},"description":"为什么模数是偶数我都敢先取模后除以2了。不知道是不是傻了。\r 51nod\r 1965\r 题意\r 求\r \\[\\prod_{i&#x3D;1}^n \\sigma_0(i)^{\\mu(i)+i}\r \\mod(10^{12}+39)\\]\r 其中 \\(\\sigma_0(i)\\) 表示 \\(i\\) 的正约数个数，\\(10^{12}+39\\) 是质数\r \\(n\\le 10^{11}\\)"}</script><link rel="canonical" href="https://cekavis.github.io/51nod-1965/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2018-12-05T10:13:21.000Z" title="2018/12/5 18:13:21">2018-12-05</time></span><span class="level-item"><a class="link-muted" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a></span><span class="level-item">5 minutes read (About 819 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">「51nod 1965」奇怪的式子</h1><div class="content"><p>为什么模数是偶数我都敢先取模后除以2了。不知道是不是傻了。</p>
+<p><a
+target="_blank" rel="noopener" href="https://www.51nod.com/Challenge/Problem.html#!#problemId=1965">51nod
+1965</a></p>
+<h2 id="题意">题意</h2>
+<p>求</p>
+<p><span class="math display">\[\prod_{i=1}^n \sigma_0(i)^{\mu(i)+i}
+\mod(10^{12}+39)\]</span></p>
+<p>其中 <span class="math inline">\(\sigma_0(i)\)</span> 表示 <span
+class="math inline">\(i\)</span> 的正约数个数，<span
+class="math inline">\(10^{12}+39\)</span> 是质数</p>
+<p><span class="math inline">\(n\le 10^{11}\)</span></p>
+<span id="more"></span>
+<hr />
+<h2 id="做法">做法</h2>
+<p><span class="math display">\[
+\prod_{i=1}^n \sigma_0(i)^{\mu(i)+i}
+=
+\prod_{i=1}^n \sigma_0(i)^i
+\prod_{i=1}^n \sigma_0(i)^{\mu(i)}
+\]</span></p>
+<p>两部分可以分开来做</p>
+<h3 id="一">一</h3>
+<p>考虑每个质数的贡献</p>
+<p><span class="math display">\[
+\prod_{i=1}^n \sigma_0(i)^i
+=
+\prod_{p\text{是质数}}
+\prod_{p^i\le n}
+(i+1)^{f(\lfloor \frac{n}{p^i} \rfloor) * p^i - f(\lfloor
+\frac{n}{p^{i+1}} \rfloor) * p^{i+1}}
+\]</span></p>
+<p>其中 <span class="math inline">\(f(x)=\sum\limits_{i=1}^x
+i=\frac{x(x+1)}{2}\)</span></p>
+<ul>
+<li><p>对于 <span class="math inline">\(p\le \sqrt{n}\)</span> 枚举
+<span class="math inline">\(p\)</span> 计算贡献</p></li>
+<li><p>对于 <span
+class="math inline">\(p&gt;\sqrt{n}\)</span>，指数只能为 <span
+class="math inline">\(1\)</span></p>
+<p>于是贡献为</p>
+<p><span class="math display">\[
+\prod_{p&gt;\sqrt{n},p\text{是质数}} 2^{f(\lfloor \frac{n}{p} \rfloor) *
+p}
+\]</span></p>
+<p>用Min_25筛出对于每一个 <span class="math inline">\(\lfloor
+\frac{n}{x} \rfloor\)</span> 的 <span
+class="math inline">\(\sum\limits_{i=1}^{\lfloor \frac{n}{x} \rfloor}
+[i\text{是质数}] * i\)</span></p>
+<p>分块计算即可</p></li>
+</ul>
+<h3 id="二">二</h3>
+<p>要求 <span class="math inline">\(\prod\limits_{i=1}^n
+\sigma_0(i)^{\mu(i)}\)</span></p>
+<p>可以发现对于有平方因子的 <span class="math inline">\(i\)</span>
+，<span class="math inline">\(\mu(i)=0\)</span>，所以没有贡献</p>
+<p>令 <span class="math inline">\(g(i)\)</span> 表示 <span
+class="math inline">\(i\)</span> 的质因子数</p>
+<p><span class="math display">\[
+\begin{align}
+&amp; \prod_{i=1}^n \sigma_0(i)^{\mu(i)} \\
+= &amp; \prod_{i=1}^n 2^{\mu(i)g(i)} \\
+= &amp; 2^{\left(\sum_{i=1}^n \mu(i)g(i)\right)}
+\end{align}
+\]</span></p>
+<p>考虑怎么求 <span class="math inline">\(\sum\limits_{i=1}^n
+\mu(i)g(i)\)</span></p>
+<p>令</p>
+<p><span class="math display">\[
+\begin{align}
+F(a,b)&amp;=\sum_{i=2}^a [i\text{是质数 或 } pmin_i\ge prime_b] * \mu(i)
+\\
+S(a,b)&amp;=\sum_{i=2}^a [i\text{是质数 或 } pmin_i\ge prime_b] *
+\mu(i)g(i)
+\end{align}
+\]</span></p>
+<p>其中 <span class="math inline">\(pmin_i\)</span> 表示 <span
+class="math inline">\(i\)</span> 的最小质因子，<span
+class="math inline">\(prime_i\)</span> 表示第 <span
+class="math inline">\(i\)</span> 个质数</p>
+<p>于是可以用Min_25筛转移</p>
+<p><span class="math display">\[
+\begin{align}
+F(a,b)&amp;=F(a,b+1)-\left(F(\lfloor \frac{a}{prime_b}
+\rfloor,b+1)+b\right) \\
+S(a,b)&amp;=S(a,b+1)-\left(S(\lfloor \frac{a}{prime_b}
+\rfloor,b+1)+F(\lfloor \frac{a}{prime_b},b+1)+2b\right)
+\end{align}
+\]</span></p>
+<p>注意这里的模数有点大，需要用快速乘</p>
+<p>总复杂度 <span class="math inline">\(\mathcal
+O(\frac{n^{\frac{3}{4}}}{\log n})\)</span></p>
+<hr />
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">316230</span>;</span><br><span class="line"><span class="keyword">const</span> ll P = <span class="number">1000000000039</span>;</span><br><span class="line"><span class="keyword">int</span> T, sn, cnt, id, prime[N];</span><br><span class="line">ll n, f[<span class="number">45</span>], a[N&lt;&lt;<span class="number">1</span>], g[N&lt;&lt;<span class="number">1</span>], h[N&lt;&lt;<span class="number">1</span>], S[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">Mul</span><span class="params">(ll x, ll y, ll mod)</span></span>&#123;</span><br><span class="line">	ll ans=(x*y-(ll)((<span class="keyword">long</span> <span class="keyword">double</span>)x*y/mod)*mod)%mod;</span><br><span class="line">	<span class="keyword">return</span> ans&lt;<span class="number">0</span>?ans+mod:ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">calc</span><span class="params">(ll x)</span></span>&#123; <span class="keyword">return</span> (x&amp;<span class="number">1</span>)?<span class="built_in">Mul</span>(x, (x+<span class="number">1</span>)/<span class="number">2</span>, P<span class="number">-1</span>):<span class="built_in">Mul</span>(x/<span class="number">2</span>, x+<span class="number">1</span>, P<span class="number">-1</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Id</span><span class="params">(ll x)</span></span>&#123; <span class="keyword">return</span> x&lt;=sn?x:id-n/x+<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">Pow</span><span class="params">(ll x, ll y)</span></span>&#123;</span><br><span class="line">	ll ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=<span class="built_in">Mul</span>(x, x, P)) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=<span class="built_in">Mul</span>(ans, x, P);</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;n), sn=<span class="built_in">sqrt</span>(n);</span><br><span class="line">		cnt=id=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i=a[id]+<span class="number">1</span>)</span><br><span class="line">			a[++id]=n/(n/i), g[id]=<span class="built_in">calc</span>(a[id])<span class="number">-1</span>, h[id]=a[id]<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=sn; ++i) <span class="keyword">if</span>(h[i]!=h[i<span class="number">-1</span>])&#123;</span><br><span class="line">			prime[++cnt]=i;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=id, tmp; (ll)i*i&lt;=a[j]; --j)</span><br><span class="line">				(g[j]-=<span class="built_in">Mul</span>(i, g[tmp=<span class="built_in">Id</span>(a[j]/i)]-g[i<span class="number">-1</span>], P<span class="number">-1</span>)-P+<span class="number">1</span>)%=P<span class="number">-1</span>, h[j]-=h[tmp]-(cnt<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="keyword">sizeof</span> f);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=cnt; ++i)</span><br><span class="line">			<span class="keyword">for</span>(ll x=prime[i], j=<span class="number">2</span>; x&lt;=n; x*=prime[i], ++j)</span><br><span class="line">				f[j]+=<span class="built_in">Mul</span>(<span class="built_in">calc</span>(n/x), x, P<span class="number">-1</span>)-<span class="built_in">Mul</span>(<span class="built_in">calc</span>(n/(x*prime[i])), x*prime[i], P<span class="number">-1</span>);</span><br><span class="line">		ll ans=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=<span class="number">40</span>; ++i) ans=<span class="built_in">Mul</span>(ans, <span class="built_in">Pow</span>(i, (f[i]%(P<span class="number">-1</span>)+(P<span class="number">-1</span>))%(P<span class="number">-1</span>)), P);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=sn; ++i) ans=<span class="built_in">Mul</span>(ans, <span class="built_in">Pow</span>(<span class="number">2</span>, <span class="built_in">Mul</span>(<span class="built_in">calc</span>(a[i]), g[id-i+<span class="number">1</span>]-g[<span class="built_in">max</span>(sn, id-i)]+P<span class="number">-1</span>, P<span class="number">-1</span>)), P);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=id; ++i) S[i]=h[i]=-h[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=cnt; i; --i) <span class="keyword">for</span>(<span class="keyword">int</span> j=id; (ll)prime[i]*prime[i]&lt;=a[j]; --j)&#123;</span><br><span class="line">			<span class="keyword">int</span> t=<span class="built_in">Id</span>(a[j]/prime[i]);</span><br><span class="line">			h[j]-=h[t]+i;</span><br><span class="line">			S[j]-=S[t]+h[t]+<span class="number">2</span>*i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">Mul</span>(ans, <span class="built_in">Pow</span>(<span class="number">2</span>, (S[id]%(P<span class="number">-1</span>)+P<span class="number">-1</span>)%(P<span class="number">-1</span>)), P));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>「51nod 1965」奇怪的式子</p><p><a href="https://cekavis.github.io/51nod-1965/">https://cekavis.github.io/51nod-1965/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Cekavis</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2018-12-05</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-06-16</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%95%B0%E8%AE%BA/">数论</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AD%9B%E6%B3%95/">筛法</a><a class="link-muted mr-2" rel="tag" href="/tags/Min-25%E7%AD%9B/">Min_25筛</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/codeforces-1034d-intervals-of-intervals/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">「Codeforces 1034D」Intervals of Intervals</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/51nod-1847/"><span class="level-item">「51nod 1847」奇怪的数学题</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cekavis.github.io/51nod-1965/';
+            this.page.identifier = '51nod-1965/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'cekaviss-notes' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/avatar.jpg" alt="Cekavis"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Cekavis</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Earth, Solar System</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">95</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">71</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/cekavis" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/cekavis"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:cmxrynp@gmail.com"><i class="fas fa-envelope"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#题意"><span class="level-left"><span class="level-item">1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#做法"><span class="level-left"><span class="level-item">2</span><span class="level-item">做法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#一"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">一</span></span></a></li><li><a class="level is-mobile" href="#二"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">二</span></span></a></li></ul></li><li><a class="level is-mobile" href="#代码"><span class="level-left"><span class="level-item">3</span><span class="level-item">代码</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a><p class="is-size-7"><span>&copy; 2022 Cekavis</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><!-- hexo injector body_end start -->
+<script src="/js/custom.js"></script>
+<!-- hexo injector body_end end --></body></html>

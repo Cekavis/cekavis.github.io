@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Min_25筛 - Cekavis&#039;s notes</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Cekavis&#039;s notes"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Cekavis&#039;s notes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="前言 大家都会啊，还是一次考试题的部分分，听 ftq 讲了 咕了几天就来学了 好像比杜教筛少很多思维难度吧 update: 好难啊，重新理解了好多次，还改了文章结构 简介 如果一个积性函数 \(f(i)\) 在 \(i\) 是质数时是一个关于 \(i\) 的低次多项式，并且在质数的幂处的能快速求，那么大概可以用Min_25筛来求 \[\sum_{i&amp;#x3D;1}^n f(i)\] 对于"><meta property="og:type" content="blog"><meta property="og:title" content="Min_25筛"><meta property="og:url" content="https://cekavis.github.io/min-25/"><meta property="og:site_name" content="Cekavis&#039;s notes"><meta property="og:description" content="前言 大家都会啊，还是一次考试题的部分分，听 ftq 讲了 咕了几天就来学了 好像比杜教筛少很多思维难度吧 update: 好难啊，重新理解了好多次，还改了文章结构 简介 如果一个积性函数 \(f(i)\) 在 \(i\) 是质数时是一个关于 \(i\) 的低次多项式，并且在质数的幂处的能快速求，那么大概可以用Min_25筛来求 \[\sum_{i&amp;#x3D;1}^n f(i)\] 对于"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cekavis.github.io/img/og_image.png"><meta property="article:published_time" content="2018-12-03T02:20:15.000Z"><meta property="article:modified_time" content="2022-06-16T08:47:32.815Z"><meta property="article:author" content="Cekavis"><meta property="article:tag" content="数论"><meta property="article:tag" content="筛法"><meta property="article:tag" content="Min_25筛"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cekavis.github.io/min-25/"},"headline":"Min_25筛","image":["https://cekavis.github.io/img/og_image.png"],"datePublished":"2018-12-03T02:20:15.000Z","dateModified":"2022-06-16T08:47:32.815Z","author":{"@type":"Person","name":"Cekavis"},"publisher":{"@type":"Organization","name":"Cekavis's notes","logo":{"@type":"ImageObject","url":"https://cekavis.github.io/min-25/logo.svg"}},"description":"前言\r 大家都会啊，还是一次考试题的部分分，听 ftq 讲了\r 咕了几天就来学了\r 好像比杜教筛少很多思维难度吧\r update:\r 好难啊，重新理解了好多次，还改了文章结构\r 简介\r 如果一个积性函数 \\(f(i)\\) 在 \\(i\\) 是质数时是一个关于 \\(i\\)\r 的低次多项式，并且在质数的幂处的能快速求，那么大概可以用Min_25筛来求\r \\[\\sum_{i&#x3D;1}^n f(i)\\]\r 对于"}</script><link rel="canonical" href="https://cekavis.github.io/min-25/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2018-12-03T02:20:15.000Z" title="2018/12/3 10:20:15">2018-12-03</time></span><span class="level-item"><a class="link-muted" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span><span class="level-item">9 minutes read (About 1384 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">Min_25筛</h1><div class="content"><h1 id="前言">前言</h1>
+<p>大家都会啊，还是一次考试题的部分分，听 ftq 讲了</p>
+<p>咕了几天就来学了</p>
+<p>好像比杜教筛少很多思维难度吧</p>
+<p>update:</p>
+<p>好难啊，重新理解了好多次，<del>还改了文章结构</del></p>
+<h1 id="简介">简介</h1>
+<p>如果一个积性函数 <span class="math inline">\(f(i)\)</span> 在 <span
+class="math inline">\(i\)</span> 是质数时是一个关于 <span
+class="math inline">\(i\)</span>
+的低次多项式，并且在质数的幂处的能快速求，那么大概可以用Min_25筛来求</p>
+<p><span class="math display">\[\sum_{i=1}^n f(i)\]</span></p>
+<p>对于 <span class="math inline">\(f(1)\)</span> 特判</p>
+<p>时间复杂度 <span class="math inline">\(\mathcal
+O(\frac{n^\frac{3}{4}}{\log n})\)</span>，空间复杂度<span
+class="math inline">\(\mathcal O(\sqrt{n})\)</span></p>
+<p>并且同时我们可以求出每个 <span class="math inline">\(\lfloor
+\frac{n}{x} \rfloor\)</span> 的 <span
+class="math inline">\(\sum\limits_{i=2}^{\lfloor \frac{n}{x}
+\rfloor}[\text{$i$ 是质数}]f(i)\)</span></p>
+<span id="more"></span>
+<h1 id="前置技能埃拉托斯特尼筛法">前置技能：埃拉托斯特尼筛法</h1>
+<p>埃拉托斯特尼筛法的第 <span class="math inline">\(i\)</span> 轮找出第
+<span class="math inline">\(i\)</span> 个质数，并把所有 <span
+class="math inline">\(i\)</span> 的倍数筛去</p>
+<p>对所有 <span class="math inline">\(\le \sqrt{n}\)</span>
+的质数执行完之后就可以结束</p>
+<p>事实上被 <span class="math inline">\(i\)</span> 第一次筛去的 <span
+class="math inline">\(i\)</span> 的倍数 <span
+class="math inline">\(x\)</span> 必然满足 <span class="math inline">\(x
+\ge i^2\)</span></p>
+<h1 id="算法流程">算法流程</h1>
+<h2 id="第一部分-处理质数">第一部分 处理质数</h2>
+<p>我们先来处理每个 <span class="math inline">\(\lfloor \frac{n}{x}
+\rfloor\)</span> 的</p>
+<p><span class="math display">\[\sum_{i=2}^{\lfloor \frac{n}{x}
+\rfloor}[\text{$i$ 是质数}]f(i)\]</span></p>
+<p>对于质数 <span class="math inline">\(p\)</span>，<span
+class="math inline">\(f(p)\)</span> 可以被表示为若干 <span
+class="math inline">\(p^k\)</span> 的和，所以我们只考虑 <span
+class="math inline">\(f(p)=p^k\)</span> 的情况</p>
+<p>令 <span class="math display">\[g(a,b)=\sum_{i=2}^a [\text{$i$ 是质数
+或 $pmin_i&gt;prime_b$}] * i^k\]</span></p>
+<p>其中 <span class="math inline">\(pmin_i\)</span> 表示 <span
+class="math inline">\(i\)</span> 的最小质因子，<span
+class="math inline">\(prime_b\)</span> 表示第 <span
+class="math inline">\(b\)</span> 个质数</p>
+<p>直观地说，就是对 <span class="math inline">\(2..a\)</span>
+做埃拉托斯特尼筛法 <span class="math inline">\(b\)</span>
+轮后剩下的所有数的 <span class="math inline">\(k\)</span>
+次幂和，<strong>包括 <span
+class="math inline">\(prime_1,..,prime_b\)</span>
+这些处理过的质数</strong></p>
+<p>需要求的就是</p>
+<p><span class="math display">\[\sum_{i=2}^n [\text{$i$
+是质数}]f(i)=g(n,\infty)\]</span></p>
+<p>我们从小到大枚举质数，从 <span class="math inline">\(g(*
+,b-1)\)</span> 推出 <span class="math inline">\(g(* ,b)\)</span></p>
+<p><span class="math display">\[g(a,0)=\sum_{i=2}^a i^k\]</span></p>
+<p><span class="math display">\[
+g(a,b)=
+\begin{cases}
+g(a,b-1), &amp; a&lt;prime_b^2\\
+g(a,b-1)-prime_b^k\left(g(\lfloor \frac{a}{prime_b}
+\rfloor,b-1)-g(prime_{b-1},b-1)\right), &amp; a\ge prime_b^2
+\end{cases}
+\]</span></p>
+<ul>
+<li><p>若 <span class="math inline">\(a&lt;prime_b^2\)</span>，所有
+<span class="math inline">\(a\)</span>
+以内的合数都被筛掉了，不会再产生影响</p></li>
+<li><p>若 <span class="math inline">\(a\ge
+prime_b^2\)</span>，此时我们考虑一轮埃拉托斯特尼筛法会筛掉的数</p>
+<p>每一个 <span class="math inline">\(\le \lfloor \frac{a}{prime_b}
+\rfloor\)</span> 的且不含有 <span
+class="math inline">\(&lt;prime_b\)</span> 的质因子的数的 <span
+class="math inline">\(prime_b\)</span> 倍，都会被筛掉</p>
+<p>但是 <span class="math inline">\(g(\lfloor \frac{a}{prime_b}
+\rfloor,b-1)\)</span> 包含了 <span
+class="math inline">\(&lt;prime_b\)</span>
+的质数，把这些影响消去即可</p>
+<p>事实上做完 <span class="math inline">\(b-1\)</span> 轮的时候 <span
+class="math inline">\(\le prime_{b-1}\)</span>
+的只剩下质数了，于是可以直接取 <span
+class="math inline">\(g(prime_{b-1},b-1)\)</span></p></li>
+</ul>
+<p>可以发现 <span class="math inline">\(a\)</span> 的取值都形如 <span
+class="math inline">\(\lfloor \frac{n}{x} \rfloor\)</span>，其中 <span
+class="math inline">\(prime_{b-1}&lt;\sqrt{n}\)</span>，所以没有影响</p>
+<p>我们记录 <span class="math inline">\(\mathcal O(\sqrt{n})\)</span>
+个值，递推即可，复杂度 <span class="math inline">\(\mathcal
+O(\frac{n^\frac{3}{4}}{\log n})\)</span></p>
+<h2 id="第二部分-计算答案">第二部分 计算答案</h2>
+<p>令</p>
+<p><span class="math display">\[S(a,b)=\sum_{i=2}^a [\text{$i$ 是质数 或
+$pmin_i\ge prime_b$}]f(i)\]</span></p>
+<p>显然所求</p>
+<p><span class="math display">\[\sum_{i=1}^n
+f(i)=S(n,1)+f(1)\]</span></p>
+<p>和上面类似地，但是需要枚举指数</p>
+<p><span class="math display">\[
+S(a,b)=
+\begin{cases}
+S(a,b+1), &amp; a&lt;prime_b^2 \\
+\\
+S(a,b+1) + \\
+\sum\limits_{prime_b^{i+1} \le a} \left(f(prime_b^i)* \left(S(\lfloor
+\frac{a}{prime_b^i} \rfloor, b+1) - g(prime_b, \infty)\right) +
+f(prime_b^{i+1}) \right), &amp; a\ge prime_b^2
+\end{cases}
+\]</span></p>
+<p>相当于每次把最小质因数为 <span class="math inline">\(prime_b\)</span>
+的合数加进来</p>
+<p>复杂度也是 <span class="math inline">\(\mathcal
+O(\frac{n^{\frac{3}{4}}}{\log n})\)</span></p>
+<h2 id="第二部分的另一种实现">第二部分的另一种实现</h2>
+<p><strong>不记忆化，暴力递归求一个值</strong></p>
+<p>重新定义，令</p>
+<p><span class="math display">\[S(a,b)=\sum_{i=2}^a [pmin_i\ge
+prime_b]f(i)\]</span></p>
+<p>区别就是这里不包含额外的质数</p>
+<ul>
+<li><p>计算 <span class="math inline">\(S(a,b)\)</span> 中质数的贡献</p>
+<p>即<span class="math inline">\(\sum_{i=2}^a [\text{$i\ge prime_b$ 且
+$i$ 是质数}]f(i)\)</span></p>
+<p>这可以通过处理的 <span class="math inline">\(g\)</span>
+快速得到，就是<span
+class="math inline">\(g(a,\infty)-g(prime_{b-1},\infty)\)</span></p>
+<p>实际上这里的 <span
+class="math inline">\(g(prime_{b-1},\infty)\)</span> 由于 <span
+class="math inline">\(prime_{b-1}\)</span>
+是很小的，下面有些代码中在筛质数的时候预处理了这部分值，本质是一样的</p></li>
+<li><p>计算合数的贡献</p>
+<p>我们枚举最小的质因子 <span class="math inline">\(prime_i\)</span>
+和次数 <span class="math inline">\(t\)</span></p>
+<p>有贡献</p>
+<p><span class="math display">\[\sum_{i=b}^{\infty} \sum_{t\ge 1,
+prime_i^{t+1}\le a}\left( S(\lfloor \frac{a}{prime_i^t} \rfloor,i+1) *
+f(prime_i^t) + f(prime_i^{t+1}) \right)\]</span></p>
+<p>其中后一部分是计算该质数幂的贡献，前一部分是其它的合数</p>
+<p><span class="math inline">\(S( * ,i+1)\)</span> 保证了没有 <span
+class="math inline">\(\le prime_i\)</span> 的质因子，<span
+class="math inline">\(prime_i^{t+1}\le a\)</span>
+保证了不会越界</p></li>
+</ul>
+<p>所以两部分加起来就好了</p>
+<p><span class="math display">\[
+S(a,b)=
+\begin{cases}
+0, &amp; a&lt;prime_b\\
+\\
+g(a,\infty)-g(prime_{b-1},\infty)+ \\
+\sum\limits_{i=b}^{\infty} \sum\limits_{t\ge 1, prime_i^{t+1}\le
+a}\left( S(\lfloor \frac{a}{prime_i^t} \rfloor,i+1) * f(prime_i^t) +
+f(prime_i^{t+1}) \right), &amp;a\ge prime_b
+\end{cases}
+\]</span></p>
+<p>这部分不加记忆化也跑得飞快，好像也被证明是 <span
+class="math inline">\(\mathcal O(\frac{n^{\frac{3}{4}}}{\log
+n})\)</span> 的</p>
+<p>但是这种方法在有些求多个值的时候不适用</p>
+<h1 id="实现">实现</h1>
+<p><del>不是很会优化常数</del></p>
+<ul>
+<li><p>我们可以预处理所有的 <span class="math inline">\(\lfloor
+\frac{n}{x} \rfloor\)</span> 的值，并<strong>从小到大</strong>地记为
+<span class="math inline">\(a_1,..,a_m\)</span></p>
+<p>可以发现</p>
+<ul>
+<li><p>对于 <span class="math inline">\(1\le i \le \sqrt{n}\)</span> 有
+<span class="math inline">\(a_i=i\)</span></p></li>
+<li><p>对于其他的 <span class="math inline">\(i\)</span> 有 <span
+class="math inline">\(\lfloor \frac{n}{a_i}
+\rfloor=m-i+1\)</span></p></li>
+</ul>
+<p>这样我们可以实现 <span class="math inline">\(\mathcal O(1)\)</span>
+从数字到编号的转换</p>
+<p>下面有一些代码是<strong>相反</strong>的顺序，并且使用了两个数组来实现转换</p></li>
+<li><p>在处理 <span class="math inline">\(g\)</span>
+的时候直接用转换之后的值计算，滚动第二维，空间复杂度 <span
+class="math inline">\(O(\sqrt{n})\)</span></p></li>
+<li><p>一种写法是线性筛 <span class="math inline">\(\le
+\sqrt{n}\)</span> 的质数</p>
+<p>但是如果我们需要筛 <span class="math inline">\(f(i)=1\)</span>
+在质数处的和时，可以在第一部分中顺便处理，具体可以参考例题一的代码</p></li>
+</ul>
+<h1 id="例题">例题</h1>
+<h2 id="例题一-区间素数个数">例题一 区间素数个数</h2>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/problem/6235">LOJ #6235. 区间素数个数</a></p>
+<h3 id="题意">题意</h3>
+<p>求 <span class="math inline">\(1,..,n\)</span> 中的质数数量</p>
+<p><span class="math inline">\(n\le 10^{11}\)</span></p>
+<h3 id="实现-1">实现</h3>
+<p>并不需要上述的第二部分求 <span class="math inline">\(S\)</span>，令
+<span class="math inline">\(f(i)=1\)</span>，求出 <span
+class="math inline">\(g(n,\infty)\)</span> 就是答案</p>
+<p>代码中使用了两个数组 <span class="math inline">\(id1[x]\)</span> 和
+<span class="math inline">\(id2[x]\)</span> 分别存 <span
+class="math inline">\(\le \sqrt{n}\)</span> 和 <span
+class="math inline">\(&gt; \sqrt{n}\)</span> 的数字对应的编号</p>
+<p>注意这里和上面描述的不同，<span
+class="math inline">\(a_1,..,a_n\)</span>
+是<strong>从大到小</strong>记录对应的数字</p>
+<h3 id="代码">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">316300</span>;</span><br><span class="line">ll n, g[N&lt;&lt;<span class="number">1</span>], a[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> id, cnt, sn, prime[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Id</span><span class="params">(ll x)</span></span>&#123; <span class="keyword">return</span> x&lt;=sn?x:id-n/x+<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;n), sn=<span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i=a[id]+<span class="number">1</span>) a[++id]=n/(n/i), g[id]=a[id]<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=sn; ++i) <span class="keyword">if</span>(g[i]!=g[i<span class="number">-1</span>])&#123;</span><br><span class="line">        <span class="comment">// 这里 i 必然是质数，因为 g[] 是前缀质数个数</span></span><br><span class="line">        <span class="comment">// 当 &lt;i 的质数的倍数都被筛去，让 g[] 发生改变的位置只能是下一个质数</span></span><br><span class="line">		prime[++cnt]=i;</span><br><span class="line">		ll sq=(ll)i*i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=id; a[j]&gt;=sq; --j) g[j]-=g[<span class="built_in">Id</span>(a[j]/i)]-(cnt<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, g[id]), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例题二-sum">例题二 Sum</h2>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/problemnew/show/P4213">Luogu P4213
+【模板】杜教筛（Sum）</a></p>
+<h3 id="题意-1">题意</h3>
+<p>给定正整数 <span class="math inline">\(n&lt;2^{31}\)</span>，求</p>
+<p><span class="math display">\[
+\sum_{i=1}^n \varphi(i) \\
+\sum_{i=1}^n \mu(i)
+\]</span></p>
+<h3 id="实现-2">实现</h3>
+<p>令 <span class="math inline">\(g(i)\)</span> 表示 <span
+class="math inline">\(i\)</span> 以内质数的和，<span
+class="math inline">\(h(i)\)</span> 表示 <span
+class="math inline">\(i\)</span> 以内质数的数量</p>
+<p>那么求 <span class="math inline">\(\varphi(i)\)</span> 的前缀和就用
+<span class="math inline">\(g(i)-h(i)\)</span>，<span
+class="math inline">\(\mu(i)\)</span> 的前缀和用 <span
+class="math inline">\(-h(i)\)</span> 做就好了</p>
+<p>直接不记忆化递归实现</p>
+<p>求 <span class="math inline">\(\mu\)</span> 的时候有些系数为 <span
+class="math inline">\(0\)</span> 的可以不搜下去，应该会快不少</p>
+<p><del>目前跑的最快</del></p>
+<h3 id="代码-1">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">46345</span>;</span><br><span class="line">ll g[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> T, id, sum[N], h[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">unsigned</span> cnt, sn, n, id1[N], id2[N], prime[N], a[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">bool</span> p[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">unsigned</span> <span class="title">Id</span><span class="params">(<span class="keyword">unsigned</span> x)</span></span>&#123; <span class="keyword">return</span> x&lt;=sn?x:id-n/x+<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function">ll <span class="title">SolvePhi</span><span class="params">(<span class="keyword">unsigned</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;prime[b]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	ll ans=g[<span class="built_in">Id</span>(a)]-(sum[b<span class="number">-1</span>]-(b<span class="number">-1</span>));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">unsigned</span> i=b; i&lt;=cnt &amp;&amp; prime[i]*prime[i]&lt;=a; ++i)&#123;</span><br><span class="line">        <span class="comment">// 这里是强行展开了一层，可能会快一点，因为条件必然满足，事实上可以和下面的写在一起</span></span><br><span class="line">		ans+=(<span class="built_in">SolvePhi</span>(a/prime[i], i+<span class="number">1</span>)+prime[i])*(prime[i]<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">unsigned</span> x=prime[i]*prime[i], f=x-prime[i]; (ll)x*prime[i]&lt;=a; x=x*prime[i], f*=prime[i])</span><br><span class="line">			ans+=(<span class="built_in">SolvePhi</span>(a/x, i+<span class="number">1</span>)+prime[i])*f;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SolveMu</span><span class="params">(<span class="keyword">unsigned</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;prime[b]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> ans=h[<span class="built_in">Id</span>(a)]+(b<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">unsigned</span> i=b; i&lt;=cnt &amp;&amp; prime[i]*prime[i]&lt;=a; ++i)</span><br><span class="line">		ans-=<span class="built_in">SolveMu</span>(a/prime[i], i+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%u&quot;</span>, &amp;n), sn=<span class="built_in">sqrt</span>(n);</span><br><span class="line">		<span class="keyword">if</span>(!n)&#123; <span class="built_in">puts</span>(<span class="string">&quot;0 0&quot;</span>); <span class="keyword">continue</span>;&#125;</span><br><span class="line">		cnt=id=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">unsigned</span> i=<span class="number">1</span>; i&lt;=n; i=a[id]+<span class="number">1</span>)</span><br><span class="line">			a[++id]=n/(n/i), g[id]=(ll)a[id]*(a[id]+<span class="number">1</span>)/<span class="number">2</span><span class="number">-1</span>, h[id]=a[id]<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">unsigned</span> i=<span class="number">2</span>; i&lt;=sn; ++i) <span class="keyword">if</span>(h[i]!=h[i<span class="number">-1</span>])&#123;</span><br><span class="line">			prime[++cnt]=i, sum[cnt]=sum[cnt<span class="number">-1</span>]+i;</span><br><span class="line">			<span class="keyword">unsigned</span> sq=i*i;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=id; a[j]&gt;=sq; --j)&#123;</span><br><span class="line">				<span class="keyword">unsigned</span> t=<span class="built_in">Id</span>(a[j]/i);</span><br><span class="line">				g[j]-=i*(g[t]-sum[cnt<span class="number">-1</span>]);</span><br><span class="line">				h[j]-=h[t]-(cnt<span class="number">-1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=id; ++i) g[i]-=h[i], h[i]*=<span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// 上面的计算都是不考虑 1 的函数值的，要加上去</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%lld %d\n&quot;</span>, <span class="built_in">SolvePhi</span>(n, <span class="number">1</span>)+<span class="number">1</span>, <span class="built_in">SolveMu</span>(n, <span class="number">1</span>)+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例题三-简单的函数">例题三 简单的函数</h2>
+<p><a target="_blank" rel="noopener" href="https://loj.ac/problem/6053">LOJ #6053. 简单的函数</a></p>
+<h3 id="题意-2">题意</h3>
+<ol type="1">
+<li><p><span class="math inline">\(f(1)=1\)</span></p></li>
+<li><p>对于质数 <span class="math inline">\(p\)</span>，<span
+class="math inline">\(f(p^c)=p \oplus c\)</span>，其中 <span
+class="math inline">\(\oplus\)</span> 表示按位异或运算</p></li>
+<li><p>对于互质的 <span class="math inline">\(a,b\)</span>，<span
+class="math inline">\(f(ab)=f(a)f(b)\)</span></p></li>
+</ol>
+<p>求 <span class="math display">\[\sum_{i=1}^n f(i) \mod
+(10^9+7)\]</span></p>
+<p><span class="math inline">\(n\le 10^{10}\)</span></p>
+<h3 id="实现-3">实现</h3>
+<p>一步步代进去就好了</p>
+<p>对于质数 <span class="math inline">\(p\)</span> 的函数值，</p>
+<p><span class="math display">\[
+f(p)=
+\begin{cases}
+p+1, &amp; p=2 \\
+p-1, &amp; p\ne 2
+\end{cases}
+\]</span></p>
+<p>除了 <span class="math inline">\(2\)</span> 的情况，这是和 <span
+class="math inline">\(\varphi(p)\)</span> 一样的</p>
+<p>质数的幂直接在枚举的时候计算</p>
+<h3 id="代码-2">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>, P = <span class="number">1000000007</span>;</span><br><span class="line">ll n, g[N&lt;&lt;<span class="number">1</span>], h[N&lt;&lt;<span class="number">1</span>], a[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> sn, id, cnt, prime[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Id</span><span class="params">(ll x)</span></span>&#123; <span class="keyword">return</span> x&lt;=sn?x:id-n/x+<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">S</span><span class="params">(ll a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;prime[b]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	ll ans=g[<span class="built_in">Id</span>(a)]-g[prime[b<span class="number">-1</span>]]+P;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=b, lim=<span class="built_in">sqrt</span>(a); i&lt;=cnt &amp;&amp; prime[i]&lt;=lim; ++i)&#123;</span><br><span class="line">		ans+=(ll)<span class="built_in">S</span>(a/prime[i], i+<span class="number">1</span>)*(prime[i]^<span class="number">1</span>)+(prime[i]^<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">for</span>(ll x=(ll)prime[i]*prime[i], j=<span class="number">2</span>; x*prime[i]&lt;=a; x*=prime[i], ++j)</span><br><span class="line">			ans+=(ll)<span class="built_in">S</span>(a/x, i+<span class="number">1</span>)*(prime[i]^j)+(prime[i]^(j+<span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;n), sn=<span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i=a[id]+<span class="number">1</span>)&#123;</span><br><span class="line">		a[++id]=n/(n/i);</span><br><span class="line">		ll tmp=a[id]%P;</span><br><span class="line">		g[id]=tmp*(tmp+<span class="number">1</span>)/<span class="number">2</span>%P<span class="number">-1</span>, h[id]=a[id]<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=sn; ++i) <span class="keyword">if</span>(h[i]!=h[i<span class="number">-1</span>])&#123;</span><br><span class="line">		prime[++cnt]=i;</span><br><span class="line">		ll sq=(ll)i*i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=id; a[j]&gt;=sq; --j)&#123;</span><br><span class="line">			<span class="keyword">int</span> t=<span class="built_in">Id</span>(a[j]/i);</span><br><span class="line">			(g[j]-=i*(g[t]-g[i<span class="number">-1</span>]))%=P; <span class="comment">// 这里 g[i-1] 和 g[prime[cnt-1]] 没有区别</span></span><br><span class="line">			h[j]-=h[t]-(cnt<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=id; ++i) (g[i]+=(i&gt;<span class="number">1</span>)*<span class="number">2</span>+P-h[i])%=P;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, (<span class="built_in">S</span>(n, <span class="number">1</span>)+<span class="number">1</span>)%P), <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例题四-counting-divisors">例题四 Counting Divisors</h2>
+<p><a target="_blank" rel="noopener" href="https://www.spoj.com/problems/DIVCNT2/">SPOJ DIVCNT2 -
+Counting Divisors (square)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.spoj.com/problems/DIVCNT3/">SPOJ DIVCNT3 -
+Counting Divisors (cube)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.spoj.com/problems/DIVCNTK/">SPOJ DIVCNTK -
+Counting Divisors (general)</a></p>
+<h3 id="题意-3">题意</h3>
+<p>令 <span class="math inline">\(\sigma_0(n)\)</span> 表示 <span
+class="math inline">\(n\)</span> 的约数个数</p>
+<p>求 <span class="math display">\[\sum_{i=1}^n
+\sigma_0(i^k)\]</span></p>
+<p>对 <span class="math inline">\(2^{64}\)</span> 取模</p>
+<p>前两题即 <span class="math inline">\(k=2,3\)</span>
+的情况，数据范围略有不同</p>
+<p><span class="math inline">\(n\le 10^{11}\)</span></p>
+<h3 id="实现-4">实现</h3>
+<p>差不多了</p>
+<p>这里只贴DIVCNTK的代码</p>
+<p>另外两题代码参考</p>
+<p><a href="https://cekavis.github.io/spoj-divcnt2/">「SPOJ
+DIVCNT2」Counting Divisors (square)</a></p>
+<p><a href="https://cekavis.github.io/spoj-divcnt3/">「SPOJ
+DIVCNT3」Counting Divisors (cube)</a></p>
+<h3 id="代码-3">代码</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ull unsigned ll</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> T, sn, id, cnt, prime[N];</span><br><span class="line">ll n, k, a[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">ull g[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Id</span><span class="params">(ll x)</span></span>&#123; <span class="keyword">return</span> x&lt;=sn?x:id-(n/x)+<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function">ull <span class="title">S</span><span class="params">(ll a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;prime[b]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	ull ans=g[<span class="built_in">Id</span>(a)]-(b<span class="number">-1</span>)*(k+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=b, lim=<span class="built_in">sqrt</span>(a); i&lt;=cnt &amp;&amp; prime[i]&lt;=lim; ++i)&#123;</span><br><span class="line">		ans+=<span class="built_in">S</span>(a/prime[i], i+<span class="number">1</span>)*(k+<span class="number">1</span>)+(k*<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(ll x=(ll)prime[i]*prime[i], j=(k*<span class="number">2</span>+<span class="number">1</span>); x*prime[i]&lt;=a; x*=prime[i], j+=k)</span><br><span class="line">			ans+=<span class="built_in">S</span>(a/x, i+<span class="number">1</span>)*j+j+k;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%llu%llu&quot;</span>, &amp;n, &amp;k), sn=<span class="built_in">sqrt</span>(n);</span><br><span class="line">		cnt=id=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">1</span>; i&lt;=n; i=a[id]+<span class="number">1</span>) a[++id]=n/(n/i), g[id]=(ull)(a[id]<span class="number">-1</span>)*(k+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=sn; ++i) <span class="keyword">if</span>(g[i]!=g[i<span class="number">-1</span>])&#123;</span><br><span class="line">			prime[++cnt]=i;</span><br><span class="line">			ll lim=(ll)i*i;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=id; a[j]&gt;=lim; --j) g[j]-=g[<span class="built_in">Id</span>(a[j]/i)]-(ull)(cnt<span class="number">-1</span>)*(k+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%llu\n&quot;</span>, <span class="built_in">S</span>(n, <span class="number">1</span>)+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例题五-spoj-aps2-amazing-prime-sequence-hard">例题五 SPOJ APS2
+Amazing Prime Sequence (hard)</h2>
+<p><a
+href="https://cekavis.github.io/spoj-aps2/"><strong>参考这里</strong></a></p>
+<h2 id="例题六-51nod-1847-奇怪的数学题">例题六 51nod 1847
+奇怪的数学题</h2>
+<p><a
+href="https://cekavis.github.io/51nod-1847/"><strong>参考这里</strong></a></p>
+<h2 id="例题七-51nod-1965-奇怪的式子">例题七 51nod 1965 奇怪的式子</h2>
+<p><a
+href="https://cekavis.github.io/51nod-1965/"><strong>参考这里</strong></a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Min_25筛</p><p><a href="https://cekavis.github.io/min-25/">https://cekavis.github.io/min-25/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Cekavis</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2018-12-03</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-06-16</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%95%B0%E8%AE%BA/">数论</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%AD%9B%E6%B3%95/">筛法</a><a class="link-muted mr-2" rel="tag" href="/tags/Min-25%E7%AD%9B/">Min_25筛</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/spoj-divcnt2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">「SPOJ DIVCNT2」Counting Divisors (square)</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/nowcoder-295h/"><span class="level-item">「Nowcoder Contest 295 H」Playing games</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cekavis.github.io/min-25/';
+            this.page.identifier = 'min-25/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'cekaviss-notes' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/avatar.jpg" alt="Cekavis"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Cekavis</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Earth, Solar System</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">95</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">71</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/cekavis" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/cekavis"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:cmxrynp@gmail.com"><i class="fas fa-envelope"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#前言"><span class="level-left"><span class="level-item">1</span><span class="level-item">前言</span></span></a></li><li><a class="level is-mobile" href="#简介"><span class="level-left"><span class="level-item">2</span><span class="level-item">简介</span></span></a></li><li><a class="level is-mobile" href="#前置技能埃拉托斯特尼筛法"><span class="level-left"><span class="level-item">3</span><span class="level-item">前置技能：埃拉托斯特尼筛法</span></span></a></li><li><a class="level is-mobile" href="#算法流程"><span class="level-left"><span class="level-item">4</span><span class="level-item">算法流程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#第一部分-处理质数"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">第一部分 处理质数</span></span></a></li><li><a class="level is-mobile" href="#第二部分-计算答案"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">第二部分 计算答案</span></span></a></li><li><a class="level is-mobile" href="#第二部分的另一种实现"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">第二部分的另一种实现</span></span></a></li></ul></li><li><a class="level is-mobile" href="#实现"><span class="level-left"><span class="level-item">5</span><span class="level-item">实现</span></span></a></li><li><a class="level is-mobile" href="#例题"><span class="level-left"><span class="level-item">6</span><span class="level-item">例题</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#例题一-区间素数个数"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">例题一 区间素数个数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意"><span class="level-left"><span class="level-item">6.1.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#实现-1"><span class="level-left"><span class="level-item">6.1.2</span><span class="level-item">实现</span></span></a></li><li><a class="level is-mobile" href="#代码"><span class="level-left"><span class="level-item">6.1.3</span><span class="level-item">代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#例题二-sum"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">例题二 Sum</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意-1"><span class="level-left"><span class="level-item">6.2.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#实现-2"><span class="level-left"><span class="level-item">6.2.2</span><span class="level-item">实现</span></span></a></li><li><a class="level is-mobile" href="#代码-1"><span class="level-left"><span class="level-item">6.2.3</span><span class="level-item">代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#例题三-简单的函数"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">例题三 简单的函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意-2"><span class="level-left"><span class="level-item">6.3.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#实现-3"><span class="level-left"><span class="level-item">6.3.2</span><span class="level-item">实现</span></span></a></li><li><a class="level is-mobile" href="#代码-2"><span class="level-left"><span class="level-item">6.3.3</span><span class="level-item">代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#例题四-counting-divisors"><span class="level-left"><span class="level-item">6.4</span><span class="level-item">例题四 Counting Divisors</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#题意-3"><span class="level-left"><span class="level-item">6.4.1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#实现-4"><span class="level-left"><span class="level-item">6.4.2</span><span class="level-item">实现</span></span></a></li><li><a class="level is-mobile" href="#代码-3"><span class="level-left"><span class="level-item">6.4.3</span><span class="level-item">代码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#例题五-spoj-aps2-amazing-prime-sequence-hard"><span class="level-left"><span class="level-item">6.5</span><span class="level-item">例题五 SPOJ APS2
+Amazing Prime Sequence (hard)</span></span></a></li><li><a class="level is-mobile" href="#例题六-51nod-1847-奇怪的数学题"><span class="level-left"><span class="level-item">6.6</span><span class="level-item">例题六 51nod 1847
+奇怪的数学题</span></span></a></li><li><a class="level is-mobile" href="#例题七-51nod-1965-奇怪的式子"><span class="level-left"><span class="level-item">6.7</span><span class="level-item">例题七 51nod 1965 奇怪的式子</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a><p class="is-size-7"><span>&copy; 2022 Cekavis</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><!-- hexo injector body_end start -->
+<script src="/js/custom.js"></script>
+<!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>「Luogu P5023」填数游戏 - Cekavis&#039;s notes</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Cekavis&#039;s notes"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Cekavis&#039;s notes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="NOIP2018 唯一没做出来的题 要是写完两题后直接去打暴力大概也不止50分吧 反正确实跪在这题了 Luogu P5023 题意 你有一个 \(n\) 行 \(m\) 列的矩阵，左上角为 \((0,0)\) 每一个位置有一个数字 \(0&amp;#x2F;1\) 你需要从 \((0,0)\) 走到 \((n-1,m-1)\)，只能向右或向下走 \((R&amp;#x2F;D)\)，一共 \(n+m-2\) 步，这会"><meta property="og:type" content="blog"><meta property="og:title" content="「Luogu P5023」填数游戏"><meta property="og:url" content="https://cekavis.github.io/luogu-p5023/"><meta property="og:site_name" content="Cekavis&#039;s notes"><meta property="og:description" content="NOIP2018 唯一没做出来的题 要是写完两题后直接去打暴力大概也不止50分吧 反正确实跪在这题了 Luogu P5023 题意 你有一个 \(n\) 行 \(m\) 列的矩阵，左上角为 \((0,0)\) 每一个位置有一个数字 \(0&amp;#x2F;1\) 你需要从 \((0,0)\) 走到 \((n-1,m-1)\)，只能向右或向下走 \((R&amp;#x2F;D)\)，一共 \(n+m-2\) 步，这会"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cekavis.github.io/source/Luogu-P5023-填数游戏/Initial.png"><meta property="og:image" content="https://cekavis.github.io/source/Luogu-P5023-填数游戏/0000.png"><meta property="og:image" content="https://cekavis.github.io/source/Luogu-P5023-填数游戏/0011.png"><meta property="og:image" content="https://cekavis.github.io/source/Luogu-P5023-填数游戏/0111.png"><meta property="og:image" content="https://cekavis.github.io/source/Luogu-P5023-填数游戏/1111.png"><meta property="og:image" content="https://cekavis.github.io/source/Luogu-P5023-填数游戏/0001.png"><meta property="article:published_time" content="2018-11-24T14:21:38.000Z"><meta property="article:modified_time" content="2022-06-16T08:28:42.747Z"><meta property="article:author" content="Cekavis"><meta property="article:tag" content="观察"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/source/Luogu-P5023-填数游戏/Initial.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cekavis.github.io/luogu-p5023/"},"headline":"「Luogu P5023」填数游戏","image":["https://cekavis.github.io/source/Luogu-P5023-填数游戏/Initial.png","https://cekavis.github.io/source/Luogu-P5023-填数游戏/0000.png","https://cekavis.github.io/source/Luogu-P5023-填数游戏/0011.png","https://cekavis.github.io/source/Luogu-P5023-填数游戏/0111.png","https://cekavis.github.io/source/Luogu-P5023-填数游戏/1111.png","https://cekavis.github.io/source/Luogu-P5023-填数游戏/0001.png"],"datePublished":"2018-11-24T14:21:38.000Z","dateModified":"2022-06-16T08:28:42.747Z","author":{"@type":"Person","name":"Cekavis"},"publisher":{"@type":"Organization","name":"Cekavis's notes","logo":{"@type":"ImageObject","url":"https://cekavis.github.io/luogu-p5023/logo.svg"}},"description":"NOIP2018 唯一没做出来的题\r 要是写完两题后直接去打暴力大概也不止50分吧\r 反正确实跪在这题了\r Luogu\r P5023\r 题意\r 你有一个 \\(n\\) 行 \\(m\\) 列的矩阵，左上角为 \\((0,0)\\)\r 每一个位置有一个数字 \\(0&#x2F;1\\)\r 你需要从 \\((0,0)\\) 走到 \\((n-1,m-1)\\)，只能向右或向下走 \\((R&#x2F;D)\\)，一共 \\(n+m-2\\) 步，这会"}</script><link rel="canonical" href="https://cekavis.github.io/luogu-p5023/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2018-11-24T14:21:38.000Z" title="2018/11/24 22:21:38">2018-11-24</time></span><span class="level-item"><a class="link-muted" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a></span><span class="level-item">7 minutes read (About 1006 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">「Luogu P5023」填数游戏</h1><div class="content"><p>NOIP2018 唯一没做出来的题</p>
+<p>要是写完两题后直接去打暴力大概也不止50分吧</p>
+<p>反正确实跪在这题了</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.org/problemnew/show/P5023">Luogu
+P5023</a></p>
+<h2 id="题意">题意</h2>
+<p>你有一个 <span class="math inline">\(n\)</span> 行 <span
+class="math inline">\(m\)</span> 列的矩阵，左上角为 <span
+class="math inline">\((0,0)\)</span></p>
+<p>每一个位置有一个数字 <span class="math inline">\(0/1\)</span></p>
+<p>你需要从 <span class="math inline">\((0,0)\)</span> 走到 <span
+class="math inline">\((n-1,m-1)\)</span>，只能向右或向下走 <span
+class="math inline">\((R/D)\)</span>，一共 <span
+class="math inline">\(n+m-2\)</span> 步，这会形成一条路径</p>
+<p>把方向记下来可以得到同样长度的只包含 <span
+class="math inline">\(R/D\)</span> 的字符串 <span
+class="math inline">\(w(P)\)</span></p>
+<p>并且经过的 <span class="math inline">\(n+m-1\)</span>
+个位置的数字连起来可以得到一个 <span class="math inline">\(01\)</span>
+串 <span class="math inline">\(s(P)\)</span></p>
+<p>你需要求出有多少种填数的方案，使得对于任意两条路径 <span
+class="math inline">\(P_1,P_2\)</span>，若 <span
+class="math inline">\(w(P_1)&gt;w(P_2)\)</span>，那么 <span
+class="math inline">\(s(P_1)\le s(P_2)\)</span></p>
+<p>模 <span class="math inline">\(10^9+7\)</span></p>
+<p><span class="math inline">\(n\le 8,m\le 10^6\)</span></p>
+<span id="more"></span>
+<hr />
+<h2 id="做法">做法</h2>
+<h3 id="转化">转化</h3>
+<p>限制可以等价转化为下面两个条件</p>
+<blockquote>
+<p>对于 <span class="math inline">\(x+y\)</span> 为定值的所有点 <span
+class="math inline">\((x,y)\)</span>，构成一条斜线，自左向右是连续的一段<span
+class="math inline">\(0\)</span>加上连续的一段<span
+class="math inline">\(1\)</span>，可以全部相同</p>
+</blockquote>
+<p>这是因为一条到 <span class="math inline">\((x,y)\)</span>
+的路径向两个方向走的时候必须要有 <span
+class="math inline">\((x+1,y)\)</span> 上的数字不大于 <span
+class="math inline">\((x,y+1)\)</span></p>
+<p>即任意 <span class="math inline">\((x,y)\)</span> 不大于 <span
+class="math inline">\((x-1,y+1)\)</span></p>
+<blockquote>
+<p>若 <span class="math inline">\((x-1,y)\)</span> 和 <span
+class="math inline">\((x,y-1)\)</span> 上的数字相同，那么以 <span
+class="math inline">\((x,y)\)</span>
+为左上角的极大的子矩阵在一个斜行上的数字都相同，即对于 <span
+class="math inline">\(a\ge x,b\ge y\)</span>的 <span
+class="math inline">\((a,b)\)</span> 有约束</p>
+</blockquote>
+<p>这是因为当 <span class="math inline">\((x-1,y)\)</span> 和 <span
+class="math inline">\((x,y-1)\)</span> 上的数字相同，从 <span
+class="math inline">\((x-1,y-1)\)</span> 经过这两个位置再到 <span
+class="math inline">\((x,y)\)</span> 的路径的 <span
+class="math inline">\(01\)</span> 串相同</p>
+<p>也就是说到 <span class="math inline">\((x,y)\)</span> 有至少两条
+<span class="math inline">\(01\)</span> 串相同的路径</p>
+<p>那么接下来的每一步必须相同，否则会存在不满足限制的路径</p>
+<h3 id="观察">观察</h3>
+<p>显然 <span class="math inline">\(n,m\)</span> 交换并不会影响答案</p>
+<p>下面只考虑<span class="math inline">\(3\le n\le
+m\)</span>的情况，其余情况都可以简单计算</p>
+<h4 id="分类讨论">分类讨论</h4>
+<h5 id="和-10-相同">1. <span class="math inline">\((0,1)\)</span> 和
+<span class="math inline">\((1,0)\)</span> 相同</h5>
+<p>以 <span class="math inline">\((1,1)\)</span>
+为左上角的矩形的斜线上数字都相同，只剩下 <span
+class="math inline">\((0,x)\)</span> 和 <span
+class="math inline">\((x,0)\)</span> 需要再判一下</p>
+<h5 id="和-20-相同">2. <span class="math inline">\((0,2),(1,1)\)</span>
+和 <span class="math inline">\((2,0)\)</span> 相同</h5>
+<p>和情况1差不多，多特判一条斜线就好了</p>
+<h5 id="和-0220-中的恰好一个相同">3 &amp; 4. <span
+class="math inline">\((1,1)\)</span> 和 <span
+class="math inline">\((0,2),(2,0)\)</span> 中的恰好一个相同</h5>
+<p>容易发现两种是对称的，下面只考虑有 <span
+class="math inline">\((2,0)\)</span> 和 <span
+class="math inline">\((1,1)\)</span> 是 <span
+class="math inline">\(0\)</span> 的情况</p>
+<p>这时以 <span class="math inline">\((2,1)\)</span>
+为左上角的子矩阵斜线部分相同</p>
+<p>也就是左边剩下一列，顶部剩下两行没有限制</p>
+<p>再讨论</p>
+<p>考虑这种情况</p>
+<!-- ![Initial](/source/Luogu-P5023-填数游戏/Initial.png =300x300) -->
+<p><img src="/source/Luogu-P5023-填数游戏/Initial.png" alt="Initial" style="height:300px; display:inline;"></p>
+<p>有 <span class="math inline">\(5\)</span> 种填法</p>
+<h6 id="和-1111">0000, 0111 和 1111</h6>
+<!-- ![0000](/source/Luogu-P5023-填数游戏/0000.png =200x200) ![0011](/source/Luogu-P5023-填数游戏/0011.png =200x200) ![0111](/source/Luogu-P5023-填数游戏/0111.png =200x200) ![1111](/source/Luogu-P5023-填数游戏/1111.png =200x200) -->
+<p><img src="/source/Luogu-P5023-填数游戏/0000.png" alt="0000" style="height:200px; display:inline;"><img src="/source/Luogu-P5023-填数游戏/0011.png" alt="0011" style="height:200px; display:inline;"><img src="/source/Luogu-P5023-填数游戏/0111.png" alt="0111" style="height:200px; display:inline;"><img src="/source/Luogu-P5023-填数游戏/1111.png" alt="1111" style="height:200px; display:inline;"></p>
+<p>好像这四种都一样..</p>
+<p>这会使斜线区域在两步后扩大至前两种大情况中</p>
+<h6 id="section">0001</h6>
+<!-- ![0001](/source/Luogu-P5023-填数游戏/0001.png =200x200) -->
+<p><img src="/source/Luogu-P5023-填数游戏/0001.png" alt="0001" style="height:200px; display:inline;"></p>
+<p>这会维持现状</p>
+<p></br></p>
+<p>也就是枚举一下在哪一个斜行选择什么方案，然后计算一下贡献就好了，可以通过预处理后缀</p>
+<p>这5种情况并不是总是都存在，再判一下就好了</p>
+<p>总时间复杂度 <span class="math inline">\(\mathcal O(n+m)\)</span></p>
+<hr />
+<p>可以发现每一次的贡献都形如 <span
+class="math inline">\(c*2^a3^b\)</span>，并且3,4两种情况都是连续的 <span
+class="math inline">\(\mathcal O(1)\)</span> 段等比数列，可以快速幂</p>
+<p>总复杂度 <span class="math inline">\(\mathcal O(\log n+\log
+m)\)</span></p>
+<hr />
+<h2 id="代码">代码</h2>
+<p>复杂度 <span class="math inline">\(\mathcal O(n+m)\)</span></p>
+<p>代码中矩形是从 <span class="math inline">\((1,1)\)</span> 到 <span
+class="math inline">\((n,m)\)</span></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000015</span>, P = <span class="number">1000000007</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, ans, a[N], f[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">if</span>(n&gt;m) <span class="built_in">swap</span>(n, m);</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">		ans=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) ans=ans*<span class="number">2</span>%P;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ans), <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">2</span>)&#123;</span><br><span class="line">		ans=<span class="number">4</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;m; ++i) ans=ans*<span class="number">3ll</span>%P;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, ans), <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// init</span></span><br><span class="line">	f[n+m+<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n+m; i&gt;=<span class="number">4</span>; --i) f[i]=(ll)f[i+<span class="number">1</span>]*(a[i]=<span class="number">2</span>+(i&lt;=n+<span class="number">1</span>)+(i&lt;=m+<span class="number">1</span>))%P;</span><br><span class="line">	<span class="comment">// 1 &amp; 2</span></span><br><span class="line">	ans=<span class="number">4</span>*(f[<span class="number">4</span>]+(ll)(a[<span class="number">5</span>]+<span class="number">1</span>)*f[<span class="number">6</span>])%P;</span><br><span class="line">	<span class="comment">// 3</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">5</span>; i&lt;=n+<span class="number">1</span>; ++i)&#123;</span><br><span class="line">		<span class="keyword">int</span> x=<span class="number">2</span>+(i&lt;=m+<span class="number">1</span>);</span><br><span class="line">		ans=(ans+<span class="number">2ll</span>*(<span class="number">1</span>+x)*(a[i+<span class="number">1</span>]+<span class="number">1</span>)*f[i+<span class="number">2</span>])%P;</span><br><span class="line">	&#125;</span><br><span class="line">	ans=(ans+<span class="number">2ll</span>*(a[n+<span class="number">2</span>]+<span class="number">1</span>)*f[n+<span class="number">3</span>])%P;</span><br><span class="line">	<span class="comment">// 4</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">5</span>; i&lt;=m+<span class="number">1</span>; ++i)&#123;</span><br><span class="line">		<span class="keyword">int</span> x=<span class="number">2</span>+(i&lt;=n+<span class="number">1</span>);</span><br><span class="line">		ans=(ans+<span class="number">2ll</span>*(<span class="number">1</span>+x)*(a[i+<span class="number">1</span>]+<span class="number">1</span>)*f[i+<span class="number">2</span>])%P;</span><br><span class="line">	&#125;</span><br><span class="line">	ans=(ans+<span class="number">2ll</span>*(a[m+<span class="number">2</span>]+<span class="number">1</span>)*f[m+<span class="number">3</span>])%P;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>「Luogu P5023」填数游戏</p><p><a href="https://cekavis.github.io/luogu-p5023/">https://cekavis.github.io/luogu-p5023/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Cekavis</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2018-11-24</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-06-16</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E8%A7%82%E5%AF%9F/">观察</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/hdu-6057/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">「HDU 6057」Kanade&#039;s convolution</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/loj-2586/"><span class="level-item">「LOJ 2586」「APIO2018」选圆圈</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cekavis.github.io/luogu-p5023/';
+            this.page.identifier = 'luogu-p5023/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'cekaviss-notes' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/avatar.jpg" alt="Cekavis"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Cekavis</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Earth, Solar System</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">95</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">71</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/cekavis" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/cekavis"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:cmxrynp@gmail.com"><i class="fas fa-envelope"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#题意"><span class="level-left"><span class="level-item">1</span><span class="level-item">题意</span></span></a></li><li><a class="level is-mobile" href="#做法"><span class="level-left"><span class="level-item">2</span><span class="level-item">做法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#转化"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">转化</span></span></a></li><li><a class="level is-mobile" href="#观察"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">观察</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#分类讨论"><span class="level-left"><span class="level-item">2.2.1</span><span class="level-item">分类讨论</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#代码"><span class="level-left"><span class="level-item">3</span><span class="level-item">代码</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a><p class="is-size-7"><span>&copy; 2022 Cekavis</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><!-- hexo injector body_end start -->
+<script src="/js/custom.js"></script>
+<!-- hexo injector body_end end --></body></html>

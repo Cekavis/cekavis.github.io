@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>二次剩余 Cipolla&#039;s algorithm - Cekavis&#039;s notes</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Cekavis&#039;s notes"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Cekavis&#039;s notes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="定义 当存在某个 \(x\)，式子 \(x^2\equiv a\pmod p\) 成立时，称“\(a\) 是模 \(p\) 的二次剩余(Quadratic residue)”"><meta property="og:type" content="blog"><meta property="og:title" content="二次剩余 Cipolla&#039;s algorithm"><meta property="og:url" content="https://cekavis.github.io/cipollas-algorithm/"><meta property="og:site_name" content="Cekavis&#039;s notes"><meta property="og:description" content="定义 当存在某个 \(x\)，式子 \(x^2\equiv a\pmod p\) 成立时，称“\(a\) 是模 \(p\) 的二次剩余(Quadratic residue)”"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cekavis.github.io/img/og_image.png"><meta property="article:published_time" content="2018-11-27T10:25:14.000Z"><meta property="article:modified_time" content="2022-06-16T08:41:30.970Z"><meta property="article:author" content="Cekavis"><meta property="article:tag" content="二次剩余"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cekavis.github.io/cipollas-algorithm/"},"headline":"二次剩余 Cipolla's algorithm","image":["https://cekavis.github.io/img/og_image.png"],"datePublished":"2018-11-27T10:25:14.000Z","dateModified":"2022-06-16T08:41:30.970Z","author":{"@type":"Person","name":"Cekavis"},"publisher":{"@type":"Organization","name":"Cekavis's notes","logo":{"@type":"ImageObject","url":"https://cekavis.github.io/cipollas-algorithm/logo.svg"}},"description":"定义\r 当存在某个 \\(x\\)，式子 \\(x^2\\equiv a\\pmod p\\) 成立时，称“\\(a\\) 是模 \\(p\\) 的二次剩余(Quadratic\r residue)”"}</script><link rel="canonical" href="https://cekavis.github.io/cipollas-algorithm/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.0.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2018-11-27T10:25:14.000Z" title="2018/11/27 18:25:14">2018-11-27</time></span><span class="level-item"><a class="link-muted" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span><span class="level-item">5 minutes read (About 751 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">二次剩余 Cipolla&#039;s algorithm</h1><div class="content"><h1 id="定义">定义</h1>
+<p>当存在某个 <span class="math inline">\(x\)</span>，式子 <span
+class="math inline">\(x^2\equiv a\pmod p\)</span> 成立时，称“<span
+class="math inline">\(a\)</span> 是模 <span
+class="math inline">\(p\)</span> 的<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Quadratic_residue">二次剩余(Quadratic
+residue)</a>”</p>
+<span id="more"></span>
+<h1 id="cipollas-algorithm">Cipolla's algorithm</h1>
+<p>只考虑 <span class="math inline">\(p\)</span> 是奇质数的情况</p>
+<h2 id="二次剩余的数量">二次剩余的数量</h2>
+<p>在 <span class="math inline">\([0,p)\)</span> 中是 <span
+class="math inline">\(\frac{p+1}{2}\)</span>，包括 <span
+class="math inline">\(0\)</span></p>
+<h3 id="证明">证明</h3>
+<p>考虑两个不同的数 <span class="math inline">\(x,y\)</span>，若 <span
+class="math inline">\(x^2\equiv y^2\pmod p\)</span>，那么 <span
+class="math inline">\(p\mid(x^2-y^2)\)</span>，即 <span
+class="math inline">\(p\mid(x-y)(x+y)\)</span>，显然 <span
+class="math inline">\(p\nmid(x-y)\)</span>，于是<span
+class="math inline">\(p\mid(x+y)\)</span></p>
+<p>于是 <span class="math inline">\(x+y\equiv 0 \pmod p\)</span></p>
+<p>所以除了 <span class="math inline">\(0\)</span>
+以外的数恰好两两匹配</p>
+<h2 id="legendre-symbol">Legendre symbol</h2>
+<p>定义<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Legendre_symbol">勒让德符号(Legendre
+symbol)</a></p>
+<p><span class="math display">\[
+\left(\frac{a}{p}\right)=
+\begin{cases}
+1,&amp; \text{$a$ 是模 $p$ 的二次剩余} \\
+-1,&amp; \text{$a$ 不是模 $p$ 的二次剩余} \\
+0,&amp; a\equiv0 \pmod p
+\end{cases}
+\]</span></p>
+<h2 id="eulers-criterion">Euler's criterion</h2>
+<p>根据<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Euler%27s_criterion">欧拉准则(Euler's
+criterion)</a></p>
+<p>若 <span class="math inline">\(p\)</span>是奇质数且 <span
+class="math inline">\(p\)</span> 不能整除 <span
+class="math inline">\(d\)</span>，则：</p>
+<p><span class="math inline">\(d\)</span> 是模 <span
+class="math inline">\(p\)</span> 的二次剩余当且仅当：</p>
+<p><span class="math display">\[d^{\frac {p-1}{2}}\equiv 1{\pmod
+{p}}\]</span></p>
+<p><span class="math inline">\(d\)</span> 是模 <span
+class="math inline">\(p\)</span> 的非二次剩余当且仅当：</p>
+<p><span class="math display">\[d^{\frac {p-1}{2}}\equiv -1{\pmod
+{p}}\]</span></p>
+<p>以勒让德符号表示，即为：</p>
+<p><span class="math display">\[d^{\frac {p-1}{2}}\equiv \left({\frac
+{d}{p}}\right){\pmod {p}}\]</span></p>
+<h3 id="证明-1">证明</h3>
+<p>参考<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Euler%27s_criterion#Proof">这里</a></p>
+<h2 id="算法过程">算法过程</h2>
+<p>我们需要求满足 <span class="math inline">\(x^2\equiv a\pmod
+p\)</span> 的一个 <span class="math inline">\(x\)</span></p>
+<p>现在我们可以 <span class="math inline">\(\mathcal O(\log p)\)</span>
+地判断一个数是否是模 <span class="math inline">\(p\)</span>
+的二次剩余</p>
+<h3 id="section">1.</h3>
+<p>随机一个<span class="math inline">\(t\)</span>，满足 <span
+class="math inline">\(t^2-a\)</span>
+是非二次剩余，根据前面二次剩余的分布，期望次数很小..</p>
+<h3 id="section-1">2.</h3>
+<p>令 <span class="math inline">\(\omega=\sqrt{t^2-a}\)</span></p>
+<p>需要求的<span
+class="math inline">\(x=(t+\omega)^{\frac{p+1}{2}}\)</span></p>
+<p>这里存两个系数 <span class="math inline">\(a+b\omega\)</span>
+就可以快速幂了</p>
+<h2 id="证明-2">证明</h2>
+<h3 id="定理1">定理1</h3>
+<blockquote>
+<p><span class="math display">\[(a+b)^p\equiv a^p+b^p \pmod{p}
+\tag{1}\]</span></p>
+</blockquote>
+<h4 id="证明-3">证明</h4>
+<p><span class="math display">\[
+(a+b)^p=\sum_{i=0}^p\binom{p}{i}a^ib^{p-i}
+\]</span></p>
+<p>当 <span class="math inline">\(i\ne 0\)</span> 且 <span
+class="math inline">\(i\ne p\)</span>，<span
+class="math inline">\(\binom{p}{i}\equiv 0 \pmod{p}\)</span></p>
+<h3 id="定理2">定理2</h3>
+<blockquote>
+<p><span class="math display">\[\omega^p\equiv-\omega \pmod{p}
+\tag{2}\]</span></p>
+</blockquote>
+<h4 id="证明-4">证明</h4>
+<p>因为<span class="math inline">\(t^2-a\)</span>是非二次剩余，所以</p>
+<p><span
+class="math display">\[\omega^{p-1}=(\omega^2)^{\frac{p-1}{2}}=(t^2-a)^{\frac{p-1}{2}}\equiv-1
+\pmod{p}\]</span></p>
+<h3 id="定理3">定理3</h3>
+<blockquote>
+<p><span class="math display">\[(a+\omega)^p\equiv a-\omega \pmod{p}
+\tag{3}\]</span></p>
+</blockquote>
+<p>由(1),(2)显然</p>
+<h3 id="结论">结论</h3>
+<p><span class="math display">\[
+\begin{align}
+x^2&amp;=(t+\omega)^{p+1} \\
+&amp;=(t+\omega)(t+\omega)^p \\
+&amp;\equiv (t+\omega)(t-\omega) \pmod{p}\\
+&amp;=t^2-\omega^2 \\
+&amp;=t^2-(t^2-a) \\
+&amp;=a
+\end{align}
+\]</span></p>
+<h3 id="omega前的系数"><span
+class="math inline">\(\omega\)</span>前的系数</h3>
+<p>根据<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(number_theory)">Lagrange's
+theorem</a>我们知道 <span class="math inline">\(x^2-a=0\)</span>
+在任何域中都有两个根，并且我们前面得到了这两个根都在模 <span
+class="math inline">\(p\)</span> 的剩余系中，所以没有<span
+class="math inline">\(\omega\)</span></p>
+<h1 id="代码">代码</h1>
+<p>这里会返回一个较小的根</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Pow</span><span class="params">(ll x, <span class="keyword">int</span> y=P<span class="number">-2</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(; y; y&gt;&gt;=<span class="number">1</span>, x=x*x%P) <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans=ans*x%P;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; <span class="title">pMul</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; x, pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; y, <span class="keyword">int</span> f)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">make_pair</span>(</span><br><span class="line">        (<span class="keyword">int</span>)(((ll)x.first*y.first+(ll)x.second*y.second%P*f)%P),</span><br><span class="line">        (<span class="keyword">int</span>)(((ll)x.second*y.first+(ll)x.first*y.second)%P)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Quadratic_residue</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Pow</span>(a, (P<span class="number">-1</span>)/<span class="number">2</span>)!=<span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> x, f;</span><br><span class="line">    <span class="keyword">do</span> x=(((ll)<span class="built_in">rand</span>()&lt;&lt;<span class="number">15</span>)^<span class="built_in">rand</span>())%(a<span class="number">-1</span>)+<span class="number">1</span>; <span class="keyword">while</span>(<span class="built_in">Pow</span>(f=((ll)x*x-a+P)%P, (P<span class="number">-1</span>)/<span class="number">2</span>)==<span class="number">1</span>);</span><br><span class="line">    pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; ans=<span class="built_in">make_pair</span>(<span class="number">1</span>, <span class="number">0</span>), t=<span class="built_in">make_pair</span>(x, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=(P+<span class="number">1</span>)/<span class="number">2</span>; i; i&gt;&gt;=<span class="number">1</span>, t=<span class="built_in">pMul</span>(t, t, f)) <span class="keyword">if</span>(i&amp;<span class="number">1</span>) ans=<span class="built_in">pMul</span>(ans, t, f);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(ans.first, P-ans.first);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="启示">启示</h1>
+<p>没有</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>二次剩余 Cipolla&#039;s algorithm</p><p><a href="https://cekavis.github.io/cipollas-algorithm/">https://cekavis.github.io/cipollas-algorithm/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Cekavis</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2018-11-27</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-06-16</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BA%8C%E6%AC%A1%E5%89%A9%E4%BD%99/">二次剩余</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/loj-150/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">「LOJ 150」挑战多项式</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/fast-polynomial-evaluation-and-interpolation/"><span class="level-item">多项式的多点求值和快速插值</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://cekavis.github.io/cipollas-algorithm/';
+            this.page.identifier = 'cipollas-algorithm/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'cekaviss-notes' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/avatar.jpg" alt="Cekavis"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Cekavis</p><p class="is-size-6 is-block">Student</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Earth, Solar System</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">95</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">71</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/cekavis" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/cekavis"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:cmxrynp@gmail.com"><i class="fas fa-envelope"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#定义"><span class="level-left"><span class="level-item">1</span><span class="level-item">定义</span></span></a></li><li><a class="level is-mobile" href="#cipollas-algorithm"><span class="level-left"><span class="level-item">2</span><span class="level-item">Cipolla&#039;s algorithm</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#二次剩余的数量"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">二次剩余的数量</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#证明"><span class="level-left"><span class="level-item">2.1.1</span><span class="level-item">证明</span></span></a></li></ul></li><li><a class="level is-mobile" href="#legendre-symbol"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">Legendre symbol</span></span></a></li><li><a class="level is-mobile" href="#eulers-criterion"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">Euler&#039;s criterion</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#证明-1"><span class="level-left"><span class="level-item">2.3.1</span><span class="level-item">证明</span></span></a></li></ul></li><li><a class="level is-mobile" href="#算法过程"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">算法过程</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#section"><span class="level-left"><span class="level-item">2.4.1</span><span class="level-item">1.</span></span></a></li><li><a class="level is-mobile" href="#section-1"><span class="level-left"><span class="level-item">2.4.2</span><span class="level-item">2.</span></span></a></li></ul></li><li><a class="level is-mobile" href="#证明-2"><span class="level-left"><span class="level-item">2.5</span><span class="level-item">证明</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#定理1"><span class="level-left"><span class="level-item">2.5.1</span><span class="level-item">定理1</span></span></a></li><li><a class="level is-mobile" href="#定理2"><span class="level-left"><span class="level-item">2.5.2</span><span class="level-item">定理2</span></span></a></li><li><a class="level is-mobile" href="#定理3"><span class="level-left"><span class="level-item">2.5.3</span><span class="level-item">定理3</span></span></a></li><li><a class="level is-mobile" href="#结论"><span class="level-left"><span class="level-item">2.5.4</span><span class="level-item">结论</span></span></a></li><li><a class="level is-mobile" href="#omega前的系数"><span class="level-left"><span class="level-item">2.5.5</span><span class="level-item">\(\omega\)前的系数</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#代码"><span class="level-left"><span class="level-item">3</span><span class="level-item">代码</span></span></a></li><li><a class="level is-mobile" href="#启示"><span class="level-left"><span class="level-item">4</span><span class="level-item">启示</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/logo.svg" alt="Cekavis&#039;s notes" height="28"></a><p class="is-size-7"><span>&copy; 2022 Cekavis</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><!-- hexo injector body_end start -->
+<script src="/js/custom.js"></script>
+<!-- hexo injector body_end end --></body></html>
