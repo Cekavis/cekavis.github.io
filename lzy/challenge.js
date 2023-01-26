@@ -26,6 +26,8 @@ $('#btn_submit').click(function(){
         $('#comments').html('凭此截图找txc领取一句夸夸！');
     else
         $('#comments').html('快去找txc挨骂！');
-    if (score >= 6)
-        $('#hint').html('下一步的提示：+Uad5NYh0txnIGpay，“只要微笑就好了”。');
+    if (score >= 6){
+        $('#hint-of-hint').html('下一步的提示在这个页面的某个地方哦。');
+        $('#hint').html('x.xx/+Uad5NYh0txnIGpay，“某桌の日常”。');
+    }
 });
