@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Improved 3D Gaussian Splatting provides artifact-free and smooth VR experiences.">
+  <meta name="keywords" content="3DGS, VR">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fast and Robust 3D Gaussian Splatting for Virtual Reality</title>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="/img/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Fast and Robust 3D Gaussian Splatting for Virtual Reality</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Xuechang Tu<sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.at/citations?user=jeasMB0AAAAJ&hl=en">Bernhard Kerbl</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.cs.cmu.edu/~ftorre/index.html">Fernando De la Torre</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Carnegie Mellon University,</span>
+            <span class="author-block"><sup>2</sup>Peking University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="static/3dgs-vr.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Abstract</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-garden">
+          <video poster="" id="garden" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/garden.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-room">
+          <video poster="" id="room" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/room.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-truck">
+          <video poster="" id="truck" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/truck.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D Gaussian Splatting (3DGS) [Kerbl et al. 2023] has quickly risen to
+            become a highly influential method for novel-view synthesis. The
+            high rendering performance of tile-based rasterization opens the
+            door for many real-time applications, enabling realistic scene
+            rendering on weaker and mobile devices. However, the original 3DGS
+            solution faces several challenges for virtual reality (VR) applications:
+            the 3DGS codebase readily integrates with extended reality (XR)
+            libraries (OpenXR), but suffers from temporal artifacts (popping).
+            While tolerable for desktop viewing, the high display resolution and
+            immersion of VR applications for head-mounted displays (HMDs)
+            amplify the visual artifacts, impacting the user experience.
+          </p>
+          <p>
+            In this work, we propose to synergize a variety of recent
+            extensions to 3DGS and improve the VR experience. These extensions
+            have been developed and considered in isolation; in this work, we
+            show how they can be meaningfully combined to yield a high-quality,
+            high-performance VR pipeline. We first use Mini-Splatting [Fang and Wang 2024]
+            to raise rendering frame rates. Next, we employ StopThePop [Radl et al. 2024], to
+            address temporal popping artifacts. The off-axis projection and 
+            field-of-view found in HMDs can give rise to particularly unsightly
+            ghosting; we address it using Optimal Projection for 3DGS [Huang et al.
+            2024]. Finally, to ensure a target framerate of >72 FPS at HMD-native
+            resolution, we propose a simple foveated rendering mechanism.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Visual Comparisons. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Visual Comparisons</h2>
+        <video id="truck-cmp" autoplay controls muted loop playsinline height="100%">
+          <source src="static/videos/truck-cmp.mp4"
+                  type="video/mp4">
+        </video>
+        <video id="room-cmp" autoplay controls muted loop playsinline height="100%">
+          <source src="static/videos/room-cmp.mp4"
+                  type="video/mp4">
+        </video>
+        <video id="garden-cmp" autoplay controls muted loop playsinline height="100%">
+          <source src="static/videos/garden-cmp.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <!--/ Visual Comparisons. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Performance. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Performance</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our solution achieves the target frame rate of 72 FPS (i.e., less than 14 ms
+            stereo) in the scenes from MipNeRF360 and Tanks&Temples, at Meta Quest 3 native
+            resolution on an NVIDIA RTX 4090.
+            The table below shows how performance changes as we introduce the suggested
+            features.
+          </p>
+          <div style="display: flex; justify-content: center;">
+            <table style="width: 70% !important;">
+              <tr>
+                <th width="16.6%"></th>
+                <th width="16.6%">3DGS</th>
+                <th width="16.6%" style="white-space: nowrap">Mini-Splatting</th>
+                <th width="16.6%" style="white-space: nowrap">+ StopThePop</th>
+                <th width="16.6%" style="text-align:left">+ Optimal Projection</th>
+                <th width="16.6%" style="text-align:left">+ Foveated Rendering</th>
+              </tr>
+              <tr>
+                <th>Truck</th>
+                <td>9.8 ms</td>
+                <td>3.7 ms</td>
+                <td>15.1 ms</td>
+                <td>15.1 ms</td>
+                <td>10.8 ms</td>
+              </tr>
+              <tr>
+                <th>Garden</th>
+                <td>14.4 ms</td>
+                <td>4.0 ms</td>
+                <td>13.6 ms</td>
+                <td>13.6 ms</td>
+                <td>11.5 ms</td>
+              </tr>
+              <tr>
+                <th>Room</th>
+                <td>10.6 ms</td>
+                <td>4.7 ms</td>
+                <td>19.9 ms</td>
+                <td>19.9 ms</td>
+                <td>13.0 ms</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Performance. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">References</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            [Fang and Wang 2024] Guangchi Fang and Bing Wang. 2024. Mini-Splatting: Representing Scenes with a Constrained Number of Gaussians. arXiv:2403.14166 [cs.CV] https://arxiv.org/abs/2403.14166
+          </p>
+          <p>
+            [Huang et al. 2024] Letian Huang, Jiayang Bai, Jie Guo, Yuanqi Li, and Yanwen Guo. 2024. On the Error Analysis of 3D Gaussian Splatting and an Optimal Projection Strategy. arXiv:2402.00752 [cs.CV] https://arxiv.org/abs/2402.00752
+          </p>
+          <p>
+            [Kerbl et al. 2023] Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler, and George Drettakis. 2023. 3D Gaussian Splatting for Real-Time Radiance Field Rendering. ACM Transactions on Graphics 42, 4 (July 2023). https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/
+          </p>  
+          <p>
+            [Radl et al. 2024] Lukas Radl, Michael Steiner, Mathias Parger, Alexander Weinrauch, Bernhard Kerbl, and Markus Steinberger. 2024. StopThePop: Sorted Gaussian Splatting for View-Consistent Real-time Rendering. ACM Transactions on Graphics 4, 43, Article 64(2024).
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="static/3dgs-vr.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            We thank the authors of <a href="https://nerfies.github.io/">Nerfies</a> that kindly open sourced the template of this website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
